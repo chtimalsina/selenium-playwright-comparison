@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Object-Oriented Programming in Java - Explained with Real Examples
+    </title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.2em;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .section {
+        margin-bottom: 50px;
+      }
+
+      .section h2 {
+        color: #2a5298;
+        font-size: 2em;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+      }
+
+      .section h3 {
+        color: #4a5568;
+        font-size: 1.5em;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      .principle-card {
+        background: #f7fafc;
+        border-left: 5px solid #667eea;
+        padding: 25px;
+        margin: 20px 0;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .principle-card h4 {
+        color: #2a5298;
+        font-size: 1.3em;
+        margin-bottom: 15px;
+      }
+
+      .code-block {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .code-block .keyword {
+        color: #fc8181;
+      }
+
+      .code-block .class-name {
+        color: #68d391;
+      }
+
+      .code-block .method {
+        color: #90cdf4;
+      }
+
+      .code-block .comment {
+        color: #9ca3af;
+        font-style: italic;
+      }
+
+      .code-block .string {
+        color: #fbd38d;
+      }
+
+      .highlight {
+        background: #fef3c7;
+        padding: 3px 6px;
+        border-radius: 3px;
+        font-weight: bold;
+      }
+
+      .benefit-box {
+        background: #d1fae5;
+        border: 2px solid #34d399;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+
+      .benefit-box strong {
+        color: #065f46;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        border: 1px solid #e2e8f0;
+        padding: 12px;
+        text-align: left;
+      }
+
+      .comparison-table th {
+        background: #2a5298;
+        color: white;
+      }
+
+      .comparison-table tr:nth-child(even) {
+        background: #f7fafc;
+      }
+
+      .diagram {
+        background: white;
+        border: 2px solid #667eea;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .diagram-box {
+        display: inline-block;
+        background: #e0e7ff;
+        border: 2px solid #667eea;
+        padding: 15px 25px;
+        margin: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+
+      .arrow {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 24px;
+        color: #667eea;
+      }
+
+      ul,
+      ol {
+        margin-left: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .note {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
+      }
+
+      .note strong {
+        color: #856404;
+      }
+
+      footer {
+        background: #2d3748;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .toc {
+        background: #edf2f7;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+
+      .toc h3 {
+        color: #2a5298;
+        margin-bottom: 15px;
+      }
+
+      .toc ul {
+        list-style: none;
+        margin-left: 0;
+      }
+
+      .toc a {
+        color: #2a5298;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .toc a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎯 Object-Oriented Programming in Java</h1>
+        <p>
+          A Practical Guide Using Selenium & Playwright Test Automation
+          Framework
+        </p>
+      </header>
+
+      <div class="content">
+        <!-- Table of Contents -->
+        <div class="toc">
+          <h3>📚 Table of Contents</h3>
+          <ul>
+            <li><a href="#introduction">Introduction to OOP</a></li>
+            <li><a href="#encapsulation">1. Encapsulation</a></li>
+            <li><a href="#inheritance">2. Inheritance</a></li>
+            <li><a href="#polymorphism">3. Polymorphism</a></li>
+            <li><a href="#abstraction">4. Abstraction</a></li>
+            <li><a href="#realworld">Real-World Benefits</a></li>
+          </ul>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section" id="introduction">
+          <h2>🌟 What is Object-Oriented Programming?</h2>
+          <p>
+            <strong>Object-Oriented Programming (OOP)</strong> is a programming
+            paradigm based on the concept of "objects" that contain both data
+            (fields/attributes) and code (methods/functions). OOP organizes
+            software design around data, or objects, rather than functions and
+            logic.
+          </p>
+
+          <div class="benefit-box">
+            <strong>Why OOP?</strong> It makes code more modular, reusable,
+            maintainable, and easier to understand. In our test automation
+            framework, OOP principles help us create clean, scalable, and
+            maintainable test code.
+          </div>
+
+          <h3>The Four Pillars of OOP</h3>
+          <ol>
+            <li>
+              <strong>Encapsulation</strong> - Bundling data and methods
+              together, hiding implementation details
+            </li>
+            <li>
+              <strong>Inheritance</strong> - Creating new classes from existing
+              ones, promoting code reuse
+            </li>
+            <li>
+              <strong>Polymorphism</strong> - Same method name, different
+              behaviors (method overloading/overriding)
+            </li>
+            <li>
+              <strong>Abstraction</strong> - Hiding complex implementation,
+              exposing only essential features
+            </li>
+          </ol>
+        </div>
+
+        <!-- Encapsulation -->
+        <div class="section" id="encapsulation">
+          <h2>🔒 1. Encapsulation</h2>
+
+          <div class="principle-card">
+            <h4>What is Encapsulation?</h4>
+            <p>
+              Encapsulation is the bundling of data (fields) and methods that
+              operate on that data within a single unit (class), while
+              restricting direct access to some of the object's components. This
+              is achieved using <span class="highlight">access modifiers</span>.
+            </p>
+          </div>
+
+          <h3>Access Modifiers in Java</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Modifier</th>
+                <th>Class</th>
+                <th>Package</th>
+                <th>Subclass</th>
+                <th>World</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>public</strong></td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+              </tr>
+              <tr>
+                <td><strong>protected</strong></td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td><strong>default</strong> (no modifier)</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>❌</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td><strong>private</strong></td>
+                <td>✅</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Example from Our Project: BasePage.java</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">BasePage</span> {
+            <span class="comment"
+              >// ENCAPSULATION - Protected fields accessible only to child
+              classes</span
+            >
+            <span class="keyword">protected</span> WebDriver driver;
+            <span class="comment">// Selenium driver</span>
+            <span class="keyword">protected</span> WebDriverWait wait;
+            <span class="comment">// Explicit wait</span>
+            <span class="keyword">protected</span> Page page;
+            <span class="comment">// Playwright page</span>
+
+            <span class="comment"
+              >// Constructor - public access for creating objects</span
+            >
+            <span class="keyword">public</span>
+            <span class="method">BasePage</span>(WebDriver driver) {
+            <span class="keyword">this</span>.driver = driver;
+            <span class="keyword">this</span>.wait =
+            <span class="keyword">new</span> WebDriverWait(driver,
+            Duration.ofSeconds(<span class="string">10</span>)); }
+
+            <span class="comment"
+              >// ENCAPSULATION - Protected method used by child classes
+              only</span
+            >
+            <span class="keyword">protected void</span>
+            <span class="method">clickElement</span>(WebElement element) {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click(); } }
+          </div>
+
+          <div class="benefit-box">
+            <strong>🎯 Benefits in Our Framework:</strong>
+            <ul>
+              <li>
+                <strong>Data Hiding:</strong> Driver and wait objects are
+                protected, preventing external misuse
+              </li>
+              <li>
+                <strong>Controlled Access:</strong> Only child page classes can
+                access these fields
+              </li>
+              <li>
+                <strong>Maintainability:</strong> Changes to internal
+                implementation don't affect external code
+              </li>
+            </ul>
+          </div>
+
+          <h3>Example from LoginPage.java</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginPage</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BasePage</span> {
+
+            <span class="comment"
+              >// ENCAPSULATION - Private fields hidden from external
+              classes</span
+            >
+            @FindBy(id = <span class="string">"username"</span>)
+            <span class="keyword">private</span> WebElement usernameField;
+            @FindBy(id = <span class="string">"password"</span>)
+            <span class="keyword">private</span> WebElement passwordField;
+
+            <span class="comment"
+              >// Public method - interface for interacting with the page</span
+            >
+            <span class="keyword">public void</span>
+            <span class="method">login</span>(String username, String password)
+            { <span class="method">enterText</span>(usernameField, username);
+            <span class="comment">// Uses protected method from BasePage</span>
+            <span class="method">enterText</span>(passwordField, password);
+            <span class="method">clickElement</span>(loginButton); } }
+          </div>
+
+          <div class="note">
+            <strong>💡 Key Point:</strong> Test classes interact with
+            <code>login()</code> method without knowing about
+            <code>usernameField</code> or <code>passwordField</code>. The
+            implementation is hidden (encapsulated).
+          </div>
+        </div>
+
+        <!-- Inheritance -->
+        <div class="section" id="inheritance">
+          <h2>🧬 2. Inheritance</h2>
+
+          <div class="principle-card">
+            <h4>What is Inheritance?</h4>
+            <p>
+              Inheritance is a mechanism where a new class (child/subclass)
+              derives properties and behaviors from an existing class
+              (parent/superclass). It promotes
+              <span class="highlight">code reusability</span> and establishes an
+              <span class="highlight">"is-a" relationship</span>.
+            </p>
+          </div>
+
+          <h3>Inheritance Hierarchy in Our Project</h3>
+          <div class="diagram">
+            <div class="diagram-box">BasePage<br />(Parent Class)</div>
+            <div class="arrow">⬇️</div>
+            <br />
+            <div class="diagram-box">LoginPage<br />(Child Class)</div>
+            <div class="diagram-box">SecurePage<br />(Child Class)</div>
+          </div>
+
+          <h3>Example: BasePage (Parent Class)</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">BasePage</span> {
+            <span class="keyword">protected</span> WebDriver driver;
+            <span class="keyword">protected</span> WebDriverWait wait;
+
+            <span class="comment">// Parent constructor</span>
+            <span class="keyword">public</span>
+            <span class="method">BasePage</span>(WebDriver driver) {
+            <span class="keyword">this</span>.driver = driver;
+            <span class="keyword">this</span>.wait =
+            <span class="keyword">new</span> WebDriverWait(driver,
+            Duration.ofSeconds(<span class="string">10</span>)); }
+
+            <span class="comment"
+              >// Common method available to all child classes</span
+            >
+            <span class="keyword">protected void</span>
+            <span class="method">clickElement</span>(WebElement element) {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click(); }
+
+            <span class="keyword">protected void</span>
+            <span class="method">enterText</span>(WebElement element, String
+            text) { wait.until(ExpectedConditions.visibilityOf(element));
+            element.clear(); element.sendKeys(text); } }
+          </div>
+
+          <h3>Example: LoginPage (Child Class)</h3>
+          <div class="code-block">
+            <span class="comment"
+              >// INHERITANCE - LoginPage extends BasePage</span
+            >
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginPage</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BasePage</span> { @FindBy(id =
+            <span class="string">"username"</span>)
+            <span class="keyword">private</span> WebElement usernameField;
+
+            <span class="comment"
+              >// Child constructor calls parent constructor</span
+            >
+            <span class="keyword">public</span>
+            <span class="method">LoginPage</span>(WebDriver driver) {
+            <span class="keyword">super</span>(driver);
+            <span class="comment">// Calling parent constructor</span>
+            PageFactory.initElements(driver, <span class="keyword">this</span>);
+            }
+
+            <span class="comment">// Uses inherited methods from BasePage</span>
+            <span class="keyword">public void</span>
+            <span class="method">login</span>(String username, String password)
+            { <span class="method">enterText</span>(usernameField, username);
+            <span class="comment">// Inherited from BasePage</span>
+            <span class="method">enterText</span>(passwordField, password);
+            <span class="comment">// Inherited from BasePage</span>
+            <span class="method">clickElement</span>(loginButton);
+            <span class="comment">// Inherited from BasePage</span>
+            } }
+          </div>
+
+          <div class="benefit-box">
+            <strong>🎯 Benefits in Our Framework:</strong>
+            <ul>
+              <li>
+                <strong>Code Reusability:</strong>
+                <code>clickElement()</code> and <code>enterText()</code> written
+                once, used everywhere
+              </li>
+              <li>
+                <strong>Single Point of Change:</strong> Update wait logic in
+                BasePage, all pages benefit
+              </li>
+              <li>
+                <strong>Consistency:</strong> All pages use same interaction
+                pattern
+              </li>
+              <li>
+                <strong>Reduced Duplication:</strong> No need to rewrite common
+                methods in each page class
+              </li>
+            </ul>
+          </div>
+
+          <h3>Example: BaseTest Inheritance</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">BaseTest</span> {
+            <span class="keyword">protected</span> WebDriver driver;
+            @BeforeMethod <span class="keyword">public void</span>
+            <span class="method">setUp</span>() { driver =
+            <span class="keyword">new</span> SafariDriver();
+            driver.manage().window().maximize(); } @AfterMethod
+            <span class="keyword">public void</span>
+            <span class="method">tearDown</span>() {
+            <span class="keyword">if</span> (driver !=
+            <span class="keyword">null</span>) { driver.quit(); } } }
+
+            <span class="comment"
+              >// Test class inherits setup and teardown</span
+            >
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginTest</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BaseTest</span> { @Test
+            <span class="keyword">public void</span>
+            <span class="method">testSuccessfulLogin</span>() {
+            <span class="comment">// driver is available from BaseTest</span>
+            LoginPage loginPage =
+            <span class="keyword">new</span> LoginPage(driver);
+            loginPage.openPage(); loginPage.login(<span class="string"
+              >"tomsmith"</span
+            >, <span class="string">"SuperSecretPassword!"</span>); } }
+          </div>
+
+          <div class="note">
+            <strong>💡 The "super" keyword:</strong> Used to call parent class
+            constructor or methods. <code>super(driver)</code> calls BasePage
+            constructor before LoginPage constructor executes.
+          </div>
+        </div>
+
+        <!-- Polymorphism -->
+        <div class="section" id="polymorphism">
+          <h2>🎭 3. Polymorphism</h2>
+
+          <div class="principle-card">
+            <h4>What is Polymorphism?</h4>
+            <p>
+              Polymorphism (Greek: "many forms") allows objects to take on
+              multiple forms. The same method name can behave differently based
+              on the object calling it or the parameters passed. There are two
+              types:
+            </p>
+            <ul>
+              <li>
+                <strong>Method Overloading</strong> (Compile-time polymorphism)
+                - Same method name, different parameters
+              </li>
+              <li>
+                <strong>Method Overriding</strong> (Runtime polymorphism) -
+                Child class redefines parent method
+              </li>
+            </ul>
+          </div>
+
+          <h3>Method Overloading in Our Project</h3>
+          <p>
+            Our BasePage demonstrates method overloading for both Selenium and
+            Playwright:
+          </p>
+
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">BasePage</span> {
+
+            <span class="comment">// POLYMORPHISM - Method Overloading</span>
+            <span class="comment"
+              >// Same method name, different parameter types</span
+            >
+
+            <span class="comment">// Version 1: For Selenium WebElement</span>
+            <span class="keyword">protected void</span>
+            <span class="method">clickElement</span>(WebElement element) {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click(); }
+
+            <span class="comment">// Version 2: For Playwright Locator</span>
+            <span class="keyword">protected void</span>
+            <span class="method">clickElement</span>(Locator locator) {
+            locator.click(); <span class="comment">// Auto-wait built-in</span>
+            }
+
+            <span class="comment"
+              >// Another example - enterText method overloading</span
+            >
+
+            <span class="comment">// Version 1: For Selenium</span>
+            <span class="keyword">protected void</span>
+            <span class="method">enterText</span>(WebElement element, String
+            text) { wait.until(ExpectedConditions.visibilityOf(element));
+            element.clear(); element.sendKeys(text); }
+
+            <span class="comment">// Version 2: For Playwright</span>
+            <span class="keyword">protected void</span>
+            <span class="method">enterText</span>(Locator locator, String text)
+            { locator.fill(text);
+            <span class="comment">// Clears and fills in one operation</span>
+            } }
+          </div>
+
+          <div class="benefit-box">
+            <strong>🎯 How It Works:</strong>
+            <ul>
+              <li>
+                Java determines which method to call based on the
+                <strong>parameter type</strong>
+              </li>
+              <li>
+                If you pass a <code>WebElement</code>, Selenium version is
+                called
+              </li>
+              <li>
+                If you pass a <code>Locator</code>, Playwright version is called
+              </li>
+              <li>Same method name = Cleaner, more intuitive API</li>
+            </ul>
+          </div>
+
+          <h3>Method Overloading in LoginPage</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginPage</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BasePage</span> {
+
+            <span class="comment">// POLYMORPHISM - Method Overloading</span>
+
+            <span class="comment"
+              >// Version 1: Selenium login (2 parameters)</span
+            >
+            <span class="keyword">public void</span>
+            <span class="method">login</span>(String username, String password)
+            { <span class="method">enterText</span>(usernameField, username);
+            <span class="method">enterText</span>(passwordField, password);
+            <span class="method">clickElement</span>(loginButton); }
+
+            <span class="comment"
+              >// Version 2: Playwright login (3 parameters - boolean
+              flag)</span
+            >
+            <span class="keyword">public void</span>
+            <span class="method">login</span>(String username, String password,
+            <span class="keyword">boolean</span> isPlaywright) {
+            <span class="method">enterText</span>(playwrightUsernameField,
+            username);
+            <span class="method">enterText</span>(playwrightPasswordField,
+            password);
+            <span class="method">clickElement</span>(playwrightLoginButton); }
+
+            <span class="comment"
+              >// Same method name "login", different signatures!</span
+            >
+            }
+          </div>
+
+          <h3>Usage in Test Class</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginTest</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BaseTest</span> { @Test
+            <span class="keyword">public void</span>
+            <span class="method">testLogin</span>() {
+            <span class="keyword">if</span> (usePlaywright) { LoginPage
+            loginPage = <span class="keyword">new</span> LoginPage(page);
+            <span class="comment">// Calls 3-parameter version</span>
+            loginPage.<span class="method">login</span>(<span class="string"
+              >"user"</span
+            >, <span class="string">"pass"</span>,
+            <span class="keyword">true</span>); }
+            <span class="keyword">else</span> { LoginPage loginPage =
+            <span class="keyword">new</span> LoginPage(driver);
+            <span class="comment">// Calls 2-parameter version</span>
+            loginPage.<span class="method">login</span>(<span class="string"
+              >"user"</span
+            >, <span class="string">"pass"</span>); } } }
+          </div>
+
+          <div class="note">
+            <strong>💡 Compile-time vs Runtime:</strong>
+            <ul>
+              <li>
+                <strong>Overloading (Compile-time):</strong> Compiler decides
+                which method to call based on parameters
+              </li>
+              <li>
+                <strong>Overriding (Runtime):</strong> JVM decides which method
+                to call based on object type
+              </li>
+            </ul>
+          </div>
+
+          <h3>Constructor Overloading</h3>
+          <div class="code-block">
+            <span class="keyword">public class</span>
+            <span class="class-name">BasePage</span> {
+
+            <span class="comment"
+              >// POLYMORPHISM - Constructor Overloading</span
+            >
+
+            <span class="comment">// Constructor 1: For Selenium</span>
+            <span class="keyword">public</span>
+            <span class="method">BasePage</span>(WebDriver driver) {
+            <span class="keyword">this</span>.driver = driver;
+            <span class="keyword">this</span>.wait =
+            <span class="keyword">new</span> WebDriverWait(driver,
+            Duration.ofSeconds(<span class="string">10</span>)); }
+
+            <span class="comment">// Constructor 2: For Playwright</span>
+            <span class="keyword">public</span>
+            <span class="method">BasePage</span>(Page page) {
+            <span class="keyword">this</span>.page = page; } }
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Aspect</th>
+                <th>Method Overloading</th>
+                <th>Method Overriding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Definition</strong></td>
+                <td>Same method name, different parameters</td>
+                <td>Same signature in parent and child class</td>
+              </tr>
+              <tr>
+                <td><strong>When</strong></td>
+                <td>Compile-time (Static)</td>
+                <td>Runtime (Dynamic)</td>
+              </tr>
+              <tr>
+                <td><strong>Where</strong></td>
+                <td>Same class</td>
+                <td>Parent and child class</td>
+              </tr>
+              <tr>
+                <td><strong>Return Type</strong></td>
+                <td>Can be different</td>
+                <td>Must be same or covariant</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Abstraction -->
+        <div class="section" id="abstraction">
+          <h2>🎨 4. Abstraction</h2>
+
+          <div class="principle-card">
+            <h4>What is Abstraction?</h4>
+            <p>
+              Abstraction is the concept of hiding complex implementation
+              details and showing only essential features. It focuses on
+              <span class="highlight">what an object does</span> rather than
+              <span class="highlight">how it does it</span>.
+            </p>
+          </div>
+
+          <h3>Abstraction in Our Framework</h3>
+          <p>
+            Our Page Object Model demonstrates abstraction at multiple levels:
+          </p>
+
+          <h3>Level 1: BasePage Abstraction</h3>
+          <div class="code-block">
+            <span class="comment"
+              >// ABSTRACTION - BasePage hides WebDriver complexity</span
+            >
+            <span class="keyword">public class</span>
+            <span class="class-name">BasePage</span> {
+
+            <span class="comment"
+              >// Complex wait logic is abstracted away</span
+            >
+            <span class="keyword">protected void</span>
+            <span class="method">clickElement</span>(WebElement element) {
+            <span class="comment">// Test doesn't need to know about:</span>
+            <span class="comment">// - WebDriverWait</span>
+            <span class="comment">// - ExpectedConditions</span>
+            <span class="comment">// - elementToBeClickable check</span>
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click(); }
+
+            <span class="comment">// Complex text entry is abstracted</span>
+            <span class="keyword">protected void</span>
+            <span class="method">enterText</span>(WebElement element, String
+            text) {
+            <span class="comment">// Test doesn't need to know about:</span>
+            <span class="comment">// - Visibility wait</span>
+            <span class="comment">// - Clearing existing text</span>
+            <span class="comment">// - Character-by-character typing</span>
+            wait.until(ExpectedConditions.visibilityOf(element));
+            element.clear(); element.sendKeys(text); } }
+          </div>
+
+          <h3>Level 2: LoginPage Abstraction</h3>
+          <div class="code-block">
+            <span class="comment"
+              >// ABSTRACTION - LoginPage hides element locators and
+              interactions</span
+            >
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginPage</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BasePage</span> {
+
+            <span class="comment"
+              >// Private fields - hidden from test classes</span
+            >
+            @FindBy(id = <span class="string">"username"</span>)
+            <span class="keyword">private</span> WebElement usernameField;
+            @FindBy(id = <span class="string">"password"</span>)
+            <span class="keyword">private</span> WebElement passwordField;
+
+            <span class="comment"
+              >// Public interface - simple, business-focused method</span
+            >
+            <span class="keyword">public void</span>
+            <span class="method">login</span>(String username, String password)
+            {
+            <span class="comment">// Test doesn't need to know:</span>
+            <span class="comment">// - How to locate username field</span>
+            <span class="comment">// - How to locate password field</span>
+            <span class="comment">// - How to locate login button</span>
+            <span class="comment">// - Wait mechanisms</span>
+            <span class="comment">// - Click/type implementations</span>
+            <span class="method">enterText</span>(usernameField, username);
+            <span class="method">enterText</span>(passwordField, password);
+            <span class="method">clickElement</span>(loginButton); } }
+          </div>
+
+          <h3>Level 3: Test Class - Clean and Simple</h3>
+          <div class="code-block">
+            <span class="comment"
+              >// ABSTRACTION - Test reads like business requirements</span
+            >
+            <span class="keyword">public class</span>
+            <span class="class-name">LoginTest</span>
+            <span class="keyword">extends</span>
+            <span class="class-name">BaseTest</span> { @Test
+            <span class="keyword">public void</span>
+            <span class="method">testSuccessfulLogin</span>() {
+            <span class="comment">// Clean, readable test code</span>
+            <span class="comment"
+              >// No technical details - just business actions</span
+            >
+
+            LoginPage loginPage =
+            <span class="keyword">new</span> LoginPage(driver); loginPage.<span
+              class="method"
+              >openPage</span
+            >(); loginPage.<span class="method">login</span>(<span
+              class="string"
+              >"tomsmith"</span
+            >, <span class="string">"SuperSecretPassword!"</span>); SecurePage
+            securePage = <span class="keyword">new</span> SecurePage(driver);
+            Assert.assertTrue(securePage.<span class="method"
+              >isLogoutButtonVisible</span
+            >());
+
+            <span class="comment">// No WebDriver, no waits, no locators!</span>
+            <span class="comment">// Just business logic!</span>
+            } }
+          </div>
+
+          <div class="benefit-box">
+            <strong>🎯 Abstraction Benefits:</strong>
+            <ul>
+              <li>
+                <strong>Simplicity:</strong> Tests read like plain English, easy
+                to understand
+              </li>
+              <li>
+                <strong>Maintainability:</strong> UI changes only affect Page
+                classes, not tests
+              </li>
+              <li>
+                <strong>Reduced Complexity:</strong> Each layer handles its own
+                concerns
+              </li>
+              <li>
+                <strong>Reusability:</strong> Same methods used across multiple
+                tests
+              </li>
+              <li><strong>Focus:</strong> Tests focus on "what" not "how"</li>
+            </ul>
+          </div>
+
+          <h3>Abstraction Layers Diagram</h3>
+          <div class="diagram">
+            <div style="margin-bottom: 20px">
+              <div
+                class="diagram-box"
+                style="background: #fee2e2; border-color: #ef4444"
+              >
+                Test Layer<br />
+                <small>(What to test)</small>
+              </div>
+            </div>
+            <div class="arrow">⬇️ uses</div>
+            <div style="margin: 20px 0">
+              <div
+                class="diagram-box"
+                style="background: #fef3c7; border-color: #f59e0b"
+              >
+                Page Object Layer<br />
+                <small>(Business actions)</small>
+              </div>
+            </div>
+            <div class="arrow">⬇️ uses</div>
+            <div style="margin: 20px 0">
+              <div
+                class="diagram-box"
+                style="background: #dbeafe; border-color: #3b82f6"
+              >
+                Base Page Layer<br />
+                <small>(Common operations)</small>
+              </div>
+            </div>
+            <div class="arrow">⬇️ uses</div>
+            <div style="margin-top: 20px">
+              <div
+                class="diagram-box"
+                style="background: #dcfce7; border-color: #22c55e"
+              >
+                WebDriver/Playwright<br />
+                <small>(Browser automation)</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>💡 Real-World Analogy:</strong> Think of a car. You don't
+            need to understand the engine, transmission, or fuel injection to
+            drive. You interact with simple abstractions: steering wheel,
+            pedals, and gear shift. That's abstraction!
+          </div>
+        </div>
+
+        <!-- Real-World Benefits -->
+        <div class="section" id="realworld">
+          <h2>🌍 Real-World Benefits in Our Framework</h2>
+
+          <h3>Before OOP (Procedural Approach)</h3>
+          <div class="code-block">
+            <span class="comment"
+              >// WITHOUT OOP - Messy, repetitive test code</span
+            >
+            @Test
+            <span class="keyword">public void</span>
+            <span class="method">testLogin</span>() { WebDriver driver =
+            <span class="keyword">new</span> ChromeDriver(); driver.get(<span
+              class="string"
+              >"https://the-internet.herokuapp.com/login"</span
+            >); WebDriverWait wait =
+            <span class="keyword">new</span> WebDriverWait(driver,
+            Duration.ofSeconds(<span class="string">10</span>)); WebElement
+            username = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(By.id(<span
+              class="string"
+              >"username"</span
+            >)) ); username.clear(); username.sendKeys(<span class="string"
+              >"tomsmith"</span
+            >); WebElement password = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(By.id(<span
+              class="string"
+              >"password"</span
+            >)) ); password.clear(); password.sendKeys(<span class="string"
+              >"SuperSecretPassword!"</span
+            >); WebElement button = wait.until(
+            ExpectedConditions.elementToBeClickable(By.cssSelector(<span
+              class="string"
+              >"button[type='submit']"</span
+            >)) ); button.click(); WebElement logout = wait.until(
+            ExpectedConditions.visibilityOfElementLocated(By.cssSelector(<span
+              class="string"
+              >".icon-signout"</span
+            >)) ); Assert.assertTrue(logout.isDisplayed()); driver.quit(); }
+
+            <span class="comment">// Problems:</span>
+            <span class="comment">// ❌ 25+ lines for simple test</span>
+            <span class="comment"
+              >// ❌ Technical details mixed with business logic</span
+            >
+            <span class="comment">// ❌ Hard to read and maintain</span>
+            <span class="comment">// ❌ Repeated code in every test</span>
+            <span class="comment"
+              >// ❌ Changes to UI require updating all tests</span
+            >
+          </div>
+
+          <h3>After OOP (With Page Object Model)</h3>
+          <div class="code-block">
+            <span class="comment"
+              >// WITH OOP - Clean, maintainable test code</span
+            >
+            @Test
+            <span class="keyword">public void</span>
+            <span class="method">testLogin</span>() { LoginPage loginPage =
+            <span class="keyword">new</span> LoginPage(driver);
+            loginPage.openPage(); loginPage.login(<span class="string"
+              >"tomsmith"</span
+            >, <span class="string">"SuperSecretPassword!"</span>); SecurePage
+            securePage = <span class="keyword">new</span> SecurePage(driver);
+            Assert.assertTrue(securePage.isLogoutButtonVisible()); }
+
+            <span class="comment">// Benefits:</span>
+            <span class="comment">// ✅ 7 lines (70% less code)</span>
+            <span class="comment">// ✅ Reads like business requirements</span>
+            <span class="comment">// ✅ Easy to understand and maintain</span>
+            <span class="comment">// ✅ No code duplication</span>
+            <span class="comment"
+              >// ✅ UI changes isolated to Page classes</span
+            >
+          </div>
+
+          <h3>Maintainability Example</h3>
+          <p>
+            <strong>Scenario:</strong> The login button ID changes from
+            <code>submit</code> to <code>login-btn</code>
+          </p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Without OOP</th>
+                <th>With OOP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  ❌ Update 15 test files<br />
+                  ❌ Find all instances<br />
+                  ❌ Risk missing some<br />
+                  ❌ Time: 30-60 minutes
+                </td>
+                <td>
+                  ✅ Update LoginPage only<br />
+                  ✅ One line change<br />
+                  ✅ All tests work<br />
+                  ✅ Time: 1 minute
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>How OOP Principles Work Together</h3>
+          <div class="principle-card">
+            <h4>The Perfect Combination</h4>
+            <ol>
+              <li>
+                <strong>Encapsulation</strong> hides WebDriver complexity in
+                BasePage
+              </li>
+              <li>
+                <strong>Inheritance</strong> allows LoginPage and SecurePage to
+                reuse BasePage methods
+              </li>
+              <li>
+                <strong>Polymorphism</strong> enables same methods for both
+                Selenium and Playwright
+              </li>
+              <li>
+                <strong>Abstraction</strong> lets tests focus on business logic,
+                not technical details
+              </li>
+            </ol>
+            <p style="margin-top: 15px">
+              <strong>Result:</strong> Clean, maintainable, scalable test
+              automation framework!
+            </p>
+          </div>
+
+          <h3>Key Takeaways</h3>
+          <div class="benefit-box">
+            <strong>🎯 Why OOP Matters for Test Automation:</strong>
+            <ul>
+              <li>
+                <strong>DRY Principle:</strong> Don't Repeat Yourself - write
+                once, use everywhere
+              </li>
+              <li>
+                <strong>Single Responsibility:</strong> Each class has one clear
+                purpose
+              </li>
+              <li>
+                <strong>Open/Closed Principle:</strong> Open for extension,
+                closed for modification
+              </li>
+              <li>
+                <strong>Maintainability:</strong> Changes are localized and easy
+                to implement
+              </li>
+              <li>
+                <strong>Scalability:</strong> Easy to add new pages and tests
+              </li>
+              <li>
+                <strong>Readability:</strong> Code is self-documenting and easy
+                to understand
+              </li>
+              <li>
+                <strong>Team Collaboration:</strong> Clear structure helps teams
+                work together
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+          <h2>📋 Summary</h2>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>OOP Principle</th>
+                <th>Definition</th>
+                <th>Example in Our Project</th>
+                <th>Benefit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Encapsulation</strong></td>
+                <td>Bundling data and methods, hiding internals</td>
+                <td>
+                  Private fields in LoginPage, protected methods in BasePage
+                </td>
+                <td>Data protection, controlled access</td>
+              </tr>
+              <tr>
+                <td><strong>Inheritance</strong></td>
+                <td>Child class derives from parent class</td>
+                <td>LoginPage extends BasePage, LoginTest extends BaseTest</td>
+                <td>Code reuse, reduced duplication</td>
+              </tr>
+              <tr>
+                <td><strong>Polymorphism</strong></td>
+                <td>Same name, multiple forms</td>
+                <td>Overloaded methods for Selenium and Playwright</td>
+                <td>Flexibility, unified interface</td>
+              </tr>
+              <tr>
+                <td><strong>Abstraction</strong></td>
+                <td>Hide complexity, show essentials</td>
+                <td>Page Object Model hides WebDriver details</td>
+                <td>Simplicity, focus on business logic</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note" style="margin-top: 30px">
+            <strong>🚀 Next Steps:</strong>
+            <ul>
+              <li>
+                Study the code in each class to see these principles in action
+              </li>
+              <li>
+                Try modifying a Page class and see how tests remain unaffected
+              </li>
+              <li>Add a new page object using the same OOP patterns</li>
+              <li>
+                Practice explaining each principle to reinforce your
+                understanding
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>Created as part of Selenium vs Playwright Comparison Project</p>
+        <p>
+          GitHub:
+          <a
+            href="https://github.com/chtimalsina/selenium-playwright-comparison"
+            style="color: #90cdf4"
+            >selenium-playwright-comparison</a
+          >
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
