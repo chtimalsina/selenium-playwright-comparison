@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software Testing Lifecycle - Complete Guide</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.8em;
+        margin-bottom: 10px;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .nav-bar {
+        background: #f7fafc;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .nav-bar a {
+        padding: 10px 20px;
+        background: #f5576c;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      .nav-bar a:hover {
+        background: #f093fb;
+      }
+
+      .section {
+        margin-bottom: 50px;
+      }
+
+      .section h2 {
+        color: #f5576c;
+        font-size: 2em;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #f093fb;
+        padding-bottom: 10px;
+      }
+
+      .section h3 {
+        color: #2d3748;
+        font-size: 1.5em;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+
+      .code-block {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 15px 0;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      th,
+      td {
+        border: 1px solid #e2e8f0;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background: #f5576c;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background: #f7fafc;
+      }
+
+      .tip-box {
+        background: #d1fae5;
+        border-left: 5px solid #10b981;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
+      }
+
+      .warning-box {
+        background: #fef3c7;
+        border-left: 5px solid #f59e0b;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
+      }
+
+      .info-box {
+        background: #dbeafe;
+        border-left: 5px solid #3b82f6;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 4px;
+      }
+
+      .phase-box {
+        background: #fef3c7;
+        border: 2px solid #f59e0b;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .phase-box h4 {
+        color: #92400e;
+        margin-bottom: 10px;
+      }
+
+      ul,
+      ol {
+        margin-left: 25px;
+        margin-top: 10px;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .diagram {
+        background: #f7fafc;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: center;
+        font-family: monospace;
+      }
+
+      .arrow {
+        font-size: 24px;
+        color: #f5576c;
+      }
+
+      footer {
+        background: #2d3748;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🔄 Software Testing Lifecycle Guide</h1>
+        <p>Complete Reference: Phases, Strategies, Types & Best Practices</p>
+      </header>
+
+      <div class="content">
+        <div class="nav-bar">
+          <a href="#stlc">STLC Phases</a>
+          <a href="#strategies">Test Strategies</a>
+          <a href="#types">Test Types</a>
+          <a href="#levels">Test Levels</a>
+          <a href="#techniques">Techniques</a>
+          <a href="#automation">Automation</a>
+          <a href="#best-practices">Best Practices</a>
+        </div>
+
+        <!-- STLC PHASES SECTION -->
+        <div class="section" id="stlc">
+          <h2>📋 Software Testing Life Cycle (STLC) Phases</h2>
+
+          <div class="diagram">
+            <p><strong>Requirement Analysis</strong></p>
+            <p class="arrow">↓</p>
+            <p><strong>Test Planning</strong></p>
+            <p class="arrow">↓</p>
+            <p><strong>Test Case Development</strong></p>
+            <p class="arrow">↓</p>
+            <p><strong>Test Environment Setup</strong></p>
+            <p class="arrow">↓</p>
+            <p><strong>Test Execution</strong></p>
+            <p class="arrow">↓</p>
+            <p><strong>Test Cycle Closure</strong></p>
+          </div>
+
+          <div class="phase-box">
+            <h4>Phase 1: Requirement Analysis</h4>
+            <strong>Objective:</strong> Understand what needs to be tested<br /><br />
+            <strong>Activities:</strong>
+            <ul>
+              <li>Review functional & non-functional requirements</li>
+              <li>Identify testable requirements</li>
+              <li>Determine test priorities</li>
+              <li>Identify testing types required</li>
+              <li>Prepare Requirement Traceability Matrix (RTM)</li>
+            </ul>
+            <strong>Deliverables:</strong> RTM, Automation feasibility report
+          </div>
+
+          <div class="phase-box">
+            <h4>Phase 2: Test Planning</h4>
+            <strong>Objective:</strong> Define testing approach and resources<br /><br />
+            <strong>Activities:</strong>
+            <ul>
+              <li>Estimate testing effort</li>
+              <li>Select testing tools</li>
+              <li>Define test strategy</li>
+              <li>Allocate resources</li>
+              <li>Identify entry/exit criteria</li>
+              <li>Risk assessment</li>
+            </ul>
+            <strong>Deliverables:</strong> Test Plan, Test Strategy Document,
+            Effort Estimation
+          </div>
+
+          <div class="phase-box">
+            <h4>Phase 3: Test Case Development</h4>
+            <strong>Objective:</strong> Create test cases and test data<br /><br />
+            <strong>Activities:</strong>
+            <ul>
+              <li>Write detailed test cases</li>
+              <li>Create test scripts (for automation)</li>
+              <li>Prepare test data</li>
+              <li>Review & baseline test cases</li>
+              <li>Update RTM</li>
+            </ul>
+            <strong>Deliverables:</strong> Test Cases, Test Scripts, Test Data
+          </div>
+
+          <div class="phase-box">
+            <h4>Phase 4: Test Environment Setup</h4>
+            <strong>Objective:</strong> Prepare testing environment<br /><br />
+            <strong>Activities:</strong>
+            <ul>
+              <li>Setup test environment (hardware/software)</li>
+              <li>Configure test data</li>
+              <li>Perform smoke testing</li>
+              <li>Verify environment readiness</li>
+            </ul>
+            <strong>Deliverables:</strong> Environment ready, Smoke test results
+          </div>
+
+          <div class="phase-box">
+            <h4>Phase 5: Test Execution</h4>
+            <strong>Objective:</strong> Execute tests and log defects<br /><br />
+            <strong>Activities:</strong>
+            <ul>
+              <li>Execute test cases</li>
+              <li>Document test results</li>
+              <li>Log defects</li>
+              <li>Retest fixed defects</li>
+              <li>Regression testing</li>
+              <li>Update test status</li>
+            </ul>
+            <strong>Deliverables:</strong> Test execution reports, Defect
+            reports, RTM updates
+          </div>
+
+          <div class="phase-box">
+            <h4>Phase 6: Test Cycle Closure</h4>
+            <strong>Objective:</strong> Complete testing and document
+            learnings<br /><br />
+            <strong>Activities:</strong>
+            <ul>
+              <li>Verify all defects closed/deferred</li>
+              <li>Prepare test summary report</li>
+              <li>Collect metrics</li>
+              <li>Conduct retrospectives</li>
+              <li>Archive test artifacts</li>
+            </ul>
+            <strong>Deliverables:</strong> Test closure report, Lessons learned,
+            Test metrics
+          </div>
+        </div>
+
+        <!-- TEST STRATEGIES SECTION -->
+        <div class="section" id="strategies">
+          <h2>🎯 Test Strategies</h2>
+
+          <h3>1. Proactive Strategy</h3>
+          <div class="info-box">
+            Testing starts early in SDLC, before code is written. Focuses on
+            preventing defects.
+          </div>
+          <ul>
+            <li>
+              <strong>Risk-Based Testing:</strong> Prioritize testing based on
+              risk assessment
+            </li>
+            <li>
+              <strong>Requirements-Based Testing:</strong> Test cases derived
+              from requirements
+            </li>
+            <li>
+              <strong>Early Test Design:</strong> Test cases created during
+              requirements phase
+            </li>
+          </ul>
+
+          <h3>2. Reactive Strategy</h3>
+          <div class="info-box">
+            Testing begins after code is developed. Focuses on finding defects.
+          </div>
+          <ul>
+            <li>
+              <strong>Exploratory Testing:</strong> Simultaneous learning, test
+              design & execution
+            </li>
+            <li>
+              <strong>Session-Based Testing:</strong> Time-boxed exploratory
+              sessions
+            </li>
+            <li>
+              <strong>Error Guessing:</strong> Based on tester's experience
+            </li>
+          </ul>
+
+          <h3>3. Methodical Strategy</h3>
+          <div class="info-box">
+            Systematic approach using established test techniques and standards.
+          </div>
+          <ul>
+            <li><strong>Checklist-Based:</strong> Predefined checklists</li>
+            <li>
+              <strong>Standards-Based:</strong> Following industry standards
+              (ISO, IEEE)
+            </li>
+            <li>
+              <strong>Quality Characteristics-Based:</strong> Testing based on
+              quality models
+            </li>
+          </ul>
+
+          <h3>4. Analytical Strategy</h3>
+          <div class="info-box">
+            Use analysis to determine testing focus areas.
+          </div>
+          <ul>
+            <li><strong>Risk Analysis:</strong> Focus on high-risk areas</li>
+            <li>
+              <strong>Coverage Analysis:</strong> Ensure adequate
+              code/requirement coverage
+            </li>
+            <li>
+              <strong>Cause-Effect Analysis:</strong> Identify causes of defects
+            </li>
+          </ul>
+
+          <h3>5. Model-Based Strategy</h3>
+          <div class="info-box">
+            Tests derived from models of system behavior.
+          </div>
+          <ul>
+            <li>
+              <strong>State Transition Testing:</strong> Based on state diagrams
+            </li>
+            <li><strong>Use Case Testing:</strong> Based on use case models</li>
+            <li>
+              <strong>Decision Table Testing:</strong> Based on business rules
+            </li>
+          </ul>
+        </div>
+
+        <!-- TEST TYPES SECTION -->
+        <div class="section" id="types">
+          <h2>🔍 Test Types</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Purpose</th>
+                <th>When to Use</th>
+                <th>Tools</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Functional Testing</strong></td>
+                <td>Verify features work as expected</td>
+                <td>Every release</td>
+                <td>Selenium, Playwright, TestNG</td>
+              </tr>
+              <tr>
+                <td><strong>Non-Functional Testing</strong></td>
+                <td>Test performance, security, usability</td>
+                <td>Before major releases</td>
+                <td>JMeter, LoadRunner, OWASP ZAP</td>
+              </tr>
+              <tr>
+                <td><strong>Regression Testing</strong></td>
+                <td>Ensure new changes don't break existing features</td>
+                <td>After every code change</td>
+                <td>Selenium, CI/CD pipelines</td>
+              </tr>
+              <tr>
+                <td><strong>Smoke Testing</strong></td>
+                <td>Verify critical functionalities work</td>
+                <td>After build deployment</td>
+                <td>Quick automated scripts</td>
+              </tr>
+              <tr>
+                <td><strong>Sanity Testing</strong></td>
+                <td>Quick check on specific functionality</td>
+                <td>After minor fixes</td>
+                <td>Manual or automated</td>
+              </tr>
+              <tr>
+                <td><strong>Integration Testing</strong></td>
+                <td>Test interaction between components</td>
+                <td>After unit testing</td>
+                <td>JUnit, TestNG, REST Assured</td>
+              </tr>
+              <tr>
+                <td><strong>System Testing</strong></td>
+                <td>End-to-end testing of complete system</td>
+                <td>Before UAT</td>
+                <td>Selenium, Playwright</td>
+              </tr>
+              <tr>
+                <td><strong>Acceptance Testing</strong></td>
+                <td>Verify system meets business requirements</td>
+                <td>Before production</td>
+                <td>Cucumber, Selenium</td>
+              </tr>
+              <tr>
+                <td><strong>Performance Testing</strong></td>
+                <td>Check speed, scalability, stability</td>
+                <td>Load testing phase</td>
+                <td>JMeter, Gatling, K6</td>
+              </tr>
+              <tr>
+                <td><strong>Security Testing</strong></td>
+                <td>Identify vulnerabilities</td>
+                <td>Security audit phase</td>
+                <td>OWASP ZAP, Burp Suite</td>
+              </tr>
+              <tr>
+                <td><strong>Usability Testing</strong></td>
+                <td>Evaluate user-friendliness</td>
+                <td>UX review phase</td>
+                <td>Manual testing, User feedback</td>
+              </tr>
+              <tr>
+                <td><strong>Compatibility Testing</strong></td>
+                <td>Check across browsers/devices/OS</td>
+                <td>Cross-platform releases</td>
+                <td>BrowserStack, Sauce Labs</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Detailed Test Types</h3>
+
+          <h4>Functional Testing</h4>
+          <ul>
+            <li><strong>Unit Testing:</strong> Individual components</li>
+            <li>
+              <strong>Integration Testing:</strong> Component interactions
+            </li>
+            <li><strong>System Testing:</strong> Complete system</li>
+            <li><strong>UAT:</strong> Business perspective validation</li>
+          </ul>
+
+          <h4>Non-Functional Testing</h4>
+          <ul>
+            <li>
+              <strong>Performance:</strong> Load, Stress, Spike, Endurance
+              testing
+            </li>
+            <li>
+              <strong>Security:</strong> Vulnerability, Penetration, Risk
+              assessment
+            </li>
+            <li><strong>Usability:</strong> User experience evaluation</li>
+            <li>
+              <strong>Compatibility:</strong> Browser, OS, Device compatibility
+            </li>
+            <li><strong>Reliability:</strong> System uptime and recovery</li>
+            <li><strong>Scalability:</strong> Handling increased load</li>
+          </ul>
+        </div>
+
+        <!-- TEST LEVELS SECTION -->
+        <div class="section" id="levels">
+          <h2>📊 Test Levels</h2>
+
+          <div class="diagram">
+            <p style="font-size: 0.9em">┌─────────────────────────┐</p>
+            <p style="font-size: 0.9em">
+              │ Acceptance Testing │ ← Business Users
+            </p>
+            <p style="font-size: 0.9em">├─────────────────────────┤</p>
+            <p style="font-size: 0.9em">│ System Testing │ ← QA Team</p>
+            <p style="font-size: 0.9em">├─────────────────────────┤</p>
+            <p style="font-size: 0.9em">│ Integration Testing │ ← Dev + QA</p>
+            <p style="font-size: 0.9em">├─────────────────────────┤</p>
+            <p style="font-size: 0.9em">│ Unit Testing │ ← Developers</p>
+            <p style="font-size: 0.9em">└─────────────────────────┘</p>
+          </div>
+
+          <h3>Level 1: Unit Testing</h3>
+          <table>
+            <tr>
+              <th>Aspect</th>
+              <th>Details</th>
+            </tr>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Individual units/components</td>
+            </tr>
+            <tr>
+              <td><strong>Who</strong></td>
+              <td>Developers</td>
+            </tr>
+            <tr>
+              <td><strong>When</strong></td>
+              <td>During development</td>
+            </tr>
+            <tr>
+              <td><strong>Tools</strong></td>
+              <td>JUnit, TestNG, Mockito</td>
+            </tr>
+            <tr>
+              <td><strong>Coverage</strong></td>
+              <td>Classes, methods, functions</td>
+            </tr>
+          </table>
+
+          <h3>Level 2: Integration Testing</h3>
+          <table>
+            <tr>
+              <th>Aspect</th>
+              <th>Details</th>
+            </tr>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Component interactions, APIs, data flow</td>
+            </tr>
+            <tr>
+              <td><strong>Who</strong></td>
+              <td>Developers + QA</td>
+            </tr>
+            <tr>
+              <td><strong>When</strong></td>
+              <td>After unit testing</td>
+            </tr>
+            <tr>
+              <td><strong>Tools</strong></td>
+              <td>REST Assured, Postman, SoapUI</td>
+            </tr>
+            <tr>
+              <td><strong>Approaches</strong></td>
+              <td>Big Bang, Top-Down, Bottom-Up, Sandwich</td>
+            </tr>
+          </table>
+
+          <h3>Level 3: System Testing</h3>
+          <table>
+            <tr>
+              <th>Aspect</th>
+              <th>Details</th>
+            </tr>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Complete integrated system</td>
+            </tr>
+            <tr>
+              <td><strong>Who</strong></td>
+              <td>QA Team</td>
+            </tr>
+            <tr>
+              <td><strong>When</strong></td>
+              <td>After integration testing</td>
+            </tr>
+            <tr>
+              <td><strong>Tools</strong></td>
+              <td>Selenium, Playwright, Cypress</td>
+            </tr>
+            <tr>
+              <td><strong>Coverage</strong></td>
+              <td>Functional & non-functional requirements</td>
+            </tr>
+          </table>
+
+          <h3>Level 4: Acceptance Testing</h3>
+          <table>
+            <tr>
+              <th>Aspect</th>
+              <th>Details</th>
+            </tr>
+            <tr>
+              <td><strong>Focus</strong></td>
+              <td>Business requirements validation</td>
+            </tr>
+            <tr>
+              <td><strong>Who</strong></td>
+              <td>Business users, Stakeholders</td>
+            </tr>
+            <tr>
+              <td><strong>When</strong></td>
+              <td>Before production release</td>
+            </tr>
+            <tr>
+              <td><strong>Types</strong></td>
+              <td>UAT, Alpha, Beta, Contract testing</td>
+            </tr>
+            <tr>
+              <td><strong>Tools</strong></td>
+              <td>Cucumber, SpecFlow, FitNesse</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- TECHNIQUES SECTION -->
+        <div class="section" id="techniques">
+          <h2>🛠️ Test Design Techniques</h2>
+
+          <h3>Black Box Testing Techniques</h3>
+
+          <h4>1. Equivalence Partitioning</h4>
+          <div class="info-box">
+            Divide input data into partitions of equivalent data where each
+            partition is tested once.
+          </div>
+          <div class="code-block">
+            <strong>Example:</strong> Age field (1-150) Valid Partition: 1-150
+            Invalid Partitions: <1, >150 Test Cases: - Age = 25 (valid) - Age =
+            0 (invalid) - Age = 151 (invalid)
+          </div>
+
+          <h4>2. Boundary Value Analysis</h4>
+          <div class="info-box">
+            Test values at boundaries between partitions.
+          </div>
+          <div class="code-block">
+            <strong>Example:</strong> Age field (18-60) Boundary Values: 17, 18,
+            60, 61 Test Cases: - Age = 17 (just below min) - Age = 18 (min
+            boundary) - Age = 60 (max boundary) - Age = 61 (just above max)
+          </div>
+
+          <h4>3. Decision Table Testing</h4>
+          <div class="info-box">
+            Test combinations of inputs and their corresponding outputs.
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Condition</th>
+                <th>Rule 1</th>
+                <th>Rule 2</th>
+                <th>Rule 3</th>
+                <th>Rule 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Valid Username</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>N</td>
+                <td>N</td>
+              </tr>
+              <tr>
+                <td>Valid Password</td>
+                <td>Y</td>
+                <td>N</td>
+                <td>Y</td>
+                <td>N</td>
+              </tr>
+              <tr>
+                <td><strong>Action</strong></td>
+                <td><strong>Login</strong></td>
+                <td><strong>Error</strong></td>
+                <td><strong>Error</strong></td>
+                <td><strong>Error</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>4. State Transition Testing</h4>
+          <div class="info-box">
+            Test system behavior through different states.
+          </div>
+          <div class="code-block">
+            <strong>Example:</strong> ATM PIN Entry States: Locked, Attempt 1,
+            Attempt 2, Unlocked Transitions: - Locked → Correct PIN → Unlocked -
+            Attempt 1 → Wrong PIN → Attempt 2 - Attempt 2 → Wrong PIN → Locked
+          </div>
+
+          <h4>5. Use Case Testing</h4>
+          <div class="info-box">
+            Derive test cases from use cases/user stories.
+          </div>
+
+          <h3>White Box Testing Techniques</h3>
+
+          <h4>1. Statement Coverage</h4>
+          <div class="info-box">
+            Ensure every statement in code is executed at least once.
+          </div>
+
+          <h4>2. Branch Coverage</h4>
+          <div class="info-box">
+            Ensure every branch (if/else, switch cases) is executed.
+          </div>
+
+          <h4>3. Path Coverage</h4>
+          <div class="info-box">
+            Execute all possible paths through the code.
+          </div>
+
+          <h4>4. Condition Coverage</h4>
+          <div class="info-box">
+            Test all boolean sub-expressions separately.
+          </div>
+        </div>
+
+        <!-- AUTOMATION SECTION -->
+        <div class="section" id="automation">
+          <h2>🤖 Test Automation Strategy</h2>
+
+          <h3>Test Automation Pyramid</h3>
+          <div class="diagram">
+            <p style="font-size: 0.8em">┌───────────────┐</p>
+            <p style="font-size: 0.8em">
+              │ UI Tests │ ← 10% (Manual + Automated)
+            </p>
+            <p style="font-size: 0.8em">├───────────────┤</p>
+            <p style="font-size: 0.8em">┌─┴───────────────┴─┐</p>
+            <p style="font-size: 0.8em">
+              │ Integration Tests │ ← 30% (Automated)
+            </p>
+            <p style="font-size: 0.8em">├───────────────────┤</p>
+            <p style="font-size: 0.8em">┌─┴───────────────────┴─┐</p>
+            <p style="font-size: 0.8em">│ Unit Tests │ ← 60% (Automated)</p>
+            <p style="font-size: 0.8em">└───────────────────────┘</p>
+          </div>
+
+          <h3>When to Automate</h3>
+          <div class="tip-box">
+            <strong>✅ AUTOMATE:</strong>
+            <ul>
+              <li>Regression test suites</li>
+              <li>Smoke/Sanity tests</li>
+              <li>Repetitive tests</li>
+              <li>Data-driven tests</li>
+              <li>Performance/Load tests</li>
+              <li>API tests</li>
+              <li>Critical path scenarios</li>
+            </ul>
+          </div>
+
+          <div class="warning-box">
+            <strong>❌ DON'T AUTOMATE:</strong>
+            <ul>
+              <li>One-time tests</li>
+              <li>Unstable features</li>
+              <li>Complex visual validation</li>
+              <li>Usability testing</li>
+              <li>Exploratory testing</li>
+              <li>Tests requiring frequent updates</li>
+            </ul>
+          </div>
+
+          <h3>Automation Framework Types</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Framework</th>
+                <th>Description</th>
+                <th>Pros</th>
+                <th>Cons</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Linear</strong></td>
+                <td>Record and playback</td>
+                <td>Easy to create</td>
+                <td>Not maintainable</td>
+              </tr>
+              <tr>
+                <td><strong>Modular</strong></td>
+                <td>Divide application into modules</td>
+                <td>Reusable modules</td>
+                <td>Requires planning</td>
+              </tr>
+              <tr>
+                <td><strong>Data-Driven</strong></td>
+                <td>Separate test data from scripts</td>
+                <td>Easy data variation</td>
+                <td>Data dependency</td>
+              </tr>
+              <tr>
+                <td><strong>Keyword-Driven</strong></td>
+                <td>Keywords represent actions</td>
+                <td>Non-technical friendly</td>
+                <td>Initial effort high</td>
+              </tr>
+              <tr>
+                <td><strong>Hybrid</strong></td>
+                <td>Combination of above</td>
+                <td>Flexible, powerful</td>
+                <td>Complex setup</td>
+              </tr>
+              <tr>
+                <td><strong>BDD</strong></td>
+                <td>Behavior-driven (Cucumber)</td>
+                <td>Business readable</td>
+                <td>Learning curve</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>CI/CD Integration</h3>
+          <div class="code-block">
+            <strong>Pipeline Stages:</strong>
+
+            1. Code Commit → Trigger build 2. Build → Compile code 3. Unit Tests
+            → Run unit tests 4. Deploy to Test Environment 5. Integration Tests
+            → API tests 6. UI Tests → Selenium/Playwright tests 7. Performance
+            Tests → Load tests 8. Security Scans → Vulnerability check 9. Deploy
+            to Staging 10. Smoke Tests → Critical path 11. Manual Testing (if
+            needed) 12. Deploy to Production
+          </div>
+
+          <h3>Test Automation Tools Comparison</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Type</th>
+                <th>Language</th>
+                <th>Best For</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Selenium</td>
+                <td>UI</td>
+                <td>Java, Python, C#, JS</td>
+                <td>Cross-browser testing</td>
+              </tr>
+              <tr>
+                <td>Playwright</td>
+                <td>UI</td>
+                <td>Java, Python, JS, C#</td>
+                <td>Modern web apps, auto-wait</td>
+              </tr>
+              <tr>
+                <td>Cypress</td>
+                <td>UI</td>
+                <td>JavaScript</td>
+                <td>Frontend developers</td>
+              </tr>
+              <tr>
+                <td>REST Assured</td>
+                <td>API</td>
+                <td>Java</td>
+                <td>REST API testing</td>
+              </tr>
+              <tr>
+                <td>Postman</td>
+                <td>API</td>
+                <td>JavaScript</td>
+                <td>API manual + automation</td>
+              </tr>
+              <tr>
+                <td>JMeter</td>
+                <td>Performance</td>
+                <td>Java</td>
+                <td>Load/Stress testing</td>
+              </tr>
+              <tr>
+                <td>Cucumber</td>
+                <td>BDD</td>
+                <td>Java, Ruby, JS</td>
+                <td>Behavior-driven testing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- BEST PRACTICES SECTION -->
+        <div class="section" id="best-practices">
+          <h2>✨ Testing Best Practices</h2>
+
+          <h3>Test Case Design</h3>
+          <div class="tip-box">
+            <ul>
+              <li>Write clear, concise test cases</li>
+              <li>One test case = one objective</li>
+              <li>Include prerequisites and test data</li>
+              <li>Make test cases independent</li>
+              <li>Use descriptive names</li>
+              <li>Maintain traceability to requirements</li>
+              <li>Review test cases before execution</li>
+            </ul>
+          </div>
+
+          <h3>Defect Management</h3>
+          <div class="tip-box">
+            <ul>
+              <li>Report defects immediately</li>
+              <li>Include steps to reproduce</li>
+              <li>Attach screenshots/logs</li>
+              <li>Assign severity and priority</li>
+              <li>Verify fixes before closing</li>
+              <li>Track defect metrics</li>
+            </ul>
+          </div>
+
+          <h3>Test Data Management</h3>
+          <div class="tip-box">
+            <ul>
+              <li>Separate test data from test scripts</li>
+              <li>Use realistic data</li>
+              <li>Protect sensitive data (masking)</li>
+              <li>Version control test data</li>
+              <li>Create data setup/teardown scripts</li>
+              <li>Use data generation tools</li>
+            </ul>
+          </div>
+
+          <h3>Test Environment</h3>
+          <div class="tip-box">
+            <ul>
+              <li>Mirror production as closely as possible</li>
+              <li>Maintain separate environments (Dev, QA, Staging, Prod)</li>
+              <li>Document environment configuration</li>
+              <li>Implement access controls</li>
+              <li>Regular environment refreshes</li>
+              <li>Monitor environment health</li>
+            </ul>
+          </div>
+
+          <h3>Test Metrics to Track</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Formula</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Test Coverage</td>
+                <td>(Tested / Total) × 100</td>
+                <td>Measure completeness</td>
+              </tr>
+              <tr>
+                <td>Defect Density</td>
+                <td>Defects / Size (KLOC)</td>
+                <td>Code quality indicator</td>
+              </tr>
+              <tr>
+                <td>Defect Removal Efficiency</td>
+                <td>(Defects Found / Total Defects) × 100</td>
+                <td>Testing effectiveness</td>
+              </tr>
+              <tr>
+                <td>Test Execution Rate</td>
+                <td>Tests Executed / Time</td>
+                <td>Team productivity</td>
+              </tr>
+              <tr>
+                <td>Pass Rate</td>
+                <td>(Passed / Executed) × 100</td>
+                <td>Build stability</td>
+              </tr>
+              <tr>
+                <td>Automation ROI</td>
+                <td>(Manual Cost - Automation Cost) / Automation Cost</td>
+                <td>Automation value</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Shift-Left Testing</h3>
+          <div class="info-box">
+            <strong>Early Testing Approach:</strong>
+            <ul>
+              <li>Test planning during requirements phase</li>
+              <li>Static testing (reviews, inspections)</li>
+              <li>Unit testing by developers</li>
+              <li>TDD (Test-Driven Development)</li>
+              <li>BDD (Behavior-Driven Development)</li>
+              <li>Early defect detection → Lower costs</li>
+            </ul>
+          </div>
+
+          <h3>Shift-Right Testing</h3>
+          <div class="info-box">
+            <strong>Production Testing:</strong>
+            <ul>
+              <li>Monitoring and logging</li>
+              <li>A/B testing</li>
+              <li>Canary releases</li>
+              <li>Feature flags</li>
+              <li>Real user monitoring (RUM)</li>
+              <li>Chaos engineering</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          🔗
+          <a
+            href="https://github.com/chtimalsina/selenium-playwright-comparison"
+            style="color: #90cdf4"
+            >Back to Repository</a
+          >
+        </p>
+        <p>Created as part of Selenium vs Playwright Comparison Project</p>
+      </footer>
+    </div>
+  </body>
+</html>

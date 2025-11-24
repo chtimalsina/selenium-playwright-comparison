@@ -417,11 +417,17 @@ This project is for educational purposes.
 - [Playwright Java](https://playwright.dev/java/)
 - [Playwright GitHub](https://github.com/microsoft/playwright-java)
 
-### 📘 OOP Learning Guide
+### 📘 Learning Guides & Cheatsheets
 
 - **[Object-Oriented Programming in Java - Explained with Examples](https://chtimalsina.github.io/selenium-playwright-comparison/OOP-Java-Explained.html)** - Interactive HTML guide demonstrating all 4 OOP pillars (Encapsulation, Inheritance, Polymorphism, Abstraction) using real code examples from this project.
 
+- **[Selenium WebDriver Complete Cheatsheet](https://chtimalsina.github.io/selenium-playwright-comparison/Selenium-Cheatsheet.html)** - Comprehensive guide covering Selenium from basics to advanced topics including setup, locators, waits, interactions, Page Object Model, and best practices.
+
+- **[Playwright Complete Cheatsheet](https://chtimalsina.github.io/selenium-playwright-comparison/Playwright-Cheatsheet.html)** - Complete reference for Playwright covering auto-waiting, locators, network interception, multi-browser support, and modern web automation features.
+
+- **[Software Testing Lifecycle Guide](https://chtimalsina.github.io/selenium-playwright-comparison/Testing-Lifecycle-Guide.html)** - Detailed guide on STLC phases, test strategies, test types (functional, non-functional, regression), test levels, design techniques, automation strategies, and industry best practices.
+
 ---
 
-**Last Updated**: November 2025  
+**Last Updated:** November 2025
 **Author**: Demo Project for Framework Comparison
