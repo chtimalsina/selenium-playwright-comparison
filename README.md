@@ -417,6 +417,10 @@ This project is for educational purposes.
 - [Playwright Java](https://playwright.dev/java/)
 - [Playwright GitHub](https://github.com/microsoft/playwright-java)
 
+### 📘 OOP Learning Guide
+
+- **[Object-Oriented Programming in Java - Explained with Examples](https://chtimalsina.github.io/selenium-playwright-comparison/OOP-Java-Explained.html)** - Interactive HTML guide demonstrating all 4 OOP pillars (Encapsulation, Inheritance, Polymorphism, Abstraction) using real code examples from this project.
+
 ---
 
 **Last Updated**: November 2025  
