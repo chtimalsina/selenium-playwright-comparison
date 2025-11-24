@@ -366,13 +366,12 @@
 
           <h3>Example from Our Project: BasePage.java</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">BasePage</span> {
             <span class="comment"
               >// ENCAPSULATION - Protected fields accessible only to child
               classes</span
             >
-            <span class="keyword">protected</span> WebDriver driver;
+<span class="keyword">protected</span> WebDriver driver;
             <span class="comment">// Selenium driver</span>
             <span class="keyword">protected</span> WebDriverWait wait;
             <span class="comment">// Explicit wait</span>
@@ -382,10 +381,8 @@
             <span class="comment"
               >// Constructor - public access for creating objects</span
             >
-            <span class="keyword">public</span>
-            <span class="method">BasePage</span>(WebDriver driver) {
-            <span class="keyword">this</span>.driver = driver;
-            <span class="keyword">this</span>.wait =
+            <span class="keyword">public</span> <span class="method">BasePage</span>(WebDriver driver) {
+            <span class="keyword">this</span>.driver = driver; <span class="keyword">this</span>.wait =
             <span class="keyword">new</span> WebDriverWait(driver,
             Duration.ofSeconds(<span class="string">10</span>)); }
 
@@ -394,8 +391,7 @@
               only</span
             >
             <span class="keyword">protected void</span>
-            <span class="method">clickElement</span>(WebElement element) {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            <span class="method">clickElement</span>(WebElement element) { wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click(); } }
           </div>
 
@@ -419,10 +415,7 @@
 
           <h3>Example from LoginPage.java</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginPage</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">LoginPage</span> <span class="keyword">extends</span> <span class="class-name">BasePage</span> {
 
             <span class="comment"
               >// ENCAPSULATION - Private fields hidden from external
@@ -437,11 +430,9 @@
               >// Public method - interface for interacting with the page</span
             >
             <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password)
-            { <span class="method">enterText</span>(usernameField, username);
+            <span class="method">login</span>(String username, String password) { <span class="method">enterText</span>(usernameField, username);
             <span class="comment">// Uses protected method from BasePage</span>
-            <span class="method">enterText</span>(passwordField, password);
-            <span class="method">clickElement</span>(loginButton); } }
+            <span class="method">enterText</span>(passwordField, password); <span class="method">clickElement</span>(loginButton); } }
           </div>
 
           <div class="note">
@@ -478,16 +469,12 @@
 
           <h3>Example: BasePage (Parent Class)</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">BasePage</span> {
-            <span class="keyword">protected</span> WebDriver driver;
-            <span class="keyword">protected</span> WebDriverWait wait;
+            <span class="keyword">public class</span> <span class="class-name">BasePage</span> {
+            <span class="keyword">protected</span> WebDriver driver; <span class="keyword">protected</span> WebDriverWait wait;
 
             <span class="comment">// Parent constructor</span>
-            <span class="keyword">public</span>
-            <span class="method">BasePage</span>(WebDriver driver) {
-            <span class="keyword">this</span>.driver = driver;
-            <span class="keyword">this</span>.wait =
+            <span class="keyword">public</span> <span class="method">BasePage</span>(WebDriver driver) {
+            <span class="keyword">this</span>.driver = driver; <span class="keyword">this</span>.wait =
             <span class="keyword">new</span> WebDriverWait(driver,
             Duration.ofSeconds(<span class="string">10</span>)); }
 
@@ -495,13 +482,11 @@
               >// Common method available to all child classes</span
             >
             <span class="keyword">protected void</span>
-            <span class="method">clickElement</span>(WebElement element) {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            <span class="method">clickElement</span>(WebElement element) { wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click(); }
 
             <span class="keyword">protected void</span>
-            <span class="method">enterText</span>(WebElement element, String
-            text) { wait.until(ExpectedConditions.visibilityOf(element));
+            <span class="method">enterText</span>(WebElement element, String text) { wait.until(ExpectedConditions.visibilityOf(element));
             element.clear(); element.sendKeys(text); } }
           </div>
 
@@ -510,18 +495,14 @@
             <span class="comment"
               >// INHERITANCE - LoginPage extends BasePage</span
             >
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginPage</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BasePage</span> { @FindBy(id =
+            <span class="keyword">public class</span> <span class="class-name">LoginPage</span> <span class="keyword">extends</span> <span class="class-name">BasePage</span> { @FindBy(id =
             <span class="string">"username"</span>)
             <span class="keyword">private</span> WebElement usernameField;
 
             <span class="comment"
               >// Child constructor calls parent constructor</span
             >
-            <span class="keyword">public</span>
-            <span class="method">LoginPage</span>(WebDriver driver) {
+            <span class="keyword">public</span> <span class="method">LoginPage</span>(WebDriver driver) {
             <span class="keyword">super</span>(driver);
             <span class="comment">// Calling parent constructor</span>
             PageFactory.initElements(driver, <span class="keyword">this</span>);
@@ -529,12 +510,11 @@
 
             <span class="comment">// Uses inherited methods from BasePage</span>
             <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password)
-            { <span class="method">enterText</span>(usernameField, username);
+            <span class="method">login</span>(String username, String password) { <span class="method">enterText</span>(usernameField, username);
             <span class="comment">// Inherited from BasePage</span>
-            <span class="method">enterText</span>(passwordField, password);
+<span class="method">enterText</span>(passwordField, password);
             <span class="comment">// Inherited from BasePage</span>
-            <span class="method">clickElement</span>(loginButton);
+<span class="method">clickElement</span>(loginButton);
             <span class="comment">// Inherited from BasePage</span>
             } }
           </div>
@@ -564,27 +544,20 @@
 
           <h3>Example: BaseTest Inheritance</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">BaseTest</span> {
-            <span class="keyword">protected</span> WebDriver driver;
-            @BeforeMethod <span class="keyword">public void</span>
-            <span class="method">setUp</span>() { driver =
-            <span class="keyword">new</span> SafariDriver();
+            <span class="keyword">public class</span> <span class="class-name">BaseTest</span> {
+            <span class="keyword">protected</span> WebDriver driver; @BeforeMethod <span class="keyword">public void</span>
+            <span class="method">setUp</span>() { driver = <span class="keyword">new</span> SafariDriver();
             driver.manage().window().maximize(); } @AfterMethod
             <span class="keyword">public void</span>
-            <span class="method">tearDown</span>() {
-            <span class="keyword">if</span> (driver !=
+            <span class="method">tearDown</span>() { <span class="keyword">if</span> (driver !=
             <span class="keyword">null</span>) { driver.quit(); } } }
 
             <span class="comment"
               >// Test class inherits setup and teardown</span
             >
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginTest</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BaseTest</span> { @Test
+            <span class="keyword">public class</span> <span class="class-name">LoginTest</span> <span class="keyword">extends</span> <span class="class-name">BaseTest</span> { @Test
             <span class="keyword">public void</span>
-            <span class="method">testSuccessfulLogin</span>() {
+<span class="method">testSuccessfulLogin</span>() {
             <span class="comment">// driver is available from BaseTest</span>
             LoginPage loginPage =
             <span class="keyword">new</span> LoginPage(driver);
@@ -631,8 +604,7 @@
           </p>
 
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">BasePage</span> {
 
             <span class="comment">// POLYMORPHISM - Method Overloading</span>
             <span class="comment"
@@ -641,14 +613,12 @@
 
             <span class="comment">// Version 1: For Selenium WebElement</span>
             <span class="keyword">protected void</span>
-            <span class="method">clickElement</span>(WebElement element) {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            <span class="method">clickElement</span>(WebElement element) { wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click(); }
 
             <span class="comment">// Version 2: For Playwright Locator</span>
             <span class="keyword">protected void</span>
-            <span class="method">clickElement</span>(Locator locator) {
-            locator.click(); <span class="comment">// Auto-wait built-in</span>
+            <span class="method">clickElement</span>(Locator locator) { locator.click(); <span class="comment">// Auto-wait built-in</span>
             }
 
             <span class="comment"
@@ -657,14 +627,12 @@
 
             <span class="comment">// Version 1: For Selenium</span>
             <span class="keyword">protected void</span>
-            <span class="method">enterText</span>(WebElement element, String
-            text) { wait.until(ExpectedConditions.visibilityOf(element));
+            <span class="method">enterText</span>(WebElement element, String text) { wait.until(ExpectedConditions.visibilityOf(element));
             element.clear(); element.sendKeys(text); }
 
             <span class="comment">// Version 2: For Playwright</span>
             <span class="keyword">protected void</span>
-            <span class="method">enterText</span>(Locator locator, String text)
-            { locator.fill(text);
+            <span class="method">enterText</span>(Locator locator, String text) { locator.fill(text);
             <span class="comment">// Clears and fills in one operation</span>
             } }
           </div>
@@ -689,10 +657,7 @@
 
           <h3>Method Overloading in LoginPage</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginPage</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">LoginPage</span> <span class="keyword">extends</span> <span class="class-name">BasePage</span> {
 
             <span class="comment">// POLYMORPHISM - Method Overloading</span>
 
@@ -700,23 +665,18 @@
               >// Version 1: Selenium login (2 parameters)</span
             >
             <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password)
-            { <span class="method">enterText</span>(usernameField, username);
-            <span class="method">enterText</span>(passwordField, password);
-            <span class="method">clickElement</span>(loginButton); }
+            <span class="method">login</span>(String username, String password) { <span class="method">enterText</span>(usernameField, username);
+            <span class="method">enterText</span>(passwordField, password); <span class="method">clickElement</span>(loginButton); }
 
             <span class="comment"
               >// Version 2: Playwright login (3 parameters - boolean
               flag)</span
             >
             <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password,
-            <span class="keyword">boolean</span> isPlaywright) {
-            <span class="method">enterText</span>(playwrightUsernameField,
-            username);
-            <span class="method">enterText</span>(playwrightPasswordField,
-            password);
-            <span class="method">clickElement</span>(playwrightLoginButton); }
+            <span class="method">login</span>(String username, String password, <span class="keyword">boolean</span> isPlaywright) {
+            <span class="method">enterText</span>(playwrightUsernameField, username);
+            <span class="method">enterText</span>(playwrightPasswordField, password);
+<span class="method">clickElement</span>(playwrightLoginButton); }
 
             <span class="comment"
               >// Same method name "login", different signatures!</span
@@ -726,13 +686,9 @@
 
           <h3>Usage in Test Class</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginTest</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BaseTest</span> { @Test
+            <span class="keyword">public class</span> <span class="class-name">LoginTest</span> <span class="keyword">extends</span> <span class="class-name">BaseTest</span> { @Test
             <span class="keyword">public void</span>
-            <span class="method">testLogin</span>() {
-            <span class="keyword">if</span> (usePlaywright) { LoginPage
+            <span class="method">testLogin</span>() { <span class="keyword">if</span> (usePlaywright) { LoginPage
             loginPage = <span class="keyword">new</span> LoginPage(page);
             <span class="comment">// Calls 3-parameter version</span>
             loginPage.<span class="method">login</span>(<span class="string"
@@ -763,24 +719,20 @@
 
           <h3>Constructor Overloading</h3>
           <div class="code-block">
-            <span class="keyword">public class</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">BasePage</span> {
 
             <span class="comment"
               >// POLYMORPHISM - Constructor Overloading</span
             >
 
             <span class="comment">// Constructor 1: For Selenium</span>
-            <span class="keyword">public</span>
-            <span class="method">BasePage</span>(WebDriver driver) {
-            <span class="keyword">this</span>.driver = driver;
-            <span class="keyword">this</span>.wait =
+            <span class="keyword">public</span> <span class="method">BasePage</span>(WebDriver driver) {
+            <span class="keyword">this</span>.driver = driver; <span class="keyword">this</span>.wait =
             <span class="keyword">new</span> WebDriverWait(driver,
             Duration.ofSeconds(<span class="string">10</span>)); }
 
             <span class="comment">// Constructor 2: For Playwright</span>
-            <span class="keyword">public</span>
-            <span class="method">BasePage</span>(Page page) {
+            <span class="keyword">public</span> <span class="method">BasePage</span>(Page page) {
             <span class="keyword">this</span>.page = page; } }
           </div>
 
@@ -841,14 +793,13 @@
             <span class="comment"
               >// ABSTRACTION - BasePage hides WebDriver complexity</span
             >
-            <span class="keyword">public class</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">BasePage</span> {
 
             <span class="comment"
               >// Complex wait logic is abstracted away</span
             >
             <span class="keyword">protected void</span>
-            <span class="method">clickElement</span>(WebElement element) {
+<span class="method">clickElement</span>(WebElement element) {
             <span class="comment">// Test doesn't need to know about:</span>
             <span class="comment">// - WebDriverWait</span>
             <span class="comment">// - ExpectedConditions</span>
@@ -858,8 +809,7 @@
 
             <span class="comment">// Complex text entry is abstracted</span>
             <span class="keyword">protected void</span>
-            <span class="method">enterText</span>(WebElement element, String
-            text) {
+            <span class="method">enterText</span>(WebElement element, String text) {
             <span class="comment">// Test doesn't need to know about:</span>
             <span class="comment">// - Visibility wait</span>
             <span class="comment">// - Clearing existing text</span>
@@ -874,10 +824,7 @@
               >// ABSTRACTION - LoginPage hides element locators and
               interactions</span
             >
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginPage</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BasePage</span> {
+            <span class="keyword">public class</span> <span class="class-name">LoginPage</span> <span class="keyword">extends</span> <span class="class-name">BasePage</span> {
 
             <span class="comment"
               >// Private fields - hidden from test classes</span
@@ -891,17 +838,15 @@
               >// Public interface - simple, business-focused method</span
             >
             <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password)
-            {
+            <span class="method">login</span>(String username, String password) {
             <span class="comment">// Test doesn't need to know:</span>
             <span class="comment">// - How to locate username field</span>
             <span class="comment">// - How to locate password field</span>
             <span class="comment">// - How to locate login button</span>
             <span class="comment">// - Wait mechanisms</span>
             <span class="comment">// - Click/type implementations</span>
-            <span class="method">enterText</span>(usernameField, username);
-            <span class="method">enterText</span>(passwordField, password);
-            <span class="method">clickElement</span>(loginButton); } }
+            <span class="method">enterText</span>(usernameField, username); <span class="method">enterText</span>(passwordField, password);
+<span class="method">clickElement</span>(loginButton); } }
           </div>
 
           <h3>Level 3: Test Class - Clean and Simple</h3>
@@ -909,12 +854,9 @@
             <span class="comment"
               >// ABSTRACTION - Test reads like business requirements</span
             >
-            <span class="keyword">public class</span>
-            <span class="class-name">LoginTest</span>
-            <span class="keyword">extends</span>
-            <span class="class-name">BaseTest</span> { @Test
+            <span class="keyword">public class</span> <span class="class-name">LoginTest</span> <span class="keyword">extends</span> <span class="class-name">BaseTest</span> { @Test
             <span class="keyword">public void</span>
-            <span class="method">testSuccessfulLogin</span>() {
+<span class="method">testSuccessfulLogin</span>() {
             <span class="comment">// Clean, readable test code</span>
             <span class="comment"
               >// No technical details - just business actions</span
@@ -1023,34 +965,33 @@
             >
             @Test
             <span class="keyword">public void</span>
-            <span class="method">testLogin</span>() { WebDriver driver =
-            <span class="keyword">new</span> ChromeDriver(); driver.get(<span
+            <span class="method">testLogin</span>() { WebDriver driver = <span class="keyword">new</span> ChromeDriver(); driver.get(<span
               class="string"
               >"https://the-internet.herokuapp.com/login"</span
             >); WebDriverWait wait =
             <span class="keyword">new</span> WebDriverWait(driver,
             Duration.ofSeconds(<span class="string">10</span>)); WebElement
-            username = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.id(<span
+            username =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(<span
               class="string"
               >"username"</span
-            >)) ); username.clear(); username.sendKeys(<span class="string"
+            >))); username.clear(); username.sendKeys(<span class="string"
               >"tomsmith"</span
-            >); WebElement password = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.id(<span
+            >); WebElement password =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(<span
               class="string"
               >"password"</span
-            >)) ); password.clear(); password.sendKeys(<span class="string"
+            >))); password.clear(); password.sendKeys(<span class="string"
               >"SuperSecretPassword!"</span
-            >); WebElement button = wait.until(
-            ExpectedConditions.elementToBeClickable(By.cssSelector(<span
+            >); WebElement button =
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(<span
               class="string"
               >"button[type='submit']"</span
-            >)) ); button.click(); WebElement logout = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.cssSelector(<span
+            >))); button.click(); WebElement logout =
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(<span
               class="string"
               >".icon-signout"</span
-            >)) ); Assert.assertTrue(logout.isDisplayed()); driver.quit(); }
+            >))); Assert.assertTrue(logout.isDisplayed()); driver.quit(); }
 
             <span class="comment">// Problems:</span>
             <span class="comment">// ❌ 25+ lines for simple test</span>
@@ -1071,8 +1012,7 @@
             >
             @Test
             <span class="keyword">public void</span>
-            <span class="method">testLogin</span>() { LoginPage loginPage =
-            <span class="keyword">new</span> LoginPage(driver);
+            <span class="method">testLogin</span>() { LoginPage loginPage = <span class="keyword">new</span> LoginPage(driver);
             loginPage.openPage(); loginPage.login(<span class="string"
               >"tomsmith"</span
             >, <span class="string">"SuperSecretPassword!"</span>); SecurePage

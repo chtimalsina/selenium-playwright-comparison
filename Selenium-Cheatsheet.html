@@ -97,6 +97,7 @@
         font-family: "Courier New", monospace;
         font-size: 14px;
         line-height: 1.6;
+        white-space: pre-wrap;
       }
 
       .code-block .comment {
@@ -236,9 +237,7 @@
             &lt;artifactId&gt;selenium-java&lt;/artifactId&gt;
             &lt;version&gt;4.15.0&lt;/version&gt; &lt;/dependency&gt;
 
-            <span class="comment"
-              >&lt;!-- WebDriverManager (Auto-download drivers) --&gt;</span
-            >
+            <span class="comment" >&lt;!-- WebDriverManager (Auto-download drivers) --&gt;</span
             &lt;dependency&gt;
             &lt;groupId&gt;io.github.bonigarcia&lt;/groupId&gt;
             &lt;artifactId&gt;webdrivermanager&lt;/artifactId&gt;
@@ -247,72 +246,47 @@
 
           <h3>Initialize WebDriver</h3>
           <div class="code-block">
-            <span class="keyword">import</span> org.openqa.selenium.WebDriver;
-            <span class="keyword">import</span>
+            <span class="keyword">import</span> org.openqa.selenium.WebDriver; <span class="keyword">import</span>
             org.openqa.selenium.chrome.ChromeDriver;
             <span class="keyword">import</span>
             io.github.bonigarcia.wdm.WebDriverManager;
 
-            <span class="comment"
-              >// Option 1: Using WebDriverManager (Recommended)</span
-            >
+            <span class="comment" >// Option 1: Using WebDriverManager (Recommended)</span
             WebDriverManager.chromedriver().setup(); WebDriver driver =
             <span class="keyword">new</span>
-            <span class="method">ChromeDriver</span>();
-
+<span class="method">ChromeDriver</span>();
             <span class="comment">// Option 2: Manual driver path</span>
-            System.setProperty(<span class="string"
-              >"webdriver.chrome.driver"</span
-            >, <span class="string">"/path/to/chromedriver"</span>); WebDriver
-            driver = <span class="keyword">new</span>
-            <span class="method">ChromeDriver</span>();
-
+            System.setProperty(<span class="string" >"webdriver.chrome.driver"</span
+            >, <span class="string">"/path/to/chromedriver"</span>); WebDriver driver = <span class="keyword">new</span>
+<span class="method">ChromeDriver</span>();
             <span class="comment">// Other browsers</span>
             WebDriver firefoxDriver = <span class="keyword">new</span>
-            <span class="method">FirefoxDriver</span>(); WebDriver edgeDriver =
-            <span class="keyword">new</span>
-            <span class="method">EdgeDriver</span>(); WebDriver safariDriver =
-            <span class="keyword">new</span>
-            <span class="method">SafariDriver</span>();
-          </div>
+            <span class="method">FirefoxDriver</span>(); WebDriver edgeDriver = <span class="keyword">new</span> <span class="method">EdgeDriver</span>(); WebDriver safariDriver = <span class="keyword">new</span>
+            <span class="method">SafariDriver</span>();</div>
 
           <h3>Browser Options</h3>
           <div class="code-block">
             ChromeOptions options = <span class="keyword">new</span>
-            <span class="method">ChromeOptions</span>();
-
+<span class="method">ChromeOptions</span>();
             <span class="comment">// Headless mode</span>
-            options.addArguments(<span class="string">"--headless"</span>);
-
+            options.addArguments(<span class="string">"--headless"</span>); 
             <span class="comment">// Window size</span>
-            options.addArguments(<span class="string"
-              >"--window-size=1920,1080"</span
-            >); options.addArguments(<span class="string"
-              >"--start-maximized"</span
-            >);
+            options.addArguments(<span class="string" >"--window-size=1920,1080"</span
+            >); options.addArguments(<span class="string" >"--start-maximized"</span
 
             <span class="comment">// Disable notifications</span>
-            options.addArguments(<span class="string"
-              >"--disable-notifications"</span
-            >);
+            options.addArguments(<span class="string" >"--disable-notifications"</span
 
             <span class="comment">// Disable automation flags</span>
-            options.addArguments(<span class="string"
-              >"--disable-blink-features=AutomationControlled"</span
-            >); options.setExperimentalOption(<span class="string"
-              >"excludeSwitches"</span
-            >, <span class="keyword">new</span> String[]{<span class="string"
-              >"enable-automation"</span
-            >});
+            options.addArguments(<span class="string" >"--disable-blink-features=AutomationControlled"</span
+            >); options.setExperimentalOption(<span class="string" >"excludeSwitches"</span
+            >, <span class="keyword">new</span> String[]{<span class="string" >"enable-automation"</span
 
             <span class="comment">// Incognito mode</span>
-            options.addArguments(<span class="string">"--incognito"</span>);
-
+            options.addArguments(<span class="string">"--incognito"</span>); 
             <span class="comment">// Accept insecure certificates</span>
-            options.setAcceptInsecureCerts(<span class="keyword">true</span>);
-            WebDriver driver = <span class="keyword">new</span>
-            <span class="method">ChromeDriver</span>(options);
-          </div>
+            options.setAcceptInsecureCerts(<span class="keyword">true</span>); WebDriver driver = <span class="keyword">new</span>
+            <span class="method">ChromeDriver</span>(options);</div>
         </div>
 
         <!-- BASICS SECTION -->
@@ -324,12 +298,9 @@
           <h3>Navigation</h3>
           <div class="code-block">
             <span class="comment">// Open URL</span>
-            driver.get(<span class="string">"https://example.com"</span>);
-
+            driver.get(<span class="string">"https://example.com"</span>); 
             <span class="comment">// Navigate methods</span>
-            driver.navigate().to(<span class="string"
-              >"https://example.com"</span
-            >); driver.navigate().back(); driver.navigate().forward();
+            driver.navigate().to(<span class="string" >"https://example.com"</span
             driver.navigate().refresh();
 
             <span class="comment">// Get current URL</span>
@@ -355,15 +326,11 @@
 
             <span class="comment">// Set window size</span>
             driver.manage().window().setSize(<span class="keyword">new</span>
-            Dimension(<span class="string">1920</span>,
-            <span class="string">1080</span>));
+            Dimension(<span class="string">1920</span>, <span class="string">1080</span>));
 
             <span class="comment">// Set window position</span>
-            driver.manage().window().setPosition(<span class="keyword"
-              >new</span
-            >
-            Point(<span class="string">0</span>,
-            <span class="string">0</span>));
+            driver.manage().window().setPosition(<span class="keyword" >new</span
+            Point(<span class="string">0</span>, <span class="string">0</span>));
 
             <span class="comment">// Get window handle</span>
             String windowHandle = driver.getWindowHandle();
@@ -397,54 +364,31 @@
 
           <h3>Find Element Methods</h3>
           <div class="code-block">
-            <span class="keyword">import</span> org.openqa.selenium.By;
-            <span class="keyword">import</span> org.openqa.selenium.WebElement;
+            <span class="keyword">import</span> org.openqa.selenium.By; <span class="keyword">import</span> org.openqa.selenium.WebElement;
 
             <span class="comment">// By ID (fastest and most reliable)</span>
-            WebElement element = driver.findElement(By.id(<span class="string"
-              >"username"</span
-            >));
+            WebElement element = driver.findElement(By.id(<span class="string" >"username"</span
 
             <span class="comment">// By Name</span>
-            WebElement element = driver.findElement(By.name(<span class="string"
-              >"email"</span
-            >));
+            WebElement element = driver.findElement(By.name(<span class="string" >"email"</span
 
             <span class="comment">// By Class Name</span>
-            WebElement element = driver.findElement(By.className(<span
-              class="string"
-              >"login-button"</span
-            >));
+            WebElement element = driver.findElement(By.className(<span class="string"
 
             <span class="comment">// By Tag Name</span>
-            WebElement element = driver.findElement(By.tagName(<span
-              class="string"
-              >"button"</span
-            >));
+            WebElement element = driver.findElement(By.tagName(<span class="string"
 
             <span class="comment">// By Link Text (exact match)</span>
-            WebElement element = driver.findElement(By.linkText(<span
-              class="string"
-              >"Sign Up"</span
-            >));
+            WebElement element = driver.findElement(By.linkText(<span class="string"
 
             <span class="comment">// By Partial Link Text</span>
-            WebElement element = driver.findElement(By.partialLinkText(<span
-              class="string"
-              >"Sign"</span
-            >));
+            WebElement element = driver.findElement(By.partialLinkText(<span class="string"
 
             <span class="comment">// By CSS Selector (flexible and fast)</span>
-            WebElement element = driver.findElement(By.cssSelector(<span
-              class="string"
-              >"input[type='password']"</span
-            >));
+            WebElement element = driver.findElement(By.cssSelector(<span class="string"
 
             <span class="comment">// By XPath (powerful but slower)</span>
-            WebElement element = driver.findElement(By.xpath(<span
-              class="string"
-              >"//button[@id='submit']"</span
-            >));
+            WebElement element = driver.findElement(By.xpath(<span class="string"
           </div>
 
           <h3>CSS Selector Examples</h3>
@@ -527,9 +471,7 @@
 
           <h3>XPath Examples</h3>
           <div class="code-block">
-            <span class="comment"
-              >// Absolute XPath (not recommended - brittle)</span
-            >
+            <span class="comment" >// Absolute XPath (not recommended - brittle)</span
             <span class="string">"/html/body/div/form/input"</span>
 
             <span class="comment">// Relative XPath (recommended)</span>
@@ -544,14 +486,10 @@
             <span class="string">"//div[@class='container']"</span>
 
             <span class="comment">// Multiple attributes (AND)</span>
-            <span class="string"
-              >"//input[@type='text' and @name='username']"</span
-            >
+            <span class="string" >"//input[@type='text' and @name='username']"</span
 
             <span class="comment">// OR condition</span>
-            <span class="string"
-              >"//input[@type='submit' or @type='button']"</span
-            >
+            <span class="string" >"//input[@type='submit' or @type='button']"</span
 
             <span class="comment">// Contains attribute value</span>
             <span class="string">"//div[contains(@class,'btn')]"</span>
@@ -563,14 +501,10 @@
             <span class="string">"//input[@id='username']/parent::div"</span>
 
             <span class="comment">// Following sibling</span>
-            <span class="string"
-              >"//label[@for='username']/following-sibling::input"</span
-            >
+            <span class="string" >"//label[@for='username']/following-sibling::input"</span
 
             <span class="comment">// Preceding sibling</span>
-            <span class="string"
-              >"//input[@id='password']/preceding-sibling::label"</span
-            >
+            <span class="string" >"//input[@id='password']/preceding-sibling::label"</span
 
             <span class="comment">// Index-based</span>
             <span class="string">"(//input[@type='text'])[2]"</span>
@@ -580,16 +514,13 @@
           <div class="code-block">
             <span class="comment">// Find multiple elements</span>
             List&lt;WebElement&gt; elements =
-            driver.findElements(By.className(<span class="string">"item"</span
-            >));
+            driver.findElements(By.className(<span class="string">"item"</span >));
 
             <span class="comment">// Iterate through elements</span>
-            <span class="keyword">for</span> (WebElement element : elements) {
-            System.out.println(element.getText()); }
+            <span class="keyword">for</span> (WebElement element : elements) { System.out.println(element.getText()); }
 
             <span class="comment">// Get count</span>
-            <span class="keyword">int</span> count = elements.size();
-          </div>
+            <span class="keyword">int</span> count = elements.size(); </div>
 
           <div class="tip-box">
             <strong>💡 Locator Strategy Priority:</strong><br />
@@ -613,12 +544,9 @@
             element.click();
 
             <span class="comment">// Type text (appends to existing)</span>
-            element.sendKeys(<span class="string">"Hello World"</span>);
-
+            element.sendKeys(<span class="string">"Hello World"</span>); 
             <span class="comment">// Clear and type</span>
-            element.clear(); element.sendKeys(<span class="string"
-              >"New Text"</span
-            >);
+            element.clear(); element.sendKeys(<span class="string" >"New Text"</span
 
             <span class="comment">// Submit form</span>
             element.submit();
@@ -627,40 +555,29 @@
             String text = element.getText();
 
             <span class="comment">// Get attribute value</span>
-            String value = element.getAttribute(<span class="string"
-              >"value"</span
-            >); String href = element.getAttribute(<span class="string"
-              >"href"</span
-            >);
+            String value = element.getAttribute(<span class="string" >"value"</span
+            >); String href = element.getAttribute(<span class="string" >"href"</span
 
             <span class="comment">// Get CSS property</span>
-            String color = element.getCssValue(<span class="string"
-              >"color"</span
-            >); String fontSize = element.getCssValue(<span class="string"
-              >"font-size"</span
-            >);
+            String color = element.getCssValue(<span class="string" >"color"</span
+            >); String fontSize = element.getCssValue(<span class="string" >"font-size"</span
 
             <span class="comment">// Check if element is displayed</span>
-            <span class="keyword">boolean</span> isDisplayed =
-            element.isDisplayed();
+            <span class="keyword">boolean</span> isDisplayed = element.isDisplayed();
 
             <span class="comment">// Check if element is enabled</span>
-            <span class="keyword">boolean</span> isEnabled =
-            element.isEnabled();
+            <span class="keyword">boolean</span> isEnabled = element.isEnabled();
 
             <span class="comment">// Check if checkbox/radio is selected</span>
-            <span class="keyword">boolean</span> isSelected =
-            element.isSelected();
+            <span class="keyword">boolean</span> isSelected = element.isSelected();
 
             <span class="comment">// Get element size</span>
             Dimension size = element.getSize();
-            <span class="keyword">int</span> width = size.getWidth();
-            <span class="keyword">int</span> height = size.getHeight();
+            <span class="keyword">int</span> width = size.getWidth(); <span class="keyword">int</span> height = size.getHeight();
 
             <span class="comment">// Get element location</span>
             Point location = element.getLocation();
-            <span class="keyword">int</span> x = location.getX();
-            <span class="keyword">int</span> y = location.getY();
+            <span class="keyword">int</span> x = location.getX(); <span class="keyword">int</span> y = location.getY();
           </div>
 
           <h3>Dropdown/Select Elements</h3>
@@ -670,22 +587,15 @@
 
             <span class="comment">// Create Select object</span>
             Select dropdown = <span class="keyword">new</span>
-            <span class="method">Select</span>(driver.findElement(By.id(<span
-              class="string"
-              >"country"</span
-            >)));
+<span class="method">Select</span>(driver.findElement(By.id(<span class="string"
 
             <span class="comment">// Select by visible text</span>
-            dropdown.selectByVisibleText(<span class="string"
-              >"United States"</span
-            >);
+            dropdown.selectByVisibleText(<span class="string" >"United States"</span
 
             <span class="comment">// Select by value attribute</span>
-            dropdown.selectByValue(<span class="string">"us"</span>);
-
+            dropdown.selectByValue(<span class="string">"us"</span>); 
             <span class="comment">// Select by index (0-based)</span>
-            dropdown.selectByIndex(<span class="string">2</span>);
-
+            dropdown.selectByIndex(<span class="string">2</span>); 
             <span class="comment">// Get selected option</span>
             WebElement selected = dropdown.getFirstSelectedOption(); String
             selectedText = selected.getText();
@@ -694,25 +604,18 @@
             List&lt;WebElement&gt; options = dropdown.getOptions();
 
             <span class="comment">// Deselect (for multi-select)</span>
-            dropdown.deselectAll(); dropdown.deselectByValue(<span
-              class="string"
-              >"us"</span
-            >); dropdown.deselectByIndex(<span class="string">0</span>);
-
+            dropdown.deselectAll(); dropdown.deselectByValue(<span class="string" >); dropdown.deselectByIndex(<span class="string">0</span>); 
             <span class="comment">// Check if multi-select</span>
-            <span class="keyword">boolean</span> isMultiple =
-            dropdown.isMultiple();
+            <span class="keyword">boolean</span> isMultiple = dropdown.isMultiple();
           </div>
 
           <h3>Checkboxes and Radio Buttons</h3>
           <div class="code-block">
             <span class="comment">// Select checkbox/radio</span>
-            <span class="keyword">if</span> (!element.isSelected()) {
-            element.click(); }
+            <span class="keyword">if</span> (!element.isSelected()) { element.click(); }
 
             <span class="comment">// Uncheck checkbox</span>
-            <span class="keyword">if</span> (element.isSelected()) {
-            element.click(); }
+            <span class="keyword">if</span> (element.isSelected()) { element.click(); }
 
             <span class="comment">// Toggle checkbox</span>
             element.click();
@@ -721,17 +624,10 @@
           <h3>File Upload</h3>
           <div class="code-block">
             <span class="comment">// Upload file (no click needed)</span>
-            WebElement uploadElement = driver.findElement(By.id(<span
-              class="string"
-              >"file-upload"</span
-            >)); uploadElement.sendKeys(<span class="string"
-              >"/path/to/file.pdf"</span
-            >);
+            WebElement uploadElement = driver.findElement(By.id(<span class="string" >)); uploadElement.sendKeys(<span class="string" >"/path/to/file.pdf"</span
 
             <span class="comment">// Multiple files (some browsers)</span>
-            uploadElement.sendKeys(<span class="string"
-              >"/path/file1.pdf\n/path/file2.pdf"</span
-            >);
+            uploadElement.sendKeys(<span class="string" >"/path/file1.pdf\n/path/file2.pdf"</span
           </div>
 
           <h3>Actions Class (Advanced Interactions)</h3>
@@ -739,8 +635,7 @@
             <span class="keyword">import</span>
             org.openqa.selenium.interactions.Actions; Actions actions =
             <span class="keyword">new</span>
-            <span class="method">Actions</span>(driver);
-
+<span class="method">Actions</span>(driver);
             <span class="comment">// Right click</span>
             actions.contextClick(element).perform();
 
@@ -751,16 +646,11 @@
             actions.moveToElement(element).perform();
 
             <span class="comment">// Drag and drop</span>
-            WebElement source = driver.findElement(By.id(<span class="string"
-              >"draggable"</span
-            >)); WebElement target = driver.findElement(By.id(<span
-              class="string"
-              >"droppable"</span
-            >)); actions.dragAndDrop(source, target).perform();
+            WebElement source = driver.findElement(By.id(<span class="string" >"draggable"</span
+            >)); WebElement target = driver.findElement(By.id(<span class="string"
 
             <span class="comment">// Drag by offset</span>
-            actions.dragAndDropBy(element, <span class="string">100</span>,
-            <span class="string">200</span>).perform();
+            actions.dragAndDropBy(element, <span class="string">100</span>, <span class="string">200</span>).perform();
 
             <span class="comment">// Click and hold</span>
             actions.clickAndHold(element).perform();
@@ -777,9 +667,7 @@
             actions.sendKeys(Keys.TAB).perform();
 
             <span class="comment">// Key combinations</span>
-            actions.keyDown(Keys.CONTROL).sendKeys(<span class="string"
-              >"a"</span
-            >).keyUp(Keys.CONTROL).perform();
+            actions.keyDown(Keys.CONTROL).sendKeys(<span class="string" >"a"</span
             actions.keyDown(Keys.SHIFT).click(element).keyUp(Keys.SHIFT).perform();
           </div>
 
@@ -787,53 +675,34 @@
           <div class="code-block">
             <span class="keyword">import</span>
             org.openqa.selenium.JavascriptExecutor; JavascriptExecutor js =
-            (JavascriptExecutor) driver;
+(JavascriptExecutor) driver;
 
-            <span class="comment"
-              >// Click element (bypasses visibility checks)</span
-            >
-            js.executeScript(<span class="string">"arguments[0].click();"</span
-            >, element);
+            <span class="comment" >// Click element (bypasses visibility checks)</span
+            js.executeScript(<span class="string">"arguments[0].click();"</span >, element);
 
             <span class="comment">// Scroll to element</span>
-            js.executeScript(<span class="string"
-              >"arguments[0].scrollIntoView(true);"</span
-            >, element);
+            js.executeScript(<span class="string" >"arguments[0].scrollIntoView(true);"</span
 
             <span class="comment">// Scroll to bottom</span>
-            js.executeScript(<span class="string"
-              >"window.scrollTo(0, document.body.scrollHeight);"</span
-            >);
+            js.executeScript(<span class="string" >"window.scrollTo(0, document.body.scrollHeight);"</span
 
             <span class="comment">// Scroll by pixels</span>
-            js.executeScript(<span class="string"
-              >"window.scrollBy(0, 500);"</span
-            >);
+            js.executeScript(<span class="string" >"window.scrollBy(0, 500);"</span
 
             <span class="comment">// Set input value</span>
-            js.executeScript(<span class="string"
-              >"arguments[0].value='text';"</span
-            >, element);
+            js.executeScript(<span class="string" >"arguments[0].value='text';"</span
 
             <span class="comment">// Get element text (including hidden)</span>
-            String text = (String) js.executeScript(<span class="string"
-              >"return arguments[0].innerText;"</span
-            >, element);
+            String text = (String) js.executeScript(<span class="string" >"return arguments[0].innerText;"</span
 
             <span class="comment">// Highlight element (debugging)</span>
-            js.executeScript(<span class="string"
-              >"arguments[0].style.border='3px solid red'"</span
-            >, element);
+            js.executeScript(<span class="string" >"arguments[0].style.border='3px solid red'"</span
 
             <span class="comment">// Remove element attribute</span>
-            js.executeScript(<span class="string"
-              >"arguments[0].removeAttribute('readonly');"</span
-            >, element);
+            js.executeScript(<span class="string" >"arguments[0].removeAttribute('readonly');"</span
 
             <span class="comment">// Check page load state</span>
-            String state = (String) js.executeScript(<span class="string"
-              >"return document.readyState"</span
-            >);
+            String state = (String) js.executeScript(<span class="string" >"return document.readyState"</span
           </div>
         </div>
 
@@ -846,19 +715,11 @@
 
           <h3>Implicit Wait</h3>
           <div class="code-block">
-            <span class="keyword">import</span> java.time.Duration;
+            <span class="keyword">import</span> java.time.Duration; 
+            <span class="comment" >// Set implicit wait (applies to all findElement calls)</span
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(<span class="string"
 
-            <span class="comment"
-              >// Set implicit wait (applies to all findElement calls)</span
-            >
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(<span
-              class="string"
-              >10</span
-            >));
-
-            <span class="comment"
-              >// Not recommended to use with explicit waits</span
-            >
+            <span class="comment" >// Not recommended to use with explicit waits</span
           </div>
 
           <div class="warning-box">
@@ -875,82 +736,51 @@
 
             <span class="comment">// Create wait object</span>
             WebDriverWait wait = <span class="keyword">new</span>
-            <span class="method">WebDriverWait</span>(driver,
-            Duration.ofSeconds(<span class="string">10</span>));
+<span class="method">WebDriverWait</span>(driver, Duration.ofSeconds(<span class="string">10</span>));
 
             <span class="comment">// Wait for element to be visible</span>
             WebElement element = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.id(<span
-              class="string"
-              >"username"</span
-            >)) );
+            ExpectedConditions.visibilityOfElementLocated(By.id(<span class="string"
 
             <span class="comment">// Wait for element to be clickable</span>
-            wait.until(ExpectedConditions.elementToBeClickable(By.id(<span
-              class="string"
-              >"submit"</span
-            >))).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.id(<span class="string"
 
             <span class="comment">// Wait for element to be present</span>
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.id(<span
-              class="string"
-              >"result"</span
-            >)));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id(<span class="string"
 
             <span class="comment">// Wait for element to be invisible</span>
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(<span
-              class="string"
-              >"loading"</span
-            >)));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(<span class="string"
 
             <span class="comment">// Wait for text to be present</span>
             wait.until(ExpectedConditions.textToBePresentInElementLocated(
-            By.id(<span class="string">"message"</span>),
-            <span class="string">"Success"</span>
+            By.id(<span class="string">"message"</span>), <span class="string">"Success"</span>
             ));
 
             <span class="comment">// Wait for title</span>
-            wait.until(ExpectedConditions.titleIs(<span class="string"
-              >"Home Page"</span
-            >)); wait.until(ExpectedConditions.titleContains(<span
-              class="string"
-              >"Home"</span
-            >));
+            wait.until(ExpectedConditions.titleIs(<span class="string" >"Home Page"</span
+            >)); wait.until(ExpectedConditions.titleContains(<span class="string"
 
             <span class="comment">// Wait for URL</span>
-            wait.until(ExpectedConditions.urlToBe(<span class="string"
-              >"https://example.com/home"</span
-            >)); wait.until(ExpectedConditions.urlContains(<span class="string"
-              >"home"</span
-            >));
+            wait.until(ExpectedConditions.urlToBe(<span class="string" >"https://example.com/home"</span
+            >)); wait.until(ExpectedConditions.urlContains(<span class="string" >"home"</span
 
             <span class="comment">// Wait for alert</span>
             wait.until(ExpectedConditions.alertIsPresent());
 
             <span class="comment">// Wait for frame to be available</span>
-            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(<span
-              class="string"
-              >"frameName"</span
-            >));
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(<span class="string"
 
             <span class="comment">// Wait for number of windows</span>
-            wait.until(ExpectedConditions.numberOfWindowsToBe(<span
-              class="string"
-              >2</span
-            >));
+            wait.until(ExpectedConditions.numberOfWindowsToBe(<span class="string"
 
-            <span class="comment"
-              >// Wait for staleness (element no longer in DOM)</span
-            >
+            <span class="comment" >// Wait for staleness (element no longer in DOM)</span
             wait.until(ExpectedConditions.stalenessOf(element));
 
             <span class="comment">// Wait for attribute value</span>
             wait.until(ExpectedConditions.attributeToBe(element,
-            <span class="string">"class"</span>,
-            <span class="string">"active"</span>));
+            <span class="string">"class"</span>, <span class="string">"active"</span>));
             wait.until(ExpectedConditions.attributeContains(element,
-            <span class="string">"class"</span>,
-            <span class="string">"btn"</span>));
+            <span class="string">"class"</span>, <span class="string">"btn"</span>));
           </div>
 
           <h3>Fluent Wait (Advanced)</h3>
@@ -960,30 +790,19 @@
             <span class="keyword">import</span>
             org.openqa.selenium.NoSuchElementException;
 
-            <span class="comment"
-              >// Create fluent wait with custom polling</span
-            >
+            <span class="comment" >// Create fluent wait with custom polling</span
             Wait&lt;WebDriver&gt; fluentWait = <span class="keyword">new</span>
-            <span class="method">FluentWait</span>&lt;&gt;(driver)
-            .withTimeout(Duration.ofSeconds(<span class="string">30</span>))
-            .pollingEvery(Duration.ofMillis(<span class="string">500</span>))
-            .ignoring(NoSuchElementException.<span class="keyword">class</span
-            >);
+            <span class="method">FluentWait</span>&lt;&gt;(driver) .withTimeout(Duration.ofSeconds(<span class="string">30</span>)) .pollingEvery(Duration.ofMillis(<span class="string">500</span>)) .ignoring(NoSuchElementException.<span class="keyword">class</span
 
             <span class="comment">// Use fluent wait</span>
-            WebElement element = fluentWait.until(<span class="keyword"
-              >driver</span
-            >
-            -&gt; driver.findElement(By.id(<span class="string"
-              >"dynamic-element"</span
-            >)) );
+            WebElement element = fluentWait.until(<span class="keyword" >driver</span
+            -&gt; driver.findElement(By.id(<span class="string" >"dynamic-element"</span
           </div>
 
           <h3>Thread Sleep (Not Recommended)</h3>
           <div class="code-block">
             <span class="comment">// Hard wait - avoid if possible</span>
-            Thread.sleep(<span class="string">3000</span>);
-            <span class="comment">// 3 seconds</span>
+            Thread.sleep(<span class="string">3000</span>); <span class="comment">// 3 seconds</span>
           </div>
 
           <div class="warning-box">
@@ -994,18 +813,10 @@
           <h3>Page Load Timeout</h3>
           <div class="code-block">
             <span class="comment">// Set page load timeout</span>
-            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(<span
-              class="string"
-              >30</span
-            >));
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(<span class="string"
 
-            <span class="comment"
-              >// Set script timeout (for async scripts)</span
-            >
-            driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(<span
-              class="string"
-              >20</span
-            >));
+            <span class="comment" >// Set script timeout (for async scripts)</span
+            driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(<span class="string"
           </div>
         </div>
 
@@ -1018,8 +829,7 @@
 
           <h3>Handling Alerts/Popups</h3>
           <div class="code-block">
-            <span class="keyword">import</span> org.openqa.selenium.Alert;
-
+            <span class="keyword">import</span> org.openqa.selenium.Alert; 
             <span class="comment">// Switch to alert</span>
             Alert alert = driver.switchTo().alert();
 
@@ -1033,29 +843,21 @@
             alert.dismiss();
 
             <span class="comment">// Send text to prompt</span>
-            alert.sendKeys(<span class="string">"My Input"</span>);
-            alert.accept();
+            alert.sendKeys(<span class="string">"My Input"</span>); alert.accept();
 
             <span class="comment">// Wait for alert</span>
             WebDriverWait wait = <span class="keyword">new</span>
-            <span class="method">WebDriverWait</span>(driver,
-            Duration.ofSeconds(<span class="string">10</span>));
-            wait.until(ExpectedConditions.alertIsPresent());
+            <span class="method">WebDriverWait</span>(driver, Duration.ofSeconds(<span class="string">10</span>)); wait.until(ExpectedConditions.alertIsPresent());
           </div>
 
           <h3>Handling Frames/iFrames</h3>
           <div class="code-block">
             <span class="comment">// Switch to frame by index</span>
-            driver.switchTo().frame(<span class="string">0</span>);
-
+            driver.switchTo().frame(<span class="string">0</span>); 
             <span class="comment">// Switch to frame by name or ID</span>
-            driver.switchTo().frame(<span class="string">"frameName"</span>);
-
+            driver.switchTo().frame(<span class="string">"frameName"</span>); 
             <span class="comment">// Switch to frame by WebElement</span>
-            WebElement frameElement = driver.findElement(By.id(<span
-              class="string"
-              >"myFrame"</span
-            >)); driver.switchTo().frame(frameElement);
+            WebElement frameElement = driver.findElement(By.id(<span class="string"
 
             <span class="comment">// Switch back to main content</span>
             driver.switchTo().defaultContent();
@@ -1079,46 +881,32 @@
             Set&lt;String&gt; allWindows = driver.getWindowHandles();
 
             <span class="comment">// Switch to new window</span>
-            <span class="keyword">for</span> (String window : allWindows) {
-            <span class="keyword">if</span> (!window.equals(mainWindow)) {
+            <span class="keyword">for</span> (String window : allWindows) { <span class="keyword">if</span> (!window.equals(mainWindow)) {
             driver.switchTo().window(window);
-            <span class="keyword">break</span>; } }
-
+            <span class="keyword">break</span>; } } 
             <span class="comment">// Close current window and switch back</span>
             driver.close(); driver.switchTo().window(mainWindow);
 
             <span class="comment">// Wait for new window</span>
-            wait.until(ExpectedConditions.numberOfWindowsToBe(<span
-              class="string"
-              >2</span
-            >));
+            wait.until(ExpectedConditions.numberOfWindowsToBe(<span class="string"
           </div>
 
           <h3>Screenshots</h3>
           <div class="code-block">
             <span class="keyword">import</span>
             org.openqa.selenium.TakesScreenshot;
-            <span class="keyword">import</span> org.openqa.selenium.OutputType;
-            <span class="keyword">import</span> org.apache.commons.io.FileUtils;
+            <span class="keyword">import</span> org.openqa.selenium.OutputType; <span class="keyword">import</span> org.apache.commons.io.FileUtils;
 
             <span class="comment">// Take screenshot</span>
             TakesScreenshot ts = (TakesScreenshot) driver; File source =
             ts.getScreenshotAs(OutputType.FILE); File destination =
-            <span class="keyword">new</span> File(<span class="string"
-              >"screenshot.png"</span
-            >); FileUtils.copyFile(source, destination);
+            <span class="keyword">new</span> File(<span class="string" >"screenshot.png"</span
 
-            <span class="comment"
-              >// Take element screenshot (Selenium 4+)</span
-            >
-            WebElement element = driver.findElement(By.id(<span class="string"
-              >"logo"</span
-            >)); File elementScreenshot =
+            <span class="comment" >// Take element screenshot (Selenium 4+)</span
+            WebElement element = driver.findElement(By.id(<span class="string" >"logo"</span
             element.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(elementScreenshot,
-            <span class="keyword">new</span> File(<span class="string"
-              >"element.png"</span
-            >));
+            <span class="keyword">new</span> File(<span class="string" >"element.png"</span
 
             <span class="comment">// Screenshot as Base64</span>
             String base64 = ts.getScreenshotAs(OutputType.BASE64);
@@ -1126,28 +914,18 @@
 
           <h3>Cookies Management</h3>
           <div class="code-block">
-            <span class="keyword">import</span> org.openqa.selenium.Cookie;
-
+            <span class="keyword">import</span> org.openqa.selenium.Cookie; 
             <span class="comment">// Add cookie</span>
-            Cookie cookie = <span class="keyword">new</span> Cookie(<span
-              class="string"
-              >"name"</span
-            >, <span class="string">"value"</span>);
-            driver.manage().addCookie(cookie);
+            Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string" >, <span class="string">"value"</span>); driver.manage().addCookie(cookie);
 
             <span class="comment">// Get cookie by name</span>
-            Cookie myCookie = driver.manage().getCookieNamed(<span
-              class="string"
-              >"sessionId"</span
-            >);
+            Cookie myCookie = driver.manage().getCookieNamed(<span class="string"
 
             <span class="comment">// Get all cookies</span>
             Set&lt;Cookie&gt; cookies = driver.manage().getCookies();
 
             <span class="comment">// Delete cookie</span>
-            driver.manage().deleteCookieNamed(<span class="string"
-              >"sessionId"</span
-            >); driver.manage().deleteCookie(cookie);
+            driver.manage().deleteCookieNamed(<span class="string" >"sessionId"</span
 
             <span class="comment">// Delete all cookies</span>
             driver.manage().deleteAllCookies();
@@ -1165,10 +943,8 @@
             <span class="comment">// Get browser console logs</span>
             LogEntries logs = driver.manage().logs().get(LogType.BROWSER);
 
-            <span class="keyword">for</span> (LogEntry entry : logs) {
-            System.out.println(entry.getLevel() +
-            <span class="string">" "</span> + entry.getMessage()); }
-
+            <span class="keyword">for</span> (LogEntry entry : logs) { System.out.println(entry.getLevel() +
+            <span class="string">" "</span> + entry.getMessage()); } 
             <span class="comment">// Available log types</span>
             driver.manage().logs().get(LogType.BROWSER);
             driver.manage().logs().get(LogType.DRIVER);
@@ -1193,64 +969,36 @@
 
             <span class="comment">// Intercept requests</span>
             devTools.addListener(Network.requestWillBeSent(), request -&gt; {
-            System.out.println(<span class="string">"Request: "</span> +
-            request.getRequest().getUrl()); });
+            System.out.println(<span class="string">"Request: "</span> + request.getRequest().getUrl()); });
 
             <span class="comment">// Intercept responses</span>
             devTools.addListener(Network.responseReceived(), response -&gt; {
-            System.out.println(<span class="string">"Response: "</span> +
-            response.getResponse().getUrl()); });
+            System.out.println(<span class="string">"Response: "</span> + response.getResponse().getUrl()); });
           </div>
 
           <h3>Geolocation (Selenium 4+)</h3>
           <div class="code-block">
             <span class="comment">// Set geolocation</span>
-            driver.executeCdpCommand(<span class="string"
-              >"Emulation.setGeolocationOverride"</span
-            >, Map.of(<span class="string">"latitude"</span>,
-            <span class="string">37.7749</span>,
-            <span class="string">"longitude"</span>,
-            <span class="string">-122.4194</span>,
-            <span class="string">"accuracy"</span>,
-            <span class="string">1</span>) );
+            driver.executeCdpCommand(<span class="string" >"Emulation.setGeolocationOverride"</span
+            >, Map.of(<span class="string">"latitude"</span>, <span class="string">37.7749</span>,
+            <span class="string">"longitude"</span>, <span class="string">-122.4194</span>,
+            <span class="string">"accuracy"</span>, <span class="string">1</span>) );
           </div>
 
           <h3>Mobile Emulation</h3>
           <div class="code-block">
-            <span class="keyword">import</span> java.util.HashMap;
-
+            <span class="keyword">import</span> java.util.HashMap; 
             <span class="comment">// Emulate mobile device</span>
             Map&lt;String, Object&gt; mobileEmulation =
-            <span class="keyword">new</span> HashMap&lt;&gt;();
-            mobileEmulation.put(<span class="string">"deviceName"</span>,
-            <span class="string">"iPhone 12 Pro"</span>); ChromeOptions options
-            = <span class="keyword">new</span>
-            <span class="method">ChromeOptions</span>();
-            options.setExperimentalOption(<span class="string"
-              >"mobileEmulation"</span
-            >, mobileEmulation); WebDriver driver =
-            <span class="keyword">new</span>
-            <span class="method">ChromeDriver</span>(options);
-
+            <span class="keyword">new</span> HashMap&lt;&gt;(); mobileEmulation.put(<span class="string">"deviceName"</span>,
+            <span class="string">"iPhone 12 Pro"</span>); ChromeOptions options = <span class="keyword">new</span>
+            <span class="method">ChromeOptions</span>(); options.setExperimentalOption(<span class="string" <span class="keyword">new</span>
+<span class="method">ChromeDriver</span>(options);
             <span class="comment">// Custom mobile settings</span>
             Map&lt;String, Object&gt; deviceMetrics =
-            <span class="keyword">new</span> HashMap&lt;&gt;();
-            deviceMetrics.put(<span class="string">"width"</span>,
-            <span class="string">375</span>); deviceMetrics.put(<span
-              class="string"
-              >"height"</span
-            >, <span class="string">812</span>); deviceMetrics.put(<span
-              class="string"
-              >"pixelRatio"</span
-            >, <span class="string">3.0</span>); mobileEmulation.put(<span
-              class="string"
-              >"deviceMetrics"</span
-            >, deviceMetrics); mobileEmulation.put(<span class="string"
-              >"userAgent"</span
-            >,
-            <span class="string"
-              >"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0..."</span
-            >);
+            <span class="keyword">new</span> HashMap&lt;&gt;(); deviceMetrics.put(<span class="string">"width"</span>,
+            <span class="string">375</span>); deviceMetrics.put(<span class="string" >, <span class="string">812</span>); deviceMetrics.put(<span class="string" >, <span class="string">3.0</span>); mobileEmulation.put(<span class="string" >, deviceMetrics); mobileEmulation.put(<span class="string" >"userAgent"</span
+            <span class="string" >"Mozilla/5.0 (iPhone; CPU iPhone OS 15_0..."</span
           </div>
         </div>
 
@@ -1265,25 +1013,13 @@
             <span class="keyword">import</span>
             org.openqa.selenium.support.PageFactory;
 
-            <span class="keyword">public class</span>
-            <span class="method">LoginPage</span> {
-            <span class="keyword">private</span> WebDriver driver; @FindBy(id =
-            <span class="string">"username"</span>)
-            <span class="keyword">private</span> WebElement usernameField;
-            @FindBy(id = <span class="string">"password"</span>)
-            <span class="keyword">private</span> WebElement passwordField;
-            @FindBy(css = <span class="string">"button[type='submit']"</span>)
-            <span class="keyword">private</span> WebElement loginButton;
+            <span class="keyword">public class</span> <span class="method">LoginPage</span> { <span class="keyword">private</span> WebDriver driver; @FindBy(id = <span class="string">"username"</span>) <span class="keyword">private</span> WebElement usernameField;
+            @FindBy(id = <span class="string">"password"</span>) <span class="keyword">private</span> WebElement passwordField;
+            @FindBy(css = <span class="string">"button[type='submit']"</span>) <span class="keyword">private</span> WebElement loginButton;
 
-            <span class="keyword">public</span>
-            <span class="method">LoginPage</span>(WebDriver driver) {
-            <span class="keyword">this</span>.driver = driver;
-            PageFactory.initElements(driver, <span class="keyword">this</span>);
-            }
+            <span class="keyword">public</span> <span class="method">LoginPage</span>(WebDriver driver) { <span class="keyword">this</span>.driver = driver; PageFactory.initElements(driver, <span class="keyword">this</span>); }
 
-            <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password)
-            { usernameField.sendKeys(username);
+            <span class="keyword">public void</span> <span class="method">login</span>(String username, String password) { usernameField.sendKeys(username);
             passwordField.sendKeys(password); loginButton.click(); } }
           </div>
 
@@ -1316,26 +1052,13 @@
 
           <h3>Exception Handling</h3>
           <div class="code-block">
-            <span class="keyword">try</span> { WebElement element =
-            driver.findElement(By.id(<span class="string">"submit"</span>));
+            <span class="keyword">try</span> { WebElement element = driver.findElement(By.id(<span class="string">"submit"</span>));
             element.click(); }
-            <span class="keyword">catch</span> (NoSuchElementException e) {
-            System.out.println(<span class="string">"Element not found"</span>);
+            <span class="keyword">catch</span> (NoSuchElementException e) { System.out.println(<span class="string">"Element not found"</span>);
             }
-            <span class="keyword">catch</span> (ElementNotInteractableException
-            e) { System.out.println(<span class="string"
-              >"Element not interactable"</span
-            >); }
-            <span class="keyword">catch</span> (StaleElementReferenceException
-            e) { System.out.println(<span class="string"
-              >"Element is stale, re-locating..."</span
-            >); element = driver.findElement(By.id(<span class="string"
-              >"submit"</span
-            >)); element.click(); }
-            <span class="keyword">catch</span> (TimeoutException e) {
-            System.out.println(<span class="string"
-              >"Timeout waiting for element"</span
-            >); }
+            <span class="keyword">catch</span> (ElementNotInteractableException e) { System.out.println(<span class="string"
+            <span class="keyword">catch</span> (StaleElementReferenceException e) { System.out.println(<span class="string" >); element = driver.findElement(By.id(<span class="string" >"submit"</span
+            <span class="keyword">catch</span> (TimeoutException e) { System.out.println(<span class="string"
           </div>
 
           <h3>Common Selenium Exceptions</h3>

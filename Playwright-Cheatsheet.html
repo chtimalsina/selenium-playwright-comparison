@@ -249,9 +249,7 @@
 
           <h3>Install Browsers</h3>
           <div class="code-block">
-            <span class="comment"
-              ># Install all browsers (Chromium, Firefox, WebKit)</span
-            >
+            <span class="comment" ># Install all browsers (Chromium, Firefox, WebKit)</span
             mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D
             exec.args=<span class="string">"install"</span>
 
@@ -269,25 +267,21 @@
           </div>
 
           <div class="code-block">
-            <span class="keyword">import</span> com.microsoft.playwright.*;
-
+            <span class="keyword">import</span> com.microsoft.playwright.*; 
             <span class="comment">// 1. Create Playwright instance</span>
             Playwright playwright = Playwright.create();
 
             <span class="comment">// 2. Launch browser</span>
             Browser browser = playwright.chromium().launch();
 
-            <span class="comment"
-              >// 3. Create browser context (isolated session)</span
-            >
+            <span class="comment" >// 3. Create browser context (isolated session)</span
             BrowserContext context = browser.newContext();
 
             <span class="comment">// 4. Create page</span>
             Page page = context.newPage();
 
             <span class="comment">// Navigate</span>
-            page.navigate(<span class="string">"https://example.com"</span>);
-
+            page.navigate(<span class="string">"https://example.com"</span>); 
             <span class="comment">// Cleanup (reverse order)</span>
             page.close(); context.close(); browser.close(); playwright.close();
           </div>
@@ -301,13 +295,9 @@
           <h3>Browser Launch Options</h3>
           <div class="code-block">
             <span class="comment">// Chromium (default)</span>
-            Browser browser = playwright.chromium().launch(<span class="keyword"
-              >new</span
-            >
-            BrowserType.LaunchOptions() .setHeadless(<span class="keyword"
-              >false</span
-            >) .setSlowMo(<span class="string">100</span>)
-            <span class="comment">// Slow down by 100ms</span>
+            Browser browser = playwright.chromium().launch(<span class="keyword" >new</span
+            BrowserType.LaunchOptions() .setHeadless(<span class="keyword" >false</span
+            >) .setSlowMo(<span class="string">100</span>) <span class="comment">// Slow down by 100ms</span>
             );
 
             <span class="comment">// Firefox</span>
@@ -317,64 +307,41 @@
             Browser browser = playwright.webkit().launch();
 
             <span class="comment">// Advanced options</span>
-            Browser browser = playwright.chromium().launch(<span class="keyword"
-              >new</span
-            >
-            BrowserType.LaunchOptions() .setHeadless(<span class="keyword"
-              >true</span
-            >) .setSlowMo(<span class="string">50</span>) .setTimeout(<span
-              class="string"
-              >30000</span
-            >) .setDevtools(<span class="keyword">true</span>)
-            <span class="comment">// Open DevTools</span>
-            .setArgs(Arrays.asList(<span class="string"
-              >"--start-maximized"</span
-            >)) );
+            Browser browser = playwright.chromium().launch(<span class="keyword" >new</span
+            BrowserType.LaunchOptions() .setHeadless(<span class="keyword" >true</span
+            >) .setSlowMo(<span class="string">50</span>) .setTimeout(<span class="string" >) .setDevtools(<span class="keyword">true</span>) <span class="comment">// Open DevTools</span>
+            .setArgs(Arrays.asList(<span class="string" >"--start-maximized"</span
           </div>
 
           <h3>Browser Context Options</h3>
           <div class="code-block">
-            BrowserContext context = browser.newContext(<span class="keyword"
-              >new</span
-            >
+            BrowserContext context = browser.newContext(<span class="keyword" >new</span
             Browser.NewContextOptions()
             <span class="comment">// Viewport size</span>
-            .setViewportSize(<span class="string">1920</span>,
-            <span class="string">1080</span>)
+            .setViewportSize(<span class="string">1920</span>, <span class="string">1080</span>)
 
             <span class="comment">// User agent</span>
-            .setUserAgent(<span class="string">"Custom User Agent"</span>)
-
+            .setUserAgent(<span class="string">"Custom User Agent"</span>) 
             <span class="comment">// Geolocation</span>
-            .setGeolocation(<span class="string">37.7749</span>,
-            <span class="string">-122.4194</span>)
-            .setPermissions(Arrays.asList(<span class="string"
-              >"geolocation"</span
-            >))
+            .setGeolocation(<span class="string">37.7749</span>, <span class="string">-122.4194</span>)
+            .setPermissions(Arrays.asList(<span class="string" >"geolocation"</span
 
             <span class="comment">// Timezone</span>
-            .setTimezoneId(<span class="string">"America/New_York"</span>)
-
+            .setTimezoneId(<span class="string">"America/New_York"</span>) 
             <span class="comment">// Locale</span>
-            .setLocale(<span class="string">"en-US"</span>)
-
+            .setLocale(<span class="string">"en-US"</span>) 
             <span class="comment">// Color scheme</span>
             .setColorScheme(ColorScheme.DARK)
 
             <span class="comment">// Accept downloads</span>
-            .setAcceptDownloads(<span class="keyword">true</span>)
-
+            .setAcceptDownloads(<span class="keyword">true</span>) 
             <span class="comment">// Ignore HTTPS errors</span>
-            .setIgnoreHTTPSErrors(<span class="keyword">true</span>)
-
+            .setIgnoreHTTPSErrors(<span class="keyword">true</span>) 
             <span class="comment">// Record video</span>
-            .setRecordVideoDir(Paths.get(<span class="string">"videos/"</span>))
-            .setRecordVideoSize(<span class="string">1280</span>,
-            <span class="string">720</span>)
-
+            .setRecordVideoDir(Paths.get(<span class="string">"videos/"</span>)) .setRecordVideoSize(<span class="string">1280</span>,
+            <span class="string">720</span>) 
             <span class="comment">// HTTP credentials</span>
-            .setHttpCredentials(<span class="string">"username"</span>,
-            <span class="string">"password"</span>) );
+            .setHttpCredentials(<span class="string">"username"</span>, <span class="string">"password"</span>) );
           </div>
 
           <h3>Mobile Emulation</h3>
@@ -385,19 +352,13 @@
             <span class="comment">// Use predefined device</span>
             BrowserContext context = browser.newContext(
             <span class="keyword">new</span>
-            Browser.NewContextOptions(devices.get(<span class="string"
-              >"iPhone 12 Pro"</span
-            >)) );
+            Browser.NewContextOptions(devices.get(<span class="string" >"iPhone 12 Pro"</span
 
             <span class="comment">// Available devices</span>
-            devices.get(<span class="string">"iPhone SE"</span>)
-            devices.get(<span class="string">"iPhone 12"</span>)
-            devices.get(<span class="string">"iPhone 12 Pro"</span>)
-            devices.get(<span class="string">"iPhone 12 Pro Max"</span>)
-            devices.get(<span class="string">"Galaxy S9+"</span>)
-            devices.get(<span class="string">"Pixel 5"</span>) devices.get(<span
-              class="string"
-              >"iPad Pro 11"</span
+            devices.get(<span class="string">"iPhone SE"</span>) devices.get(<span class="string">"iPhone 12"</span>)
+            devices.get(<span class="string">"iPhone 12 Pro"</span>) devices.get(<span class="string">"iPhone 12 Pro Max"</span>)
+            devices.get(<span class="string">"Galaxy S9+"</span>) devices.get(<span class="string">"Pixel 5"</span>) devices.get(<span
+              class="string" >"iPad Pro 11"</span
             >)
           </div>
         </div>
@@ -411,13 +372,10 @@
           <h3>Navigation</h3>
           <div class="code-block">
             <span class="comment">// Navigate to URL</span>
-            page.navigate(<span class="string">"https://example.com"</span>);
-
+            page.navigate(<span class="string">"https://example.com"</span>); 
             <span class="comment">// Navigate with options</span>
-            page.navigate(<span class="string">"https://example.com"</span>,
-            <span class="keyword">new</span> Page.NavigateOptions()
-            .setTimeout(<span class="string">30000</span>)
-            .setWaitUntil(WaitUntilState.NETWORKIDLE) );
+            page.navigate(<span class="string">"https://example.com"</span>, <span class="keyword">new</span> Page.NavigateOptions()
+            .setTimeout(<span class="string">30000</span>) .setWaitUntil(WaitUntilState.NETWORKIDLE) );
 
             <span class="comment">// Go back</span>
             page.goBack();
@@ -474,32 +432,24 @@
           <h3>Page Methods</h3>
           <div class="code-block">
             <span class="comment">// Wait for timeout</span>
-            page.waitForTimeout(<span class="string">3000</span>);
-            <span class="comment">// 3 seconds (avoid if possible)</span>
+            page.waitForTimeout(<span class="string">3000</span>); <span class="comment">// 3 seconds (avoid if possible)</span>
 
             <span class="comment">// Wait for URL</span>
-            page.waitForURL(<span class="string">"**/dashboard"</span>);
-
+            page.waitForURL(<span class="string">"**/dashboard"</span>); 
             <span class="comment">// Wait for load state</span>
             page.waitForLoadState(LoadState.NETWORKIDLE);
 
             <span class="comment">// Screenshot</span>
             page.screenshot(<span class="keyword">new</span>
-            Page.ScreenshotOptions().setPath(Paths.get(<span class="string"
-              >"screenshot.png"</span
-            >)));
+            Page.ScreenshotOptions().setPath(Paths.get(<span class="string" >"screenshot.png"</span
 
             <span class="comment">// Full page screenshot</span>
             page.screenshot(<span class="keyword">new</span>
-            Page.ScreenshotOptions() .setPath(Paths.get(<span class="string"
-              >"full.png"</span
-            >)) .setFullPage(<span class="keyword">true</span>) );
-
+            Page.ScreenshotOptions() .setPath(Paths.get(<span class="string" >"full.png"</span
+            >)) .setFullPage(<span class="keyword">true</span>) ); 
             <span class="comment">// PDF (Chromium only)</span>
             page.pdf(<span class="keyword">new</span>
-            Page.PdfOptions().setPath(Paths.get(<span class="string"
-              >"page.pdf"</span
-            >)));
+            Page.PdfOptions().setPath(Paths.get(<span class="string" >"page.pdf"</span
 
             <span class="comment">// Close page</span>
             page.close();
@@ -521,105 +471,67 @@
 
           <h3>Basic Locators (Recommended)</h3>
           <div class="code-block">
-            <span class="comment"
-              >// By role (Recommended - Accessibility-first)</span
-            >
+            <span class="comment" >// By role (Recommended - Accessibility-first)</span
             page.getByRole(AriaRole.BUTTON,
             <span class="keyword">new</span>
-            Page.GetByRoleOptions().setName(<span class="string">"Submit"</span
-            >));
+            Page.GetByRoleOptions().setName(<span class="string">"Submit"</span >));
 
             <span class="comment">// By text</span>
-            page.getByText(<span class="string">"Sign Up"</span>);
-            page.getByText(<span class="string">"Sign"</span>);
+            page.getByText(<span class="string">"Sign Up"</span>); page.getByText(<span class="string">"Sign"</span>);
             <span class="comment">// Partial match</span>
 
             <span class="comment">// By label (form fields)</span>
-            page.getByLabel(<span class="string">"Username"</span>);
-            page.getByLabel(<span class="string">"Email Address"</span>);
+            page.getByLabel(<span class="string">"Username"</span>); page.getByLabel(<span class="string">"Email Address"</span>);
 
             <span class="comment">// By placeholder</span>
-            page.getByPlaceholder(<span class="string">"Enter email"</span>);
-
+            page.getByPlaceholder(<span class="string">"Enter email"</span>); 
             <span class="comment">// By alt text (images)</span>
-            page.getByAltText(<span class="string">"Company Logo"</span>);
-
+            page.getByAltText(<span class="string">"Company Logo"</span>); 
             <span class="comment">// By title</span>
-            page.getByTitle(<span class="string">"Close"</span>);
-
+            page.getByTitle(<span class="string">"Close"</span>); 
             <span class="comment">// By test ID (data-testid attribute)</span>
-            page.getByTestId(<span class="string">"submit-button"</span>);
-          </div>
+            page.getByTestId(<span class="string">"submit-button"</span>); </div>
 
           <h3>CSS and XPath Locators</h3>
           <div class="code-block">
             <span class="comment">// CSS selector</span>
-            page.locator(<span class="string">"css=button.primary"</span>);
-            page.locator(<span class="string">"button.primary"</span>);
+            page.locator(<span class="string">"css=button.primary"</span>); page.locator(<span class="string">"button.primary"</span>);
             <span class="comment">// 'css=' is default</span>
 
             <span class="comment">// XPath</span>
-            page.locator(<span class="string"
-              >"xpath=//button[@id='submit']"</span
-            >); page.locator(<span class="string">"//button[@id='submit']"</span
-            >);
+            page.locator(<span class="string" >"xpath=//button[@id='submit']"</span
+            >); page.locator(<span class="string">"//button[@id='submit']"</span >);
 
             <span class="comment">// ID shorthand</span>
-            page.locator(<span class="string">"#username"</span>);
-
+            page.locator(<span class="string">"#username"</span>); 
             <span class="comment">// Class shorthand</span>
-            page.locator(<span class="string">".btn-primary"</span>);
-          </div>
+            page.locator(<span class="string">".btn-primary"</span>); </div>
 
           <h3>Chaining Locators</h3>
           <div class="code-block">
             <span class="comment">// Filter by text</span>
-            page.locator(<span class="string">"button"</span>).filter(<span
-              class="keyword"
-              >new</span
-            >
-            Locator.FilterOptions().setHasText(<span class="string"
-              >"Submit"</span
-            >));
+            page.locator(<span class="string">"button"</span>).filter(<span class="keyword"
+            Locator.FilterOptions().setHasText(<span class="string" >"Submit"</span
 
             <span class="comment">// Filter by another locator</span>
-            page.locator(<span class="string">"article"</span>).filter(<span
-              class="keyword"
-              >new</span
-            >
-            Locator.FilterOptions() .setHas(page.locator(<span class="string"
-              >".featured"</span
-            >)) );
+            page.locator(<span class="string">"article"</span>).filter(<span class="keyword"
+            Locator.FilterOptions() .setHas(page.locator(<span class="string" >".featured"</span
 
             <span class="comment">// Find within locator (scoping)</span>
-            page.locator(<span class="string">".container"</span>).locator(<span
-              class="string"
-              >"button"</span
-            >);
+            page.locator(<span class="string">".container"</span>).locator(<span class="string"
 
             <span class="comment">// First/Last/Nth</span>
-            page.locator(<span class="string">"li"</span>).first();
-            page.locator(<span class="string">"li"</span>).last();
-            page.locator(<span class="string">"li"</span>).nth(<span
-              class="string"
-              >2</span
-            >); <span class="comment">// 0-based index</span>
+            page.locator(<span class="string">"li"</span>).first(); page.locator(<span class="string">"li"</span>).last();
+            page.locator(<span class="string">"li"</span>).nth(<span class="string"
 
             <span class="comment">// Count</span>
-            <span class="keyword">int</span> count = page.locator(<span
-              class="string"
-              >"li"</span
-            >).count();
+            <span class="keyword">int</span> count = page.locator(<span class="string"
 
             <span class="comment">// All text contents</span>
-            List&lt;String&gt; texts = page.locator(<span class="string"
-              >"li"</span
-            >).allTextContents();
+            List&lt;String&gt; texts = page.locator(<span class="string" >"li"</span
 
             <span class="comment">// All inner texts</span>
-            List&lt;String&gt; innerTexts = page.locator(<span class="string"
-              >"li"</span
-            >).allInnerTexts();
+            List&lt;String&gt; innerTexts = page.locator(<span class="string" >"li"</span
           </div>
 
           <h3>Locator Assertions</h3>
@@ -628,47 +540,30 @@
             com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
             <span class="comment">// Visibility</span>
-            assertThat(page.locator(<span class="string">"#message"</span
-            >)).isVisible(); assertThat(page.locator(<span class="string"
-              >"#hidden"</span
-            >)).isHidden();
+            assertThat(page.locator(<span class="string">"#message"</span >)).isVisible(); assertThat(page.locator(<span class="string"
 
             <span class="comment">// Text content</span>
-            assertThat(page.locator(<span class="string">"#message"</span
-            >)).hasText(<span class="string">"Success"</span>);
-            assertThat(page.locator(<span class="string">"#message"</span
-            >)).containsText(<span class="string">"Succ"</span>);
+            assertThat(page.locator(<span class="string">"#message"</span >)).hasText(<span class="string">"Success"</span>);
+            assertThat(page.locator(<span class="string">"#message"</span >)).containsText(<span class="string">"Succ"</span>);
 
             <span class="comment">// Count</span>
-            assertThat(page.locator(<span class="string">"li"</span
-            >)).hasCount(<span class="string">5</span>);
+            assertThat(page.locator(<span class="string">"li"</span >)).hasCount(<span class="string">5</span>);
 
             <span class="comment">// Attributes</span>
-            assertThat(page.locator(<span class="string">"input"</span
-            >)).hasAttribute(<span class="string">"type"</span>,
-            <span class="string">"text"</span>); assertThat(page.locator(<span
-              class="string"
-              >"a"</span
-            >)).hasAttribute(<span class="string">"href"</span>,
-            <span class="string">"/home"</span>);
+            assertThat(page.locator(<span class="string">"input"</span >)).hasAttribute(<span class="string">"type"</span>,
+            <span class="string">"text"</span>); assertThat(page.locator(<span class="string" >)).hasAttribute(<span class="string">"href"</span>, <span class="string">"/home"</span>);
 
             <span class="comment">// Value</span>
-            assertThat(page.locator(<span class="string">"input"</span
-            >)).hasValue(<span class="string">"test@example.com"</span>);
+            assertThat(page.locator(<span class="string">"input"</span >)).hasValue(<span class="string">"test@example.com"</span>);
 
             <span class="comment">// CSS class</span>
-            assertThat(page.locator(<span class="string">"button"</span
-            >)).hasClass(<span class="string">"active"</span>);
+            assertThat(page.locator(<span class="string">"button"</span >)).hasClass(<span class="string">"active"</span>);
 
             <span class="comment">// Enabled/Disabled</span>
-            assertThat(page.locator(<span class="string">"button"</span
-            >)).isEnabled(); assertThat(page.locator(<span class="string"
-              >"button"</span
-            >)).isDisabled();
+            assertThat(page.locator(<span class="string">"button"</span >)).isEnabled(); assertThat(page.locator(<span class="string"
 
             <span class="comment">// Checked</span>
-            assertThat(page.locator(<span class="string">"#agree"</span
-            >)).isChecked();
+            assertThat(page.locator(<span class="string">"#agree"</span >)).isChecked();
           </div>
 
           <h3>Aria Roles (Accessibility Testing)</h3>
@@ -730,233 +625,136 @@
           <h3>Basic Actions</h3>
           <div class="code-block">
             <span class="comment">// Click</span>
-            page.locator(<span class="string">"button"</span>).click();
-
+            page.locator(<span class="string">"button"</span>).click(); 
             <span class="comment">// Click with options</span>
-            page.locator(<span class="string">"button"</span>).click(<span
-              class="keyword"
-              >new</span
-            >
+            page.locator(<span class="string">"button"</span>).click(<span class="keyword"
             Locator.ClickOptions() .setButton(MouseButton.RIGHT)
-            <span class="comment">// Right click</span> .setClickCount(<span
-              class="string"
-              >2</span
-            >) <span class="comment">// Double click</span> .setDelay(<span
-              class="string"
-              >100</span
-            >)
+            <span class="comment">// Right click</span> .setClickCount(<span class="string" >) <span class="comment">// Double click</span> .setDelay(<span class="string"
             <span class="comment">// Delay between mousedown and mouseup</span>
-            .setForce(<span class="keyword">true</span>)
-            <span class="comment">// Bypass actionability checks</span>
+            .setForce(<span class="keyword">true</span>) <span class="comment">// Bypass actionability checks</span>
             .setModifiers(Arrays.asList(KeyboardModifier.SHIFT)) );
 
             <span class="comment">// Double click</span>
-            page.locator(<span class="string">"button"</span>).dblclick();
-
+            page.locator(<span class="string">"button"</span>).dblclick(); 
             <span class="comment">// Right click</span>
-            page.locator(<span class="string">"button"</span>).click(<span
-              class="keyword"
-              >new</span
-            >
+            page.locator(<span class="string">"button"</span>).click(<span class="keyword"
             Locator.ClickOptions() .setButton(MouseButton.RIGHT) );
 
             <span class="comment">// Fill input (auto-clears first)</span>
-            page.locator(<span class="string">"#email"</span>).fill(<span
-              class="string"
-              >"test@example.com"</span
-            >);
+            page.locator(<span class="string">"#email"</span>).fill(<span class="string"
 
             <span class="comment">// Type (character by character)</span>
-            page.locator(<span class="string">"#search"</span>).type(<span
-              class="string"
-              >"Playwright"</span
-            >); page.locator(<span class="string">"#search"</span>).type(<span
-              class="string"
-              >"Slow typing"</span
-            >,
+            page.locator(<span class="string">"#search"</span>).type(<span class="string" >); page.locator(<span class="string">"#search"</span>).type(<span class="string"
             <span class="keyword">new</span>
-            Locator.TypeOptions().setDelay(<span class="string">100</span>));
-
+            Locator.TypeOptions().setDelay(<span class="string">100</span>)); 
             <span class="comment">// Press key</span>
-            page.locator(<span class="string">"#search"</span>).press(<span
-              class="string"
-              >"Enter"</span
-            >); page.locator(<span class="string">"#search"</span>).press(<span
-              class="string"
-              >"Control+A"</span
-            >); page.locator(<span class="string">"#search"</span>).press(<span
-              class="string"
-              >"Backspace"</span
-            >);
+            page.locator(<span class="string">"#search"</span>).press(<span class="string" >); page.locator(<span class="string">"#search"</span>).press(<span class="string" >); page.locator(<span class="string">"#search"</span>).press(<span class="string"
 
             <span class="comment">// Clear input</span>
-            page.locator(<span class="string">"#email"</span>).clear();
-
+            page.locator(<span class="string">"#email"</span>).clear(); 
             <span class="comment">// Check/Uncheck</span>
-            page.locator(<span class="string">"#agree"</span>).check();
-            page.locator(<span class="string">"#agree"</span>).uncheck();
-            page.locator(<span class="string">"#agree"</span>).setChecked(<span
-              class="keyword"
-              >true</span
-            >);
+            page.locator(<span class="string">"#agree"</span>).check(); page.locator(<span class="string">"#agree"</span>).uncheck();
+            page.locator(<span class="string">"#agree"</span>).setChecked(<span class="keyword"
 
             <span class="comment">// Focus</span>
-            page.locator(<span class="string">"#email"</span>).focus();
-
+            page.locator(<span class="string">"#email"</span>).focus(); 
             <span class="comment">// Hover</span>
-            page.locator(<span class="string">".menu"</span>).hover();
-
+            page.locator(<span class="string">".menu"</span>).hover(); 
             <span class="comment">// Scroll into view</span>
-            page.locator(<span class="string">"#footer"</span
-            >).scrollIntoViewIfNeeded();
+            page.locator(<span class="string">"#footer"</span >).scrollIntoViewIfNeeded();
 
             <span class="comment">// Tap (touch devices)</span>
-            page.locator(<span class="string">"button"</span>).tap();
-          </div>
+            page.locator(<span class="string">"button"</span>).tap(); </div>
 
           <h3>Get Element Information</h3>
           <div class="code-block">
             <span class="comment">// Text content</span>
-            String text = page.locator(<span class="string">"#message"</span
-            >).textContent();
+            String text = page.locator(<span class="string">"#message"</span >).textContent();
 
             <span class="comment">// Inner text (visible text only)</span>
-            String innerText = page.locator(<span class="string"
-              >"#message"</span
-            >).innerText();
+            String innerText = page.locator(<span class="string" >"#message"</span
 
             <span class="comment">// Inner HTML</span>
-            String innerHTML = page.locator(<span class="string"
-              >"#container"</span
-            >).innerHTML();
+            String innerHTML = page.locator(<span class="string" >"#container"</span
 
             <span class="comment">// Get attribute</span>
-            String href = page.locator(<span class="string">"a"</span
-            >).getAttribute(<span class="string">"href"</span>); String value =
-            page.locator(<span class="string">"input"</span>).getAttribute(<span
-              class="string"
-              >"value"</span
-            >);
+            String href = page.locator(<span class="string">"a"</span >).getAttribute(<span class="string">"href"</span>); String value =
+            page.locator(<span class="string">"input"</span>).getAttribute(<span class="string"
 
             <span class="comment">// Input value</span>
-            String inputValue = page.locator(<span class="string">"input"</span
-            >).inputValue();
+            String inputValue = page.locator(<span class="string">"input"</span >).inputValue();
 
             <span class="comment">// Is visible</span>
-            <span class="keyword">boolean</span> visible = page.locator(<span
-              class="string"
-              >"#message"</span
-            >).isVisible();
+            <span class="keyword">boolean</span> visible = page.locator(<span class="string"
 
             <span class="comment">// Is hidden</span>
-            <span class="keyword">boolean</span> hidden = page.locator(<span
-              class="string"
-              >"#message"</span
-            >).isHidden();
+            <span class="keyword">boolean</span> hidden = page.locator(<span class="string"
 
             <span class="comment">// Is enabled</span>
-            <span class="keyword">boolean</span> enabled = page.locator(<span
-              class="string"
-              >"button"</span
-            >).isEnabled();
+            <span class="keyword">boolean</span> enabled = page.locator(<span class="string"
 
             <span class="comment">// Is disabled</span>
-            <span class="keyword">boolean</span> disabled = page.locator(<span
-              class="string"
-              >"button"</span
-            >).isDisabled();
+            <span class="keyword">boolean</span> disabled = page.locator(<span class="string"
 
             <span class="comment">// Is checked</span>
-            <span class="keyword">boolean</span> checked = page.locator(<span
-              class="string"
-              >"#agree"</span
-            >).isChecked();
+            <span class="keyword">boolean</span> checked = page.locator(<span class="string"
 
             <span class="comment">// Bounding box</span>
-            BoundingBox box = page.locator(<span class="string">"#element"</span
-            >).boundingBox(); <span class="keyword">double</span> width =
-            box.width; <span class="keyword">double</span> height = box.height;
-            <span class="keyword">double</span> x = box.x;
-            <span class="keyword">double</span> y = box.y;
-          </div>
+            BoundingBox box = page.locator(<span class="string">"#element"</span >).boundingBox(); <span class="keyword">double</span> width =
+            box.width; <span class="keyword">double</span> height = box.height; <span class="keyword">double</span> x = box.x;
+            <span class="keyword">double</span> y = box.y; </div>
 
           <h3>Dropdowns/Select</h3>
           <div class="code-block">
             <span class="comment">// Select by value</span>
-            page.locator(<span class="string">"select"</span
-            >).selectOption(<span class="string">"value1"</span>);
+            page.locator(<span class="string">"select"</span >).selectOption(<span class="string">"value1"</span>);
 
             <span class="comment">// Select by label</span>
-            page.locator(<span class="string">"select"</span
-            >).selectOption(<span class="keyword">new</span>
-            SelectOption().setLabel(<span class="string">"Option 1"</span>));
-
+            page.locator(<span class="string">"select"</span >).selectOption(<span class="keyword">new</span>
+            SelectOption().setLabel(<span class="string">"Option 1"</span>)); 
             <span class="comment">// Select by index</span>
-            page.locator(<span class="string">"select"</span
-            >).selectOption(<span class="keyword">new</span>
-            SelectOption().setIndex(<span class="string">2</span>));
-
+            page.locator(<span class="string">"select"</span >).selectOption(<span class="keyword">new</span>
+            SelectOption().setIndex(<span class="string">2</span>)); 
             <span class="comment">// Select multiple</span>
-            page.locator(<span class="string">"select"</span
-            >).selectOption(<span class="keyword">new</span> String[]{<span
-              class="string"
-              >"value1"</span
-            >, <span class="string">"value2"</span>});
-          </div>
+            page.locator(<span class="string">"select"</span >).selectOption(<span class="keyword">new</span> String[]{<span
+              class="string" >"value1"</span
+            >, <span class="string">"value2"</span>}); </div>
 
           <h3>File Upload</h3>
           <div class="code-block">
             <span class="comment">// Upload single file</span>
-            page.locator(<span class="string">"input[type='file']"</span
-            >).setInputFiles(Paths.get(<span class="string">"file.pdf"</span>));
+            page.locator(<span class="string">"input[type='file']"</span >).setInputFiles(Paths.get(<span class="string">"file.pdf"</span>));
 
             <span class="comment">// Upload multiple files</span>
-            page.locator(<span class="string">"input[type='file']"</span
-            >).setInputFiles(<span class="keyword">new</span> Path[]{
-            Paths.get(<span class="string">"file1.pdf"</span>), Paths.get(<span
-              class="string"
-              >"file2.pdf"</span
-            >) });
+            page.locator(<span class="string">"input[type='file']"</span >).setInputFiles(<span class="keyword">new</span> Path[]{
+            Paths.get(<span class="string">"file1.pdf"</span>), Paths.get(<span class="string"
 
             <span class="comment">// Clear file input</span>
-            page.locator(<span class="string">"input[type='file']"</span
-            >).setInputFiles(<span class="keyword">new</span> Path[0]);
+            page.locator(<span class="string">"input[type='file']"</span >).setInputFiles(<span class="keyword">new</span> Path[0]);
           </div>
 
           <h3>Drag and Drop</h3>
           <div class="code-block">
             <span class="comment">// Drag and drop</span>
-            page.locator(<span class="string">"#source"</span
-            >).dragTo(page.locator(<span class="string">"#target"</span>));
+            page.locator(<span class="string">"#source"</span >).dragTo(page.locator(<span class="string">"#target"</span>));
 
             <span class="comment">// Drag by coordinates</span>
-            page.locator(<span class="string">"#draggable"</span
-            >).dragTo(page.locator(<span class="string">"#draggable"</span>),
-            <span class="keyword">new</span> Locator.DragToOptions()
-            .setTargetPosition(<span class="string">100</span>,
-            <span class="string">200</span>) );
-          </div>
+            page.locator(<span class="string">"#draggable"</span >).dragTo(page.locator(<span class="string">"#draggable"</span>),
+            <span class="keyword">new</span> Locator.DragToOptions() .setTargetPosition(<span class="string">100</span>,
+            <span class="string">200</span>) ); </div>
 
           <h3>Screenshots</h3>
           <div class="code-block">
             <span class="comment">// Element screenshot</span>
-            page.locator(<span class="string">"#logo"</span>).screenshot(<span
-              class="keyword"
-              >new</span
-            >
-            Locator.ScreenshotOptions() .setPath(Paths.get(<span class="string"
-              >"logo.png"</span
-            >)) );
+            page.locator(<span class="string">"#logo"</span>).screenshot(<span class="keyword"
+            Locator.ScreenshotOptions() .setPath(Paths.get(<span class="string" >"logo.png"</span
 
             <span class="comment">// Full page screenshot</span>
             page.screenshot(<span class="keyword">new</span>
-            Page.ScreenshotOptions() .setPath(Paths.get(<span class="string"
-              >"fullpage.png"</span
-            >)) .setFullPage(<span class="keyword">true</span>) );
-
+            Page.ScreenshotOptions() .setPath(Paths.get(<span class="string" >"fullpage.png"</span
+            >)) .setFullPage(<span class="keyword">true</span>) ); 
             <span class="comment">// Screenshot as bytes</span>
-            <span class="keyword">byte</span>[] screenshot = page.screenshot();
-          </div>
+            <span class="keyword">byte</span>[] screenshot = page.screenshot(); </div>
         </div>
 
         <!-- AUTO-WAITING SECTION -->
@@ -986,18 +784,12 @@
           </div>
 
           <div class="code-block">
-            <span class="comment"
-              >// No wait needed! Playwright waits automatically</span
-            >
-            page.locator(<span class="string">"button"</span>).click();
-            <span class="comment">// Waits for button to be clickable</span>
+            <span class="comment" >// No wait needed! Playwright waits automatically</span
+            page.locator(<span class="string">"button"</span>).click(); <span class="comment">// Waits for button to be clickable</span>
 
             <span class="comment">// In Selenium, you'd need:</span>
-            <span class="comment"
-              >// WebDriverWait wait = new WebDriverWait(driver, 10);</span
-            >
-            <span class="comment"
-              >//
+            <span class="comment" >// WebDriverWait wait = new WebDriverWait(driver, 10);</span
+            <span class="comment" >//
               wait.until(ExpectedConditions.elementToBeClickable(button));</span
             >
             <span class="comment">// button.click();</span>
@@ -1006,71 +798,53 @@
           <h3>Explicit Waits (When Needed)</h3>
           <div class="code-block">
             <span class="comment">// Wait for selector</span>
-            page.waitForSelector(<span class="string">"#message"</span>);
-
+            page.waitForSelector(<span class="string">"#message"</span>); 
             <span class="comment">// Wait for selector with options</span>
-            page.waitForSelector(<span class="string">"#message"</span>,
-            <span class="keyword">new</span> Page.WaitForSelectorOptions()
-            .setState(WaitForSelectorState.VISIBLE) .setTimeout(<span
-              class="string"
-              >5000</span
-            >) );
+            page.waitForSelector(<span class="string">"#message"</span>, <span class="keyword">new</span> Page.WaitForSelectorOptions()
+            .setState(WaitForSelectorState.VISIBLE) .setTimeout(<span class="string"
 
             <span class="comment">// Wait for element to be hidden</span>
-            page.waitForSelector(<span class="string">"#loading"</span>,
-            <span class="keyword">new</span> Page.WaitForSelectorOptions()
+            page.waitForSelector(<span class="string">"#loading"</span>, <span class="keyword">new</span> Page.WaitForSelectorOptions()
             .setState(WaitForSelectorState.HIDDEN) );
 
             <span class="comment">// Wait for element to be detached</span>
-            page.waitForSelector(<span class="string">"#temp"</span>,
-            <span class="keyword">new</span> Page.WaitForSelectorOptions()
+            page.waitForSelector(<span class="string">"#temp"</span>, <span class="keyword">new</span> Page.WaitForSelectorOptions()
             .setState(WaitForSelectorState.DETACHED) );
 
             <span class="comment">// Wait for URL</span>
-            page.waitForURL(<span class="string">"**/dashboard"</span>);
-            page.waitForURL(url -&gt; url.contains(<span class="string"
-              >"success"</span
-            >));
+            page.waitForURL(<span class="string">"**/dashboard"</span>); page.waitForURL(url -&gt; url.contains(<span class="string"
 
             <span class="comment">// Wait for load state</span>
             page.waitForLoadState(LoadState.NETWORKIDLE);
             page.waitForLoadState(LoadState.DOMCONTENTLOADED);
 
             <span class="comment">// Wait for function</span>
-            page.waitForFunction(<span class="string"
-              >"() => document.querySelector('#message').innerText ===
+            page.waitForFunction(<span class="string" >"() => document.querySelector('#message').innerText ===
               'Ready'"</span
             >);
 
             <span class="comment">// Wait for timeout (avoid if possible)</span>
-            page.waitForTimeout(<span class="string">1000</span>);
-            <span class="comment">// 1 second</span>
+            page.waitForTimeout(<span class="string">1000</span>); <span class="comment">// 1 second</span>
 
             <span class="comment">// Wait for response</span>
-            page.waitForResponse(<span class="string">"**/api/data"</span>, ()
-            -&gt; { page.locator(<span class="string">"button"</span>).click();
+            page.waitForResponse(<span class="string">"**/api/data"</span>, () -&gt; { page.locator(<span class="string">"button"</span>).click();
             });
 
             <span class="comment">// Wait for request</span>
-            page.waitForRequest(<span class="string">"**/api/submit"</span>, ()
-            -&gt; { page.locator(<span class="string">"button"</span>).click();
+            page.waitForRequest(<span class="string">"**/api/submit"</span>, () -&gt; { page.locator(<span class="string">"button"</span>).click();
             });
           </div>
 
           <h3>Polling/Retry</h3>
           <div class="code-block">
-            <span class="comment"
-              >// Locators retry automatically (polling every 100ms by
+            <span class="comment" >// Locators retry automatically (polling every 100ms by
               default)</span
             >
-            assertThat(page.locator(<span class="string">"#status"</span
-            >)).hasText(<span class="string">"Complete"</span>);
+            assertThat(page.locator(<span class="string">"#status"</span >)).hasText(<span class="string">"Complete"</span>);
 
             <span class="comment">// Custom timeout for assertion</span>
-            assertThat(page.locator(<span class="string">"#message"</span>))
-            .hasText(<span class="string">"Success"</span>,
-            <span class="keyword">new</span> LocatorAssertions.HasTextOptions()
-            .setTimeout(<span class="string">10000</span>) );
+            assertThat(page.locator(<span class="string">"#message"</span>)) .hasText(<span class="string">"Success"</span>,
+            <span class="keyword">new</span> LocatorAssertions.HasTextOptions() .setTimeout(<span class="string">10000</span>) );
           </div>
         </div>
 
@@ -1089,9 +863,7 @@
             });
 
             <span class="comment">// Handle prompt with input</span>
-            page.onDialog(dialog -&gt; { dialog.accept(<span class="string"
-              >"My Input"</span
-            >); });
+            page.onDialog(dialog -&gt; { dialog.accept(<span class="string" >"My Input"</span
 
             <span class="comment">// Get dialog type</span>
             page.onDialog(dialog -&gt; { System.out.println(dialog.type());
@@ -1102,110 +874,74 @@
           <h3>Frames/iFrames</h3>
           <div class="code-block">
             <span class="comment">// By name or ID</span>
-            FrameLocator frame = page.frameLocator(<span class="string"
-              >"iframe[name='myframe']"</span
-            >); frame.locator(<span class="string">"button"</span>).click();
-
+            FrameLocator frame = page.frameLocator(<span class="string" >"iframe[name='myframe']"</span
+            >); frame.locator(<span class="string">"button"</span>).click(); 
             <span class="comment">// Nested frames</span>
-            page.frameLocator(<span class="string">"#outer-frame"</span>)
-            .frameLocator(<span class="string">"#inner-frame"</span>)
-            .locator(<span class="string">"button"</span>) .click();
-
+            page.frameLocator(<span class="string">"#outer-frame"</span>) .frameLocator(<span class="string">"#inner-frame"</span>)
+            .locator(<span class="string">"button"</span>) .click(); 
             <span class="comment">// Get all frames</span>
             List&lt;Frame&gt; frames = page.frames();
 
             <span class="comment">// Get frame by URL</span>
-            Frame frame = page.frameByUrl(<span class="string"
-              >"https://example.com/frame"</span
-            >);
+            Frame frame = page.frameByUrl(<span class="string" >"https://example.com/frame"</span
           </div>
 
           <h3>Multiple Pages/Windows</h3>
           <div class="code-block">
             <span class="comment">// Wait for new page</span>
-            Page newPage = context.waitForPage(() -&gt; { page.locator(<span
-              class="string"
-              >"a[target='_blank']"</span
-            >).click(); });
+            Page newPage = context.waitForPage(() -&gt; { page.locator(<span class="string"
 
             <span class="comment">// Open new page</span>
-            Page newPage = context.newPage(); newPage.navigate(<span
-              class="string"
-              >"https://example.com"</span
-            >);
+            Page newPage = context.newPage(); newPage.navigate(<span class="string"
 
             <span class="comment">// Get all pages</span>
             List&lt;Page&gt; pages = context.pages();
 
             <span class="comment">// Switch between pages</span>
-            pages.get(<span class="string">0</span>).bringToFront();
-
+            pages.get(<span class="string">0</span>).bringToFront(); 
             <span class="comment">// Close page</span>
             newPage.close();
 
             <span class="comment">// Handle popup</span>
-            Page popup = page.waitForPopup(() -&gt; { page.locator(<span
-              class="string"
-              >"button"</span
-            >).click(); }); System.out.println(popup.title()); popup.close();
+            Page popup = page.waitForPopup(() -&gt; { page.locator(<span class="string"
           </div>
 
           <h3>Network Interception</h3>
           <div class="code-block">
             <span class="comment">// Route API calls</span>
-            page.route(<span class="string">"**/api/data"</span>, route -&gt; {
-            route.fulfill(<span class="keyword">new</span>
-            Route.FulfillOptions() .setStatus(<span class="string">200</span>)
-            .setBody(<span class="string"
-              >"{\"message\": \"Mocked response\"}"</span
-            >) .setContentType(<span class="string">"application/json"</span>)
-            ); });
+            page.route(<span class="string">"**/api/data"</span>, route -&gt; { route.fulfill(<span class="keyword">new</span>
+            Route.FulfillOptions() .setStatus(<span class="string">200</span>) .setBody(<span class="string" >) .setContentType(<span class="string">"application/json"</span>) ); });
 
             <span class="comment">// Abort requests (e.g., block images)</span>
-            page.route(<span class="string">"**/*.{png,jpg,jpeg}"</span>, route
-            -&gt; route.abort());
+            page.route(<span class="string">"**/*.{png,jpg,jpeg}"</span>, route -&gt; route.abort());
 
             <span class="comment">// Continue request with modifications</span>
-            page.route(<span class="string">"**/api/**"</span>, route -&gt; {
-            route.continue_(<span class="keyword">new</span>
-            Route.ContinueOptions() .setHeaders(Map.of(<span class="string"
-              >"Authorization"</span
-            >, <span class="string">"Bearer token"</span>)) ); });
-
+            page.route(<span class="string">"**/api/**"</span>, route -&gt; { route.continue_(<span class="keyword">new</span>
+            Route.ContinueOptions() .setHeaders(Map.of(<span class="string" >"Authorization"</span
+            >, <span class="string">"Bearer token"</span>)) ); }); 
             <span class="comment">// Monitor requests</span>
-            page.onRequest(request -&gt; { System.out.println(<span
-              class="string"
-              >"Request: "</span
-            >
+            page.onRequest(request -&gt; { System.out.println(<span class="string"
             + request.url()); });
 
             <span class="comment">// Monitor responses</span>
-            page.onResponse(response -&gt; { System.out.println(<span
-              class="string"
-              >"Response: "</span
-            >
-            + response.url() + <span class="string">" - "</span> +
-            response.status()); });
+            page.onResponse(response -&gt; { System.out.println(<span class="string"
+            + response.url() + <span class="string">" - "</span> + response.status()); });
 
             <span class="comment">// Wait for specific response</span>
-            Response response = page.waitForResponse(<span class="string"
-              >"**/api/user"</span
-            >, () -&gt; { page.locator(<span class="string">"button"</span
-            >).click(); }); System.out.println(response.json());
+            Response response = page.waitForResponse(<span class="string" >"**/api/user"</span
+            >, () -&gt; { page.locator(<span class="string">"button"</span >).click(); }); System.out.println(response.json());
           </div>
 
           <h3>Downloads</h3>
           <div class="code-block">
             <span class="comment">// Handle download</span>
             Download download = page.waitForDownload(() -&gt; {
-            page.locator(<span class="string">"a[download]"</span>).click(); });
-
+            page.locator(<span class="string">"a[download]"</span>).click(); }); 
             <span class="comment">// Get suggested filename</span>
             String filename = download.suggestedFilename();
 
             <span class="comment">// Save download</span>
-            download.saveAs(Paths.get(<span class="string">"downloads/"</span> +
-            filename));
+            download.saveAs(Paths.get(<span class="string">"downloads/"</span> + filename));
 
             <span class="comment">// Get path to temporary file</span>
             Path path = download.path();
@@ -1215,19 +951,11 @@
           <div class="code-block">
             <span class="comment">// Save authentication state</span>
             context.storageState(<span class="keyword">new</span>
-            BrowserContext.StorageStateOptions() .setPath(Paths.get(<span
-              class="string"
-              >"auth.json"</span
-            >)) );
+            BrowserContext.StorageStateOptions() .setPath(Paths.get(<span class="string"
 
             <span class="comment">// Reuse authentication state</span>
-            BrowserContext context = browser.newContext(<span class="keyword"
-              >new</span
-            >
-            Browser.NewContextOptions() .setStorageState(Paths.get(<span
-              class="string"
-              >"auth.json"</span
-            >)) );
+            BrowserContext context = browser.newContext(<span class="keyword" >new</span
+            Browser.NewContextOptions() .setStorageState(Paths.get(<span class="string"
 
             <span class="comment">// This loads cookies and local storage</span>
           </div>
@@ -1235,18 +963,10 @@
           <h3>Video Recording</h3>
           <div class="code-block">
             <span class="comment">// Enable video recording</span>
-            BrowserContext context = browser.newContext(<span class="keyword"
-              >new</span
-            >
-            Browser.NewContextOptions() .setRecordVideoDir(Paths.get(<span
-              class="string"
-              >"videos/"</span
-            >)) .setRecordVideoSize(<span class="string">1280</span>,
-            <span class="string">720</span>) );
+            BrowserContext context = browser.newContext(<span class="keyword" >new</span
+            Browser.NewContextOptions() .setRecordVideoDir(Paths.get(<span class="string" >)) .setRecordVideoSize(<span class="string">1280</span>, <span class="string">720</span>) );
 
-            <span class="comment"
-              >// Video is saved when page/context closes</span
-            >
+            <span class="comment" >// Video is saved when page/context closes</span
             page.close(); Path videoPath = page.video().path();
           </div>
 
@@ -1254,22 +974,15 @@
           <div class="code-block">
             <span class="comment">// Start tracing</span>
             context.tracing().start(<span class="keyword">new</span>
-            Tracing.StartOptions() .setScreenshots(<span class="keyword"
-              >true</span
-            >) .setSnapshots(<span class="keyword">true</span>) );
-
+            Tracing.StartOptions() .setScreenshots(<span class="keyword" >true</span
+            >) .setSnapshots(<span class="keyword">true</span>) ); 
             <span class="comment">// Your test code here</span>
-            page.navigate(<span class="string">"https://example.com"</span>);
-
+            page.navigate(<span class="string">"https://example.com"</span>); 
             <span class="comment">// Stop tracing and save</span>
             context.tracing().stop(<span class="keyword">new</span>
-            Tracing.StopOptions() .setPath(Paths.get(<span class="string"
-              >"trace.zip"</span
-            >)) );
+            Tracing.StopOptions() .setPath(Paths.get(<span class="string" >"trace.zip"</span
 
-            <span class="comment"
-              >// View trace: npx playwright show-trace trace.zip</span
-            >
+            <span class="comment" >// View trace: npx playwright show-trace trace.zip</span
           </div>
         </div>
 
@@ -1363,29 +1076,17 @@
           <h3>Common Patterns</h3>
           <div class="code-block">
             <span class="comment">// Page Object Model with Playwright</span>
-            <span class="keyword">public class</span>
-            <span class="method">LoginPage</span> {
-            <span class="keyword">private final</span> Page page;
-            <span class="keyword">private final</span> Locator usernameInput;
-            <span class="keyword">private final</span> Locator passwordInput;
-            <span class="keyword">private final</span> Locator loginButton;
-
-            <span class="keyword">public</span>
-            <span class="method">LoginPage</span>(Page page) {
-            <span class="keyword">this</span>.page = page;
-            <span class="keyword">this</span>.usernameInput =
-            page.getByLabel(<span class="string">"Username"</span>);
-            <span class="keyword">this</span>.passwordInput =
-            page.getByLabel(<span class="string">"Password"</span>);
-            <span class="keyword">this</span>.loginButton =
-            page.getByRole(AriaRole.BUTTON,
+            <span class="keyword">public class</span> <span class="method">LoginPage</span> { <span class="keyword">private final</span> Page page;
+            <span class="keyword">private final</span> Locator usernameInput; <span class="keyword">private final</span> Locator passwordInput;
+            <span class="keyword">private final</span> Locator loginButton; 
+            <span class="keyword">public</span> <span class="method">LoginPage</span>(Page page) { <span class="keyword">this</span>.page = page;
+            <span class="keyword">this</span>.usernameInput = page.getByLabel(<span class="string">"Username"</span>);
+            <span class="keyword">this</span>.passwordInput = page.getByLabel(<span class="string">"Password"</span>);
+            <span class="keyword">this</span>.loginButton = page.getByRole(AriaRole.BUTTON,
             <span class="keyword">new</span>
-            Page.GetByRoleOptions().setName(<span class="string">"Login"</span
-            >)); }
+            Page.GetByRoleOptions().setName(<span class="string">"Login"</span >)); }
 
-            <span class="keyword">public void</span>
-            <span class="method">login</span>(String username, String password)
-            { usernameInput.fill(username); passwordInput.fill(password);
+            <span class="keyword">public void</span> <span class="method">login</span>(String username, String password) { usernameInput.fill(username); passwordInput.fill(password);
             loginButton.click(); } }
           </div>
 
