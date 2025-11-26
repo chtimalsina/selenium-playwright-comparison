@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REST API Testing Guide for Automation Testers</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>REST API Testing Guide</h1>
+        <p>
+          From Beginner to Advanced: A Complete Guide for Automation Testers
+        </p>
+      </header>
+
+      <div class="content">
+        <!-- Table of Contents -->
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ul>
+            <li><a href="#introduction">Introduction to REST APIs</a></li>
+            <li><a href="#core-concepts">Core Concepts</a></li>
+            <li><a href="#request-anatomy">Request Anatomy</a></li>
+            <li><a href="#request-types">HTTP Request Types Compared</a></li>
+            <li><a href="#parameters">Parameters, Headers & Payloads</a></li>
+            <li>
+              <a href="#authentication">Authentication & Authorization</a>
+            </li>
+            <li><a href="#api-testing-tools">API Testing with Tools</a></li>
+            <li><a href="#playwright-api">Playwright for API Testing</a></li>
+            <li><a href="#rest-assured">REST Assured for Java</a></li>
+            <li>
+              <a href="#best-practices">Best Practices & Data Handling</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section" id="introduction">
+          <h2>🌐 Introduction to REST APIs</h2>
+          <p>
+            A REST (Representational State Transfer) API is an architectural
+            style for designing networked applications. It's a way for different
+            systems to communicate over HTTP in a stateless, scalable, and
+            reliable way. For automation testers, understanding REST APIs is
+            crucial for both UI and API-level testing.
+          </p>
+        </div>
+
+        <!-- Core Concepts -->
+        <div class="section" id="core-concepts">
+          <h2>🧩 Core Concepts</h2>
+          <h3>HTTP Methods</h3>
+          <p>HTTP methods define the action to be performed on a resource.</p>
+          <ul class="method-list">
+            <li><strong>GET:</strong> Retrieve data from a server.</li>
+            <li>
+              <strong>POST:</strong> Send data to a server to create a new
+              resource.
+            </li>
+            <li>
+              <strong>PUT:</strong> Update an existing resource on the server.
+            </li>
+            <li><strong>DELETE:</strong> Remove a resource from the server.</li>
+          </ul>
+
+          <h3>HTTP Status Codes</h3>
+          <p>Status codes indicate the result of the HTTP request.</p>
+          <ul class="status-code-list">
+            <li><strong>2xx (Success):</strong> 200 OK, 201 Created</li>
+            <li><strong>3xx (Redirection):</strong> 301 Moved Permanently</li>
+            <li>
+              <strong>4xx (Client Error):</strong> 400 Bad Request, 401
+              Unauthorized, 404 Not Found
+            </li>
+            <li>
+              <strong>5xx (Server Error):</strong> 500 Internal Server Error
+            </li>
+          </ul>
+        </div>
+
+        <!-- Request Anatomy -->
+        <div class="section" id="request-anatomy">
+          <h2>🧱 Request Anatomy & Lifecycle</h2>
+          <p>
+            Every REST call follows the same structure:
+            <strong>Method</strong> + <strong>URL</strong> +
+            <strong>Headers</strong> + <strong>Payload</strong>. Understanding
+            each piece helps you design focused test cases and troubleshoot
+            failures quickly.
+          </p>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>What It Is</th>
+                <th>Tester Checklist</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Method</strong></td>
+                <td>
+                  Verb describing the intent (read, create, update, delete).
+                </td>
+                <td>
+                  Assert that the chosen method matches the API contract (e.g.
+                  no POST used for reads).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Endpoint</strong></td>
+                <td>
+                  Base URL + path parameters (e.g. <code>/users/{id}</code>).
+                </td>
+                <td>
+                  Validate path parameter formats, URL encoding, and versioning
+                  (e.g. <code>/v1/</code> vs <code>/v2/</code>).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Query Parameters</strong></td>
+                <td>
+                  Optional filters, pagination, sorting (e.g.
+                  <code>?page=2&limit=20</code>).
+                </td>
+                <td>
+                  Test extremes (min, max, null) and ensure parameters cannot be
+                  abused for injection.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Headers</strong></td>
+                <td>
+                  Metadata for content negotiation, caching, auth, correlation.
+                </td>
+                <td>
+                  Verify required headers, default values, casing, and error
+                  messages when missing.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Payload (Body)</strong></td>
+                <td>
+                  JSON, XML, multipart, form data sent with POST/PUT/PATCH.
+                </td>
+                <td>
+                  Validate schema, optional fields, array lengths, and server
+                  behavior when unexpected fields are present.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="code-block">
+            <span class="comment"># Sample cURL showing each component</span>
+            curl -X POST https://api.example.com/v1/users/42/orders \ --header
+            "Authorization: Bearer &lt;token&gt;" \\ --header "Content-Type:
+            application/json" \\ --data '{ "sku": "A123", "quantity": 2,
+            "expedite": true }'
+          </div>
+        </div>
+
+        <!-- HTTP Request Types -->
+        <div class="section" id="request-types">
+          <h2>⚖️ HTTP Request Types Compared</h2>
+          <p>
+            Choosing the right verb affects caching, retries, and how the API
+            should behave under load. Use the contract below to design
+            assertions for both happy-path and negative scenarios.
+          </p>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Typical Use</th>
+                <th>Safe?</th>
+                <th>Idempotent?</th>
+                <th>Common Tests</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GET</strong></td>
+                <td>Read data, search, filtering</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>
+                  Cache headers present, query combinations, pagination,
+                  conditional GET (<code>If-None-Match</code>).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>POST</strong></td>
+                <td>Create resource, trigger actions</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>
+                  Required fields, duplicates, retry behavior, server-generated
+                  IDs.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PUT</strong></td>
+                <td>Replace resource (full update)</td>
+                <td>❌</td>
+                <td>✅</td>
+                <td>
+                  Repeated requests produce same state, validation for missing
+                  optional fields.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PATCH</strong></td>
+                <td>Partial update</td>
+                <td>❌</td>
+                <td>Depends</td>
+                <td>
+                  JSON merge vs JSON patch semantics, ordering, conflict
+                  detection (ETags).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>DELETE</strong></td>
+                <td>Remove resource or mark as inactive</td>
+                <td>❌</td>
+                <td>✅</td>
+                <td>
+                  Subsequent deletes return 404/204, cascading deletes, soft
+                  delete flags.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="benefit-box">
+            <strong>Idempotency Tips:</strong>
+            <ul>
+              <li>
+                “Safe” means the method must not modify server data when used
+                correctly; it has nothing to do with whether parameters sit in
+                the URL or the body.
+              </li>
+              <li>
+                Retry-safe methods (GET, PUT, DELETE) should always return the
+                same result no matter how many times they run.
+              </li>
+              <li>
+                For POST-based create endpoints, support an
+                <code>Idempotency-Key</code> header to deduplicate spikes.
+              </li>
+              <li>
+                Validate that unsafe methods are protected against accidental
+                caching (set <code>Cache-Control: no-store</code> where needed).
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Secure vs Insecure Data Exposure -->
+        <div class="section" id="method-security">
+          <h2>🛡️ Secure vs. Exposed Information by Method</h2>
+          <p>
+            The HTTP verb does not inherently make a call secure—the transport
+            (HTTPS), payload placement, and caching rules do. Still, different
+            methods have typical exposure patterns that testers should audit.
+          </p>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Common Exposure Risks</th>
+                <th>Hardening Techniques</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GET</strong></td>
+                <td>
+                  Query strings appear in browser history, server logs,
+                  analytics tools, and intermediary caches.
+                </td>
+                <td>
+                  Never send credentials/PII in URLs, disable caching with
+                  <code>Cache-Control: no-store</code> for sensitive endpoints,
+                  ensure HTTPS with HSTS.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>POST</strong></td>
+                <td>
+                  Payload lives in the body (safer than URL) but can still leak
+                  through proxies, verbose logging, or browser autofill.
+                </td>
+                <td>
+                  Enforce TLS, scrub request/response bodies in logs, apply CSRF
+                  protection, reject missing <code>Content-Type</code>.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>PUT/PATCH</strong></td>
+                <td>
+                  Large JSON bodies may include secrets, and partial updates can
+                  unintentionally zero-out fields if validation is weak.
+                </td>
+                <td>
+                  Require explicit fields for sensitive attributes, use JSON
+                  schema validation, encrypt at rest before persisting.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>DELETE</strong></td>
+                <td>
+                  Often triggered via GET links in poorly designed UIs, causing
+                  CSRF risk and unintended deletions.
+                </td>
+                <td>
+                  Force DELETE via POST/DELETE with anti-CSRF tokens, audit
+                  authorization checks, require confirmation workflows in UI.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tip-box">
+            <strong>Security Checklist Per Method:</strong>
+            <ul>
+              <li>✅ Use HTTPS everywhere; block plain HTTP requests early.</li>
+              <li>
+                ✅ Centralize logging filters to mask tokens, cookies, and PII.
+              </li>
+              <li>
+                ✅ Configure caching/CDN rules to prevent storing sensitive
+                responses.
+              </li>
+              <li>
+                ✅ Pair method + role verification (e.g., only admins may POST
+                to /users).
+              </li>
+              <li>
+                ✅ Document which fields are allowed in URLs to prevent
+                accidental leakage.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Parameters and Payloads -->
+        <div class="section" id="parameters">
+          <h2>🧾 Parameters, Headers & Payloads</h2>
+          <div class="principle-card">
+            <h4>Path vs Query vs Body</h4>
+            <ul>
+              <li>
+                <strong>Path parameters</strong> identify a specific resource
+                (<code>/accounts/{id}</code>). They should be validated for type
+                (UUID, int) and URL-encoded.
+              </li>
+              <li>
+                <strong>Query parameters</strong> control filtering, pagination,
+                localization. Always test default values and combinations.
+              </li>
+              <li>
+                <strong>Body payloads</strong> hold the state you send to the
+                server. Schema validation and optional fields are critical.
+              </li>
+            </ul>
+          </div>
+
+          <h3>Common Headers</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Header</th>
+                <th>Role</th>
+                <th>Tester Focus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Authorization</code></td>
+                <td>Access control (API keys, Bearer tokens, Basic auth).</td>
+                <td>
+                  Expired vs valid tokens, scopes, missing header behavior.
+                </td>
+              </tr>
+              <tr>
+                <td><code>Content-Type</code></td>
+                <td>
+                  Indicates payload format (<code>application/json</code>,
+                  <code>multipart/form-data</code>).
+                </td>
+                <td>
+                  Verify server rejects unsupported formats and enforces UTF-8.
+                </td>
+              </tr>
+              <tr>
+                <td><code>Accept</code></td>
+                <td>Requested response format.</td>
+                <td>
+                  Ensure API negotiates properly (JSON vs XML) and defaults are
+                  documented.
+                </td>
+              </tr>
+              <tr>
+                <td><code>X-Correlation-ID</code></td>
+                <td>Traceability for distributed logs.</td>
+                <td>
+                  Assert that IDs are echoed back and propagated downstream.
+                </td>
+              </tr>
+              <tr>
+                <td><code>Idempotency-Key</code></td>
+                <td>Prevents duplicate POST processing.</td>
+                <td>
+                  Send identical keys twice and confirm only one resource is
+                  created.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Payload Validation Ideas</h3>
+          <ul>
+            <li>Missing required fields vs empty strings vs null values.</li>
+            <li>
+              Boundary testing for numeric fields (min/max), string lengths,
+              enum values.
+            </li>
+            <li>
+              Semantic validation: cross-field rules (startDate < endDate,
+              currency + locale alignment).
+            </li>
+            <li>Malformed JSON/XML to ensure graceful 400 responses.</li>
+          </ul>
+
+          <div class="code-block">
+            <span class="comment">// Example request model (TypeScript)</span>
+            <span class="keyword">interface</span> CreateUserRequest { id?:
+            string; <span class="comment">// optional for POST</span>
+            email: string; roles: string[]; metadata?: Record&lt;string,
+            string&gt;; }
+          </div>
+
+          <div class="code-block">
+            <span class="comment"
+              ># Validate query, headers, payload together</span
+            >
+            curl "https://api.example.com/v1/users?role=admin&page=2" \\
+            --header "Authorization: Bearer &lt;token&gt;" \\ --header "Accept:
+            application/json" \\ --data '{ "notify": true, "metadata": {
+            "source": "automation-suite" } }'
+          </div>
+        </div>
+
+        <!-- Authentication -->
+        <div class="section" id="authentication">
+          <h2>🔐 Authentication & Authorization Patterns</h2>
+          <p>
+            Robust API testing exercises success, failure, and expiration paths
+            for each auth scheme. Aim to cover least-privilege scopes, token
+            refresh, and abuse scenarios.
+          </p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>How It Works</th>
+                <th>Use Cases</th>
+                <th>What to Test</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>API Key</strong></td>
+                <td>
+                  Static key shared per app, sent as
+                  <code>Authorization: ApiKey &lt;key&gt;</code> or query param.
+                </td>
+                <td>Internal services, server-to-server, low-risk data.</td>
+                <td>
+                  Key rotation, IP allow lists, rate limit enforcement per key.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Basic Auth</strong></td>
+                <td>
+                  Base64 encoded <code>username:password</code> in header.
+                </td>
+                <td>Legacy systems, smoke envs, when using HTTPS only.</td>
+                <td>
+                  Incorrect credentials, lockout thresholds, TLS enforcement.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Bearer / JWT</strong></td>
+                <td>
+                  Signed token with claims (sub, exp, scope) sent as
+                  <code>Authorization: Bearer &lt;jwt&gt;</code>.
+                </td>
+                <td>Modern microservices, SPAs, mobile apps.</td>
+                <td>
+                  Expired tokens, tampered signature, insufficient scopes, clock
+                  skew.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>OAuth 2.0</strong></td>
+                <td>
+                  Delegated flow (Auth Code, Client Credentials, Device Code)
+                  issuing short-lived access tokens + refresh tokens.
+                </td>
+                <td>
+                  Third-party integrations, enterprise APIs, user-consent
+                  scenarios.
+                </td>
+                <td>
+                  Token refresh, consent revocation, PKCE enforcement, scope
+                  downgrades.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>HMAC</strong></td>
+                <td>
+                  Request body + timestamp signed with shared secret, usually
+                  via <code>X-Signature</code> header.
+                </td>
+                <td>Financial APIs, webhook verification.</td>
+                <td>
+                  Replay protection, clock drift tolerance, signature mismatch
+                  responses.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Mutual TLS</strong></td>
+                <td>
+                  Client presents certificate during TLS handshake; server
+                  validates against CA.
+                </td>
+                <td>B2B integrations, highly regulated industries.</td>
+                <td>
+                  Cert expiration, revoked certs, fallback refusal to plaintext
+                  connections.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="code-block">
+            <span class="comment"
+              >// Example: attaching OAuth2 token in Playwright</span
+            >
+            <span class="keyword">const</span> token = await getAccessToken();
+            <span class="keyword">const</span> response = await request.post(
+            <span class="string">'/api/reports'</span>, { data: { range:
+            <span class="string">'last-30-days'</span> }, headers: {
+            Authorization: `Bearer ${token}`, 'Content-Type':
+            <span class="string">'application/json'</span>
+            } } );
+          </div>
+
+          <div class="benefit-box">
+            <strong>Authorization Test Ideas:</strong>
+            <ul>
+              <li>
+                Rotate keys/tokens mid-test and confirm old ones stop working.
+              </li>
+              <li>
+                Attempt role escalation (e.g., reader token hitting admin
+                route).
+              </li>
+              <li>
+                Validate error messaging does not leak secrets (<code>401</code>
+                vs <code>403</code>).
+              </li>
+              <li>
+                Check rate-limit headers (<code>X-RateLimit-Remaining</code>)
+                reset after window.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- API Testing with Tools -->
+        <div class="section" id="api-testing-tools">
+          <h2>🛠️ API Testing with Tools</h2>
+          <p>
+            Here are examples of how to perform API requests using popular
+            automation tools.
+          </p>
+        </div>
+
+        <!-- Playwright for API Testing -->
+        <div class="section" id="playwright-api">
+          <h3>🎭 Playwright for API Testing</h3>
+          <p>
+            Playwright has built-in capabilities for API testing, allowing you
+            to send requests directly.
+          </p>
+          <div class="code-block">
+            <span class="keyword">import</span> { test, expect }
+            <span class="keyword">from</span>
+            <span class="string">'@playwright/test'</span>; test(<span
+              class="string"
+              >'should fetch user data'</span
+            >, <span class="keyword">async</span> ({ request }) => {
+            <span class="keyword">const</span> response =
+            <span class="keyword">await</span> request.get(<span class="string"
+              >'/api/users/1'</span
+            >); expect(response.ok()).toBeTruthy();
+            <span class="keyword">const</span> body =
+            <span class="keyword">await</span> response.json();
+            expect(body.name).toBe(<span class="string">'Leanne Graham'</span>);
+            });
+          </div>
+        </div>
+
+        <!-- REST Assured for Java -->
+        <div class="section" id="rest-assured">
+          <h3>☕ REST Assured for Java</h3>
+          <p>REST Assured is a popular Java library for testing REST APIs.</p>
+          <div class="code-block">
+            <span class="keyword">import static</span>
+            io.restassured.RestAssured.*;
+            <span class="keyword">import static</span> org.hamcrest.Matchers.*;
+            @Test <span class="keyword">public void</span>
+            <span class="method">testGetUser</span>() { given(). when().
+            get(<span class="string">"/api/users/1"</span>). then().
+            statusCode(200). body(<span class="string">"name"</span>,
+            equalTo(<span class="string">"Leanne Graham"</span>)); }
+          </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="section" id="best-practices">
+          <h2>✅ Best Practices & Sensitive Data Handling</h2>
+
+          <h3>Designing Test Coverage</h3>
+          <div class="tip-box">
+            <ul>
+              <li>
+                Write contract tests for request/response schemas (e.g., OpenAPI
+                + JSON Schema validation).
+              </li>
+              <li>
+                Combine positive, negative, and chaos scenarios (timeouts,
+                throttling, malformed payloads).
+              </li>
+              <li>
+                Include performance baselines (95th percentile latency) for
+                critical endpoints.
+              </li>
+              <li>
+                Use synthetic data seeding scripts so tests remain
+                deterministic.
+              </li>
+            </ul>
+          </div>
+
+          <h3>Handling Sensitive Data</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Concern</th>
+                <th>What To Do</th>
+                <th>Automation Tip</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Secrets in code</td>
+                <td>
+                  Load tokens/keys from vaults (Azure Key Vault, AWS Secrets
+                  Manager) via environment variables.
+                </td>
+                <td>
+                  Fail tests if placeholder secrets detected; mask in logs.
+                </td>
+              </tr>
+              <tr>
+                <td>PII in fixtures</td>
+                <td>
+                  Use anonymized datasets or on-the-fly generators (Faker) with
+                  consistent seeds.
+                </td>
+                <td>
+                  Sanitize responses before storing snapshots; redact emails,
+                  phone numbers.
+                </td>
+              </tr>
+              <tr>
+                <td>Data in transit</td>
+                <td>
+                  Enforce HTTPS; block downgrades; validate TLS certificates.
+                </td>
+                <td>
+                  Add assertions on <code>Strict-Transport-Security</code> and
+                  <code>Content-Security-Policy</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>Logs & reports</td>
+                <td>Mask tokens using regex filters before log aggregation.</td>
+                <td>
+                  Centralize logging via interceptors (REST Assured filters,
+                  Playwright hooks).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Operational Considerations</h3>
+          <ul>
+            <li>
+              <strong>Versioning:</strong> Always hit explicit versions
+              (<code>/v1/</code>). Automate smoke tests against upcoming
+              versions in parallel.
+            </li>
+            <li>
+              <strong>Rate Limits:</strong> Respect
+              <code>X-RateLimit-Remaining</code>; throttle your suites to avoid
+              blacklisting.
+            </li>
+            <li>
+              <strong>Idempotent Retries:</strong> Build retry helpers that only
+              execute on retry-safe methods and inspect
+              <code>Retry-After</code> headers.
+            </li>
+            <li>
+              <strong>Observability:</strong> Capture request/response pairs
+              with correlation IDs so UI test failures can be matched to backend
+              calls.
+            </li>
+            <li>
+              <strong>Environment Segregation:</strong> Separate credentials,
+              base URLs, and data seeds per environment (dev, QA, staging, prod
+              shadow).
+            </li>
+          </ul>
+
+          <div class="note">
+            <strong>Quick Audit Checklist:</strong> Secrets externalized ➜ PII
+            masked ➜ TLS enforced ➜ Replay attacks blocked ➜ Contracts
+            validated.
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Pages -->
+      <div class="related-pages">
+        <h3>📚 Related Guides & Cheatsheets</h3>
+        <div class="related-grid">
+          <a href="OOP-Java-Explained.html" class="related-card">
+            <h4>🎯 OOP in Java</h4>
+            <p>
+              Learn object-oriented programming concepts with real test
+              automation examples
+            </p>
+          </a>
+          <a href="Selenium-Cheatsheet.html" class="related-card">
+            <h4>🔍 Selenium Cheatsheet</h4>
+            <p>
+              Complete reference for Selenium WebDriver with Java - from basics
+              to advanced features
+            </p>
+          </a>
+          <a href="Playwright-Cheatsheet.html" class="related-card">
+            <h4>🎭 Playwright Cheatsheet</h4>
+            <p>
+              Modern browser automation with Playwright - auto-waiting, network
+              control, and more
+            </p>
+          </a>
+          <a href="Testing-Lifecycle-Guide.html" class="related-card">
+            <h4>♻️ Testing Lifecycle Guide</h4>
+            <p>
+              Comprehensive STLC guide covering phases, strategies, types, and
+              automation best practices
+            </p>
+          </a>
+        </div>
+      </div>
+
+      <footer>
+        <p>Created as part of Selenium vs Playwright Comparison Project</p>
+        <p>
+          GitHub:
+          <a
+            href="https://github.com/chtimalsina/selenium-playwright-comparison"
+            >selenium-playwright-comparison</a
+          >
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
