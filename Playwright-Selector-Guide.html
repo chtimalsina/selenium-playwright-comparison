@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playwright Selector Guide</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎯 Playwright Selector Strategy</h1>
+        <p>From stable static hooks to resilient dynamic targeting</p>
+      </header>
+
+      <div class="content">
+        <div class="toc">
+          <h3>Roadmap</h3>
+          <ul>
+            <li><a href="#foundations">Selector Foundations</a></li>
+            <li><a href="#intermediate">Intermediate Patterns</a></li>
+            <li><a href="#advanced">Advanced Dynamic Targeting</a></li>
+            <li><a href="#debug">Debugging & Anti-Flake</a></li>
+          </ul>
+        </div>
+
+        <div class="section" id="foundations">
+          <h2>
+            Selector Foundations <span class="level-badge">Beginner</span>
+          </h2>
+          <p>
+            Playwright locators inherit CSS awareness <em>and</em> layer on
+            modern pseudo selectors such as <code>:has()</code>,
+            <code>:text()</code>, and <code>:nth-match()</code>. Start with
+            deterministic hooks whenever you can.
+          </p>
+
+          <div class="principle-card">
+            <h4>Static locator checklist</h4>
+            <ul>
+              <li>Prefer semantic IDs (<code>#static-username</code>).</li>
+              <li>
+                Use <code>data-test</code> or
+                <code>data-testid</code> attributes for automation.
+              </li>
+              <li>
+                Scope by component (<code
+                  >.login-form input[name='static-password']</code
+                >).
+              </li>
+              <li>Add a short assertion so the selector fails loudly.</li>
+            </ul>
+          </div>
+
+          <div class="code-block">
+            <span class="comment"
+              >// Playwright static selectors demo (from
+              PlaywrightSelectorTest)</span
+            >
+            Locator usernameField = page.locator(<span class="string"
+              >"#static-username"</span
+            >); Locator passwordField = page.locator(<span class="string"
+              >"input[name='static-password']"</span
+            >); Locator rememberMe = page.locator(<span class="string"
+              >"label.login-toggle input"</span
+            >); Locator primaryCta = page.locator(<span class="string"
+              >"[data-test='primary-cta']"</span
+            >); usernameField.fill(<span class="string"
+              >"qa.analyst@acme.dev"</span
+            >); passwordField.fill(<span class="string">"SuperSecret!"</span>);
+            rememberMe.check(); primaryCta.click(); expect(page.locator(<span
+              class="string"
+              >"#cta-result"</span
+            >)).toHaveText(<span class="string"
+              >"CTA clicked via static selectors"</span
+            >);
+          </div>
+
+          <div class="tip-box">
+            <strong>Pro tip:</strong> <code>locator()</code> auto-waits for the
+            element to be actionable. Avoid <code>page.waitForTimeout</code> -
+            let locators synchronize the UI for you.
+          </div>
+        </div>
+
+        <div class="section" id="intermediate">
+          <h2>
+            Intermediate Patterns <span class="level-badge">Skilled</span>
+          </h2>
+          <p>
+            Once the DOM becomes noisy, compose locators by combining attribute
+            wildcards, structural filters, and scoping.
+          </p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Pattern</th>
+                <th>When to use</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>[data-row-id^='user-']</code></td>
+                <td>ID prefixes (server-generated handles).</td>
+                <td>
+                  <code>page.locator("[data-row-id^='user-']").first()</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>.feed-card:has-text('Pinned')</code></td>
+                <td>Cards or rows with unique copy.</td>
+                <td>
+                  <code>page.locator("li.feed-card:has-text('Pinned')")</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>:nth-match(locator, index)</code></td>
+                <td>Multiple identical CTAs.</td>
+                <td><code>page.locator("button.promote-btn").nth(1)</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="code-block">
+            <span class="comment">// Scoped dynamic selection</span>
+            Locator newestRow = page.locator(<span class="string"
+              >"[data-row-id^='user-']"</span
+            >).last(); Locator promoteButton = newestRow.locator(<span
+              class="string"
+              >"button.promote-btn"</span
+            >); promoteButton.click(); Locator designCard = page.locator(
+            <span class="string"
+              >"li.feed-card:has(.content-pill:has-text('Pinned'))"</span
+            >
+            ); expect(designCard.locator(<span class="string">"p"</span
+            >)).toContainText(<span class="string">"Design System"</span>);
+          </div>
+        </div>
+
+        <div class="section" id="advanced">
+          <h2>
+            Advanced Dynamic Targeting <span class="level-badge">Advanced</span>
+          </h2>
+          <p>
+            Complex enterprise apps often generate GUID-based IDs and nested
+            components. Combine Playwright-only capabilities with fallback XPath
+            for the rare edge case.
+          </p>
+
+          <div class="diagram">
+            <span class="diagram-box">Hook element</span>
+            <span class="arrow">⟶</span>
+            <span class="diagram-box">Filter (has-text, nth-match)</span>
+            <span class="arrow">⟶</span>
+            <span class="diagram-box">Fallback XPath</span>
+          </div>
+
+          <div class="code-block">
+            <span class="comment">// Pattern 1: :has-text chaining</span>
+            Locator onboardingTile = page.locator(
+            <span class="string"
+              >"section.dashboard-tile:has-text('Onboarding Checklist')"</span
+            >
+            ); onboardingTile.locator(<span class="string"
+              >"button:has-text('Start now')"</span
+            >).click();
+
+            <span class="comment">// Pattern 2: Text-first dynamic tables</span>
+            Locator statusChip = page.locator(
+            <span class="string"
+              >"tr:has(td:has-text('CRM Sync')) td.status span"</span
+            >
+            ); expect(statusChip).toHaveText(<span class="string"
+              >"Healthy"</span
+            >);
+
+            <span class="comment"
+              >// Pattern 3: XPath fallback when DOM lacks hooks</span
+            >
+            Locator xpathFallback = page.locator(
+            <span class="string">"xpath=(//div[@data-row-id])[last()]"</span>
+            ); expect(xpathFallback).toContainText(<span class="string"
+              >"@dynamic"</span
+            >);
+          </div>
+
+          <div class="warning-box">
+            <strong>Remember:</strong> XPath is still valuable for relationship
+            queries, but keep it as the exception. A readable CSS+has-text
+            locator is easier to debug.
+          </div>
+        </div>
+
+        <div class="section" id="debug">
+          <h2>
+            Debugging & Anti-Flake <span class="level-badge">Expert</span>
+          </h2>
+          <p>
+            Bad selectors usually manifest as flaky tests. Instrument your
+            locators the same way you observe API calls.
+          </p>
+
+          <ul>
+            <li>
+              <strong
+                >Use <code>locator.highlight()</code> in headed mode:</strong
+              >
+              Keep a helper that calls <code>page.pause()</code> and highlights
+              the selector so you can visually confirm the match.
+            </li>
+            <li>
+              <strong>Leverage trace viewer:</strong>
+              <code>npx playwright show-trace</code>
+              displays animations, DOM snapshots, and the exact selector
+              Playwright attempted.
+            </li>
+            <li>
+              <strong>Record custom data hooks:</strong> Ask frontend teams to
+              add <code>data-qa</code>/<code>data-testid</code> attributes as
+              part of their definition of done to guarantee future proof
+              selectors.
+            </li>
+          </ul>
+
+          <div class="info-box">
+            <strong>Fast safety net:</strong> The repository now includes
+            <code>PlaywrightSelectorTest</code> so you can iterate on selectors
+            in isolation without touching production UIs.
+          </div>
+        </div>
+      </div>
+
+      <div class="related-pages">
+        <h3>Explore more</h3>
+        <div class="related-grid">
+          <a class="related-card" href="Playwright-Cheatsheet.html">
+            <h4>Playwright Cheatsheet</h4>
+            <p>
+              Complete reference for setup, locators, waiting, and parallelism.
+            </p>
+          </a>
+          <a class="related-card" href="Selenium-Selector-Guide.html">
+            <h4>Selenium Selector Guide</h4>
+            <p>Mirror of these strategies for WebDriver + TestNG teams.</p>
+          </a>
+          <a class="related-card" href="Selenium-Cheatsheet.html">
+            <h4>Selenium Cheatsheet</h4>
+            <p>Migration-ready Selenium 4 patterns, waits, and assertions.</p>
+          </a>
+        </div>
+      </div>
+
+      <footer>
+        <p>Made with ❤️ for automation engineers.</p>
+        <p><a href="PlaywrightSelectorTest.java">Open demo test</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

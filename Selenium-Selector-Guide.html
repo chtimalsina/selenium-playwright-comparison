@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selenium Selector Guide</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🧭 Selenium Selector Playbook</h1>
+        <p>Static IDs, CSS mastery, and dynamic XPath patterns</p>
+      </header>
+
+      <div class="content">
+        <div class="toc">
+          <h3>Roadmap</h3>
+          <ul>
+            <li><a href="#static">Solid Static Hooks</a></li>
+            <li><a href="#css">CSS Power Moves</a></li>
+            <li><a href="#xpath">XPath Situations</a></li>
+            <li><a href="#maintenance">Maintenance Toolkit</a></li>
+          </ul>
+        </div>
+
+        <div class="section" id="static">
+          <h2>Solid Static Hooks <span class="level-badge">Beginner</span></h2>
+          <p>
+            The lowest maintenance selectors rely on attributes the UI team can
+            guarantee. IDs, names, and <code>data-test</code> values should be
+            your default.
+          </p>
+
+          <div class="principle-card">
+            <h4>Checklist</h4>
+            <ul>
+              <li>
+                Reach for <code>By.id</code> before <code>By.xpath</code>.
+              </li>
+              <li>Use <code>By.name</code> for forms when IDs are missing.</li>
+              <li>
+                Create <code>data-testid</code> attributes in component
+                libraries.
+              </li>
+              <li>
+                Avoid brittle selectors that depend on color, font, or parent
+                order.
+              </li>
+            </ul>
+          </div>
+
+          <div class="code-block">
+            <span class="comment"
+              >// SeleniumSelectorTest#seleniumStaticSelectors</span
+            >
+            WebElement username = driver.findElement(By.id(<span class="string"
+              >"static-username"</span
+            >)); WebElement password = driver.findElement(By.name(<span
+              class="string"
+              >"static-password"</span
+            >)); WebElement remember = driver.findElement(By.cssSelector(<span
+              class="string"
+              >"label.login-toggle input"</span
+            >)); WebElement cta = driver.findElement(By.cssSelector(<span
+              class="string"
+              >"[data-test='primary-cta']"</span
+            >)); username.sendKeys(<span class="string"
+              >"architect@acme.dev"</span
+            >); password.sendKeys(<span class="string">"TestAutomationFTW"</span
+            >); remember.click(); cta.click(); WebElement result =
+            driver.findElement(By.id(<span class="string">"cta-result"</span>));
+            assertEquals(result.getText().trim(),
+            <span class="string">"CTA clicked via static selectors"</span>);
+          </div>
+        </div>
+
+        <div class="section" id="css">
+          <h2>CSS Power Moves <span class="level-badge">Intermediate</span></h2>
+          <p>
+            CSS selectors are fast and readable. Combine attribute matchers,
+            parent scopes, and pseudo classes to avoid XPath unless necessary.
+          </p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Selector</th>
+                <th>Purpose</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>[data-row-id^='user-']</code></td>
+                <td>Prefix match for generated IDs.</td>
+                <td>
+                  <code
+                    >driver.findElement(By.cssSelector("[data-row-id^='user-']"))</code
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><code>li.feed-card:has(strong)</code></td>
+                <td>CSS4 <code>:has()</code> supported via ChromeDriver.</td>
+                <td>
+                  <code
+                    >driver.findElement(By.cssSelector("li.feed-card:has(strong)"))</code
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td><code>section.dynamic-feed button.promote-btn</code></td>
+                <td>Scope by component to avoid duplicates.</td>
+                <td>
+                  <code
+                    >driver.findElements(By.cssSelector("section.dynamic-feed
+                    button.promote-btn"))</code
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tip-box">
+            <strong>Chrome + Edge support :has():</strong> Selenium 4 rides on
+            Chromium DevTools, so modern CSS works out of the box. Use it when
+            the DOM is otherwise uncooperative.
+          </div>
+        </div>
+
+        <div class="section" id="xpath">
+          <h2>XPath Situations <span class="level-badge">Advanced</span></h2>
+          <p>
+            XPath still shines when you need ancestry, order, or text functions
+            not exposed in CSS. Keep expressions short, descriptive, and
+            relative.
+          </p>
+
+          <div class="code-block">
+            <span class="comment"
+              >// SeleniumSelectorTest#seleniumDynamicSelectors</span
+            >
+            driver.findElement(By.id(<span class="string">"add-user"</span
+            >)).click(); driver.findElement(By.id(<span class="string"
+              >"add-user"</span
+            >)).click(); WebElement pinnedCard = driver.findElement(
+            By.xpath(<span class="string"
+              >"//li[contains(@class,'feed-card')][.//strong[contains(text(),'Design
+              System')]]"</span
+            >) ); String promoteTarget =
+            driver.findElements(By.cssSelector(<span class="string"
+              >"button.promote-btn"</span
+            >)).get(1).getText(); driver.findElements(By.cssSelector(<span
+              class="string"
+              >"button.promote-btn"</span
+            >)).get(1).click(); String feedLog = driver.findElement(By.id(<span
+              class="string"
+              >"feed-log"</span
+            >)).getText(); assertTrue(feedLog.startsWith(<span class="string"
+              >"Promoted"</span
+            >)); JavascriptExecutor js = (JavascriptExecutor) driver; String
+            lastRow = (String) js.executeScript(
+            <span class="string"
+              >"return
+              document.querySelector('[data-row-id]:last-of-type').getAttribute('data-row-id');"</span
+            >
+            ); assertTrue(lastRow.startsWith(<span class="string">"user-"</span
+            >));
+          </div>
+
+          <div class="warning-box">
+            <strong>Guardrails:</strong>
+            <ul>
+              <li>
+                Never start with <code>//div[5]/div[2]</code> - absolute paths
+                break quickly.
+              </li>
+              <li>Anchor XPath expressions with text or attributes.</li>
+              <li>
+                Store XPath strings in constants so refactors touch one place.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section" id="maintenance">
+          <h2>Maintenance Toolkit <span class="level-badge">Expert</span></h2>
+          <ul>
+            <li>
+              <strong>Use data URLs for experimentation:</strong> the repository
+              now includes <code>SeleniumSelectorTest</code>, which loads a
+              sandbox DOM so you can iterate without hitting a real environment.
+            </li>
+            <li>
+              <strong>Wrap selectors in Page Objects:</strong> keep raw
+              <code>By</code> definitions in one place and reuse across suites.
+            </li>
+            <li>
+              <strong>Log debug info:</strong> capture
+              <code>WebElement#getAttribute</code>
+              values whenever a selector fails so investigation is faster.
+            </li>
+          </ul>
+
+          <div class="info-box">
+            <strong>Pair with Playwright strategies:</strong> Comparing both
+            frameworks helps teams choose the right tool per application. Jump
+            to the Playwright guide for :has-text recipes.
+          </div>
+        </div>
+      </div>
+
+      <div class="related-pages">
+        <h3>Explore more</h3>
+        <div class="related-grid">
+          <a class="related-card" href="Selenium-Cheatsheet.html">
+            <h4>Selenium Cheatsheet</h4>
+            <p>
+              Start-to-finish coverage of waits, actions, and parallelization.
+            </p>
+          </a>
+          <a class="related-card" href="Playwright-Selector-Guide.html">
+            <h4>Playwright Selector Guide</h4>
+            <p>CSS + :has-text() wizardry for fast, reliable locators.</p>
+          </a>
+          <a class="related-card" href="Playwright-Cheatsheet.html">
+            <h4>Playwright Cheatsheet</h4>
+            <p>Compare Selenium and Playwright flows to decide per project.</p>
+          </a>
+        </div>
+      </div>
+
+      <footer>
+        <p>Selectors make or break UI automation—invest in them.</p>
+        <p><a href="SeleniumSelectorTest.java">Open demo test</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
